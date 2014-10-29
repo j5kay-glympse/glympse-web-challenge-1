@@ -1,4 +1,4 @@
-#Glympse Challenge #1
+#Glympse Web Challenge #1
 > Simple Map Destination Picker exercise
 
 ##Challenge outline
