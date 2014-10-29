@@ -40,24 +40,19 @@ The final solution should be a production-ready release. This can be done via ``
 Once everything is ready for review, generate a pull-request with your changes. That's it!
 
 
-##Dependencies
+##Getting Started
 It is actually quite simple really!
 
 First make sure you have node.js installed... without that nothing works!  You can either install it with your favorite package manager or with [the installer](http://nodejs.org/download) found on [nodejs.org](http://nodejs.org).
 
-This project relies on grunt-cli, and bower to do all the heavy lifting for you:
+Once you have node set up, you'll need to install app-specific packages to facilitate all of the automated building for the Challenge.
 
-```
-npm install -g grunt-cli bower
-```
+Here are the steps:
+1. cd into the project's root directory (i.e. `glympse-web-challenge-1/`)
+2. This project relies on grunt-cli, and bower to do all the heavy lifting for you, so: `npm install -g grunt-cli bower`
+3. Now, install all of the base project dependencies: `npm install && bower install`
 
-##Getting Started
-
-```
-npm install && bower install
-```
-
-That's it!!!
+That's it!!! You are now ready for the challenge.
 
 ##Notes on making your app
 There is an opinionated structure for your app as you build it:
