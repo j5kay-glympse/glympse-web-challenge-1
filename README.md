@@ -48,6 +48,7 @@ First make sure you have node.js installed... without that nothing works!  You c
 Once you have node set up, you'll need to install app-specific packages to facilitate all of the automated building for the Challenge.
 
 Here are the steps:
+
 1. cd into the project's root directory (i.e. `glympse-web-challenge-1/`)
 2. This project relies on grunt-cli, and bower to do all the heavy lifting for you, so: `npm install -g grunt-cli bower`
 3. Now, install all of the base project dependencies: `npm install && bower install`
