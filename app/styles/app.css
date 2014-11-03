@@ -2,6 +2,21 @@ html {
   background: #fff;
 }
 
+html { 
+	height: 100%;
+}
+
+body { 
+	height: 100%;
+	margin: 0;
+	padding: 0 2em;
+}
+
+#map { 
+	height: 100%;
+}
+
+
 .backfaceVisibility {
   -webkit-backface-visibility: visible;
   backface-visibility: visible;
