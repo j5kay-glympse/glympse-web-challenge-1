@@ -1,13 +1,13 @@
 var geocoder;
 var map;
+var pos;
 var service;
 var infowindow;
 var glympse = new google.maps.LatLng(47.622328,-122.334737);
-var directionsDisplay;
+var directionsDisplay = new google.maps.DirectionsRenderer();
 var directionsService = new google.maps.DirectionsService();
 
 function initialize() {
-	directionsDisplay = new google.maps.DirectionsRenderer();
 	geocoder = new google.maps.Geocoder();
 	var mapOptions = {
 		zoom: 14
@@ -19,7 +19,7 @@ function initialize() {
 	// Try HTML5 geolocation
 	if(navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(function(position) {
-			var pos = new google.maps.LatLng(position.coords.latitude,
+			pos = new google.maps.LatLng(position.coords.latitude,
 											 position.coords.longitude);
 
 			infowindow = new google.maps.InfoWindow({
@@ -100,10 +100,8 @@ function createPOIMarker(place) {
 }
 
 function calcRoute(destination) {
-	var newAddress = address.value;
-	console.log(newAddress);
 	var request = {
-		origin: newAddress,
+		origin: pos,
 		destination: destination.name,
 		travelMode: google.maps.TravelMode.DRIVING
 	};
