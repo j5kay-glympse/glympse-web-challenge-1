@@ -8,10 +8,15 @@ var glympse = new google.maps.LatLng(47.622328,-122.334737);
 var directionsDisplay = new google.maps.DirectionsRenderer();
 var directionsService = new google.maps.DirectionsService();
 
+
+// Initialize the map
 function initialize() {
 	geocoder = new google.maps.Geocoder();
+	// Styles from SnazzyMaps
+	var styleOptions = [{"stylers":[{"hue":"#16a085"},{"saturation":0}]},{"featureType":"road","elementType":"geometry","stylers":[{"lightness":100},{"visibility":"simplified"}]},{"featureType":"road","elementType":"labels","stylers":[{"visibility":"off"}]}]
 	var mapOptions = {
-		zoom: 14
+		zoom: 14,
+		styles: styleOptions
 	};
 	map = new google.maps.Map(document.getElementById('map'), mapOptions);
 	directionsDisplay.setMap(map);
@@ -21,18 +26,16 @@ function initialize() {
 		navigator.geolocation.getCurrentPosition(function(position) {
 			geopos = new google.maps.LatLng(position.coords.latitude,
 										 position.coords.longitude);
-
 			infowindow = new google.maps.InfoWindow({
 				map: map,
 				position: geopos,
-				content: 'This is your location!',
+				content: '<div style="line-height:1.35;overflow:hidden;white-space:nowrap;font-size:1.4em;font-weight:500;">You are here!</div>',
 				maxWidth: 1000
 			});
 			var firstMarker = new google.maps.Marker({
 				map: map,
 				position: geopos,
-				icon: {
-					url: "/../content/images/glympse-small.png"			    }
+				icon: {url: "/../content/images/glympse-small.png"}
 			});
 			map.setCenter(geopos);
 		}, function() {
@@ -43,6 +46,7 @@ function initialize() {
 	}
 }
 
+// Geolocation handler - if error, show error, if no error, show location with marker and infowindow
 function handleNoGeolocation(errorFlag) {
 	if (errorFlag) {
 		var content = 'Error: The Geolocation service failed.';
@@ -60,7 +64,13 @@ function handleNoGeolocation(errorFlag) {
 }
 
 function codeAddress() {
+	// get address from user input, create div
 	var address = document.getElementById('address').value;
+	var addressContent = document.createElement('div');
+	addressContent.setAttribute('style', 
+		'line-height:1.35;overflow:hidden;white-space:nowrap;'); // styles to remove scroll bar
+	addressContent.innerHTML = address;
+
 	geocoder.geocode( {'address': address}, function(results, status) {
 		if (status == google.maps.GeocoderStatus.OK) {
 			deleteMarkers();
@@ -78,10 +88,14 @@ function codeAddress() {
 				}
 			});
 			markers.push(marker);
-			infowindow.setContent(address);
+			infowindow.setContent(addressContent);
 			infowindow.open(map, marker);
+			google.maps.event.addListener(marker, 'mouseover', function() {
+				infowindow.setContent(addressContent);
+				infowindow.open(map, marker);
+			});
 			google.maps.event.addListener(marker, 'click', function() {
-				infowindow.setContent(address);
+				infowindow.setContent(addressContent);
 				infowindow.open(map, marker);
 			});
 			var request = {
@@ -103,6 +117,7 @@ function setAllMap(map) {
   }
 }
 
+// Deletes all markers on map and in markers array.
 function deleteMarkers() {
   setAllMap(null);
   markers = [];
@@ -120,7 +135,8 @@ function POIcallback(results, status) {
 function createPOIMarker(place) {
 	var placeContent = document.createElement('div');
 	var placeName = document.createElement('h3');
-	placeContent.setAttribute('style', 'padding:0 10px 20px 10px;line-height:1.35;overflow:hidden;white-space:nowrap;');
+	placeContent.setAttribute('style', 
+		'padding:0 10px 20px 10px;line-height:1.35;overflow:hidden;white-space:nowrap;'); // styles to remove scroll bar
 	placeName.innerHTML = place.name + "<br/>";
 	placeContent.appendChild(placeName);
 
@@ -137,6 +153,12 @@ function createPOIMarker(place) {
 		position: place.geometry.location
 	});
 	markers.push(marker);
+
+	google.maps.event.addListener(marker, 'mouseover', function() {
+		infowindow.setContent(placeContent);
+		infowindow.open(map, this);
+	});
+
 	google.maps.event.addListener(marker, 'click', function() {
 		infowindow.setContent(placeContent);
 		infowindow.open(map, this);
