@@ -25,7 +25,8 @@ function initialize() {
 			infowindow = new google.maps.InfoWindow({
 				map: map,
 				position: geopos,
-				content: 'This is your location!'
+				content: 'This is your location!',
+				maxWidth: 1000
 			});
 			var firstMarker = new google.maps.Marker({
 				map: map,
@@ -51,7 +52,8 @@ function handleNoGeolocation(errorFlag) {
 	var options = {
 		map: map,
 		position: glympse,
-		content: content
+		content: content,
+		maxWidth: 500
 	};
 	infowindow = new google.maps.InfoWindow(options);
 	map.setCenter(options.position);
@@ -116,14 +118,27 @@ function POIcallback(results, status) {
 }
 
 function createPOIMarker(place) {
-	var placeLoc = place.geometry.location;
+	var placeContent = document.createElement('div');
+	var placeName = document.createElement('h3');
+	placeContent.setAttribute('style', 'padding:0 10px 20px 10px;line-height:1.35;overflow:hidden;white-space:nowrap;');
+	placeName.innerHTML = place.name + "<br/>";
+	placeContent.appendChild(placeName);
+
+	var placePhotos = place.photos;
+	if (placePhotos) {
+		var placePhotoURL = placePhotos[0].getUrl({'maxWidth': 200, 'maxHeight': 200});
+		var placePhoto = document.createElement('img');
+		placePhoto.setAttribute('src', placePhotoURL);
+		placeContent.appendChild(placePhoto);
+	}
+
 	var marker = new google.maps.Marker({
 		map: map,
 		position: place.geometry.location
 	});
 	markers.push(marker);
 	google.maps.event.addListener(marker, 'click', function() {
-		infowindow.setContent(place.name);
+		infowindow.setContent(placeContent);
 		infowindow.open(map, this);
 		calcRoute(place.geometry.location);
 	});

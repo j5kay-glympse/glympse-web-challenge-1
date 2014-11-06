@@ -11,6 +11,9 @@ body {
 
 #map { 
 	height: 100%;
+	margin: 10px;
+	border: 4px solid #333;
+	border-radius: 15px;
 }
 
 
