@@ -3,6 +3,7 @@ var map;
 var geopos;
 var service;
 var infowindow;
+var markers = [];
 var glympse = new google.maps.LatLng(47.622328,-122.334737);
 var directionsDisplay = new google.maps.DirectionsRenderer();
 var directionsService = new google.maps.DirectionsService();
@@ -26,7 +27,12 @@ function initialize() {
 				position: geopos,
 				content: 'This is your location!'
 			});
-
+			var firstMarker = new google.maps.Marker({
+				map: map,
+				position: geopos,
+				icon: {
+					url: "/../content/images/glympse-small.png"			    }
+			});
 			map.setCenter(geopos);
 		}, function() {
 			handleNoGeolocation(true);
@@ -55,25 +61,49 @@ function codeAddress() {
 	var address = document.getElementById('address').value;
 	geocoder.geocode( {'address': address}, function(results, status) {
 		if (status == google.maps.GeocoderStatus.OK) {
+			deleteMarkers();
+			directionsDisplay.setMap(null);
+			directionsDisplay = new google.maps.DirectionsRenderer();
+			directionsDisplay.setMap(map);
 			map.setZoom(14);
 			map.setCenter(results[0].geometry.location);
 			var marker = new google.maps.Marker({
 				map: map,
-				position: results[0].geometry.location
+				position: results[0].geometry.location,
+				icon: {
+					path: google.maps.SymbolPath.CIRCLE,
+					scale: 8
+				}
 			});
+			markers.push(marker);
 			infowindow.setContent(address);
 			infowindow.open(map, marker);
+			google.maps.event.addListener(marker, 'click', function() {
+				infowindow.setContent(address);
+				infowindow.open(map, marker);
+			});
 			var request = {
 				location: results[0].geometry.location,
 				radius: '500'
 			};
-			
 			service = new google.maps.places.PlacesService(map);
 			service.nearbySearch(request, POIcallback);
 		} else {
 			alert('Geocode was not successful for the following reason: ' + status);
 		}
 	});
+}
+
+// Sets the map on all markers in the array.
+function setAllMap(map) {
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].setMap(map);
+  }
+}
+
+function deleteMarkers() {
+  setAllMap(null);
+  markers = [];
 }
 
 function POIcallback(results, status) {
@@ -91,18 +121,18 @@ function createPOIMarker(place) {
 		map: map,
 		position: place.geometry.location
 	});
-
+	markers.push(marker);
 	google.maps.event.addListener(marker, 'click', function() {
 		infowindow.setContent(place.name);
 		infowindow.open(map, this);
-		calcRoute(place);
+		calcRoute(place.geometry.location);
 	});
 }
 
 function calcRoute(destination) {
 	var request = {
 		origin: geopos,
-		destination: destination.name,
+		destination: destination,
 		travelMode: google.maps.TravelMode.DRIVING
 	};
 	directionsService.route(request, function(response, status) {
