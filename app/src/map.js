@@ -67,6 +67,7 @@ function codeAddress() {
 				location: results[0].geometry.location,
 				radius: '500'
 			};
+			
 			service = new google.maps.places.PlacesService(map);
 			service.nearbySearch(request, POIcallback);
 		} else {
@@ -94,7 +95,6 @@ function createPOIMarker(place) {
 	google.maps.event.addListener(marker, 'click', function() {
 		infowindow.setContent(place.name);
 		infowindow.open(map, this);
-		console.log("omg i clicked a thing");
 		calcRoute(place);
 	});
 }
