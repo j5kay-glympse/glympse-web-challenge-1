@@ -23,9 +23,9 @@ function initialize() {
 
 	// Try HTML5 geolocation
 	if(navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition(function(position) {
+		navigator.geolocation.watchPosition(function(position) {
 			geopos = new google.maps.LatLng(position.coords.latitude,
-										 position.coords.longitude);
+										 	position.coords.longitude);
 			infowindow = new google.maps.InfoWindow({
 				map: map,
 				position: geopos,
@@ -46,6 +46,8 @@ function initialize() {
 		handleNoGeolocation(false);
 	}
 }
+
+// navigator.geolocation.watchPosition();
 
 // Geolocation handler - if error, show error, if no error, show location with marker and infowindow
 function handleNoGeolocation(errorFlag) {
