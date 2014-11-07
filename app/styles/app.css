@@ -31,7 +31,7 @@ input[type="text"] {
 	font-size: 1.1em;
 }
 
-input[type="button"] {
+input[type="submit"] {
 	max-width: 45%;
 	margin: .5rem;
 	padding: .5rem 1rem;
@@ -59,7 +59,7 @@ input[type="button"] {
 		margin: 0.25em;
 		font-size: 1.6em;
 	}
-	input[type="button"], input[type="text"] {
+	input[type="submit"], input[type="text"] {
 		margin: 0.25em;
 		font-size: 1em;
 	}

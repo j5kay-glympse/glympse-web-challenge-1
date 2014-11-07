@@ -115,7 +115,7 @@ function codeAddress() {
 			});
 			var request = {
 				location: results[0].geometry.location,
-				radius: '500'
+				radius: '1500'
 			};
 
 			// Calls POIcallback function to create POI markers
