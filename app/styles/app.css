@@ -23,7 +23,7 @@ input, #map {
 }
 
 input[type="text"] {
-	max-width: 50%;
+	max-width: 45%;
 	padding: .5rem;
 	border: 2px solid #E9E9E8;
 	border-radius: 4px;
@@ -32,7 +32,7 @@ input[type="text"] {
 }
 
 input[type="button"] {
-	max-width: 50%;
+	max-width: 45%;
 	margin: .5rem;
 	padding: .5rem 1rem;
 	border: 2px solid #aaa;
@@ -47,6 +47,20 @@ input[type="button"] {
 }
 
 .backfaceVisibility {
-  -webkit-backface-visibility: visible;
-  backface-visibility: visible;
+	-webkit-backface-visibility: visible;
+	backface-visibility: visible;
 }
+
+@media (max-width: 480px) {
+	body {
+		padding: 0 1em;
+	}
+	h1 {
+		margin: 0.25em;
+		font-size: 1.6em;
+	}
+	input[type="button"], input[type="text"] {
+		margin: 0.25em;
+		font-size: 1em;
+	}
+} 

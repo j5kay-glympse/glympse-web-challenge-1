@@ -35,7 +35,8 @@ function initialize() {
 			var firstMarker = new google.maps.Marker({
 				map: map,
 				position: geopos,
-				icon: {url: "/../content/images/glympse-small.png"}
+				icon: {url: "/../content/images/glympse-small.png"},
+				animation: google.maps.Animation.BOUNCE
 			});
 			map.setCenter(geopos);
 		}, function() {
@@ -64,21 +65,27 @@ function handleNoGeolocation(errorFlag) {
 }
 
 function codeAddress() {
-	// get address from user input, create div
+	// Get address from user input, create div
 	var address = document.getElementById('address').value;
 	var addressContent = document.createElement('div');
 	addressContent.setAttribute('style', 
 		'line-height:1.35;overflow:hidden;white-space:nowrap;'); // styles to remove scroll bar
 	addressContent.innerHTML = address;
 
+	// Geocode address from user input
 	geocoder.geocode( {'address': address}, function(results, status) {
 		if (status == google.maps.GeocoderStatus.OK) {
+			// Clear existing markers from markers array
 			deleteMarkers();
+			// Clear existing directions from map and start a new directions renderer
 			directionsDisplay.setMap(null);
 			directionsDisplay = new google.maps.DirectionsRenderer();
 			directionsDisplay.setMap(map);
+
 			map.setZoom(14);
 			map.setCenter(results[0].geometry.location);
+
+			// Create marker for address from user input
 			var marker = new google.maps.Marker({
 				map: map,
 				position: results[0].geometry.location,
@@ -88,12 +95,18 @@ function codeAddress() {
 				}
 			});
 			markers.push(marker);
+
+			// Initializes search with infowindow of the address from user input.
 			infowindow.setContent(addressContent);
 			infowindow.open(map, marker);
+
+			// On mouseover, show address from user input in infowindow.
 			google.maps.event.addListener(marker, 'mouseover', function() {
 				infowindow.setContent(addressContent);
 				infowindow.open(map, marker);
 			});
+
+			// On click, show address from user input in infowindow.
 			google.maps.event.addListener(marker, 'click', function() {
 				infowindow.setContent(addressContent);
 				infowindow.open(map, marker);
@@ -102,8 +115,11 @@ function codeAddress() {
 				location: results[0].geometry.location,
 				radius: '500'
 			};
+
+			// Calls POIcallback function to create POI markers
 			service = new google.maps.places.PlacesService(map);
 			service.nearbySearch(request, POIcallback);
+
 		} else {
 			alert('Geocode was not successful for the following reason: ' + status);
 		}
@@ -123,6 +139,7 @@ function deleteMarkers() {
   markers = [];
 }
 
+// Call Places service, iterate through array of POI and create a marker for each.
 function POIcallback(results, status) {
 	if (status == google.maps.places.PlacesServiceStatus.OK) {
 		for (var i = 0; i < results.length; i++) {
@@ -132,7 +149,9 @@ function POIcallback(results, status) {
 	}
 }
 
+// Create POI found from Places service using address from user input.
 function createPOIMarker(place) {
+	// Create HTML content for infowindow
 	var placeContent = document.createElement('div');
 	var placeName = document.createElement('h3');
 	placeContent.setAttribute('style', 
@@ -140,25 +159,30 @@ function createPOIMarker(place) {
 	placeName.innerHTML = place.name + "<br/>";
 	placeContent.appendChild(placeName);
 
+	// Get Place photos and put into HTML content for infowindow.
 	var placePhotos = place.photos;
 	if (placePhotos) {
-		var placePhotoURL = placePhotos[0].getUrl({'maxWidth': 200, 'maxHeight': 200});
+		var placePhotoURL = placePhotos[0].getUrl({'maxWidth': 100, 'maxHeight': 100});
 		var placePhoto = document.createElement('img');
 		placePhoto.setAttribute('src', placePhotoURL);
 		placeContent.appendChild(placePhoto);
 	}
 
+	// Create a marker from Places service and push to markers array.
 	var marker = new google.maps.Marker({
 		map: map,
-		position: place.geometry.location
+		position: place.geometry.location,
+		animation: google.maps.Animation.DROP
 	});
 	markers.push(marker);
 
+	// On mouseover show infowindow associated with POI.
 	google.maps.event.addListener(marker, 'mouseover', function() {
 		infowindow.setContent(placeContent);
 		infowindow.open(map, this);
 	});
 
+	// On click show infowindow for and directions to POI.
 	google.maps.event.addListener(marker, 'click', function() {
 		infowindow.setContent(placeContent);
 		infowindow.open(map, this);
@@ -166,6 +190,7 @@ function createPOIMarker(place) {
 	});
 }
 
+// Calculates the route from user geolocation to destination.
 function calcRoute(destination) {
 	var request = {
 		origin: geopos,
