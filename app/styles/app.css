@@ -11,6 +11,10 @@ body {
 	font-family: "PT Sans", "helvetica neue", helvetica, sans-serif;
 }
 
+h1 {
+	margin: 0.5em 0 0.25em 0;
+}
+
 #map { 
 	height: 75%;
 	margin: 20px 0;
