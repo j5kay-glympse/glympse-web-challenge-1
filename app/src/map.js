@@ -4,7 +4,7 @@ var geopos;
 var service;
 var infowindow;
 var markers = [];
-var glympse = new google.maps.LatLng(47.622328,-122.334737);
+var glympse = new google.maps.LatLng(47.622328, -122.334737);
 var directionsDisplay = new google.maps.DirectionsRenderer();
 var directionsService = new google.maps.DirectionsService();
 
@@ -13,7 +13,7 @@ var directionsService = new google.maps.DirectionsService();
 function initialize() {
 	geocoder = new google.maps.Geocoder();
 	// Styles from SnazzyMaps
-	var styleOptions = [{"stylers":[{"hue":"#16a085"},{"saturation":0}]},{"featureType":"road","elementType":"geometry","stylers":[{"lightness":100},{"visibility":"simplified"}]},{"featureType":"road","elementType":"labels","stylers":[{"visibility":"off"}]}]
+	var styleOptions = [{'stylers':[{'hue':'#16a085'},{'saturation':0}]},{'featureType':'road','elementType':'geometry','stylers':[{'lightness':100},{'visibility':'simplified'}]},{'featureType':'road','elementType':'labels','stylers':[{'visibility':'off'}]}];
 	var mapOptions = {
 		zoom: 14,
 		styles: styleOptions
@@ -22,10 +22,10 @@ function initialize() {
 	directionsDisplay.setMap(map);
 
 	// Try HTML5 geolocation
-	if(navigator.geolocation) {
+	if (navigator.geolocation) {
 		navigator.geolocation.watchPosition(function(position) {
 			geopos = new google.maps.LatLng(position.coords.latitude,
-										 	position.coords.longitude);
+											position.coords.longitude);
 			infowindow = new google.maps.InfoWindow({
 				map: map,
 				position: geopos,
@@ -35,7 +35,7 @@ function initialize() {
 			var firstMarker = new google.maps.Marker({
 				map: map,
 				position: geopos,
-				icon: {url: "/../content/images/glympse-small.png"},
+				icon: {url: '/../content/images/glympse-small.png'},
 				animation: google.maps.Animation.BOUNCE
 			});
 			map.setCenter(geopos);
@@ -75,7 +75,7 @@ function codeAddress() {
 	addressContent.innerHTML = address;
 
 	// Geocode address from user input
-	geocoder.geocode( {'address': address}, function(results, status) {
+	geocoder.geocode({'address': address}, function(results, status) {
 		if (status == google.maps.GeocoderStatus.OK) {
 			// Clear existing markers from markers array
 			deleteMarkers();
@@ -158,7 +158,7 @@ function createPOIMarker(place) {
 	var placeName = document.createElement('h3');
 	placeContent.setAttribute('style', 
 		'padding:0 10px 20px 10px;line-height:1.35;overflow:hidden;white-space:nowrap;'); // styles to remove scroll bar
-	placeName.innerHTML = place.name + "<br/>";
+	placeName.innerHTML = place.name + '<br/>';
 	placeContent.appendChild(placeName);
 
 	// Get Place photos and put into HTML content for infowindow.
