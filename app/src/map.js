@@ -1,8 +1,6 @@
-var geocoder;
-var map;
-var geopos;
-var service;
-var infowindow;
+/*global google*/
+
+var map, geocoder, geopos, service, infowindow;
 var markers = [];
 var glympse = new google.maps.LatLng(47.622328, -122.334737);
 var directionsDisplay = new google.maps.DirectionsRenderer();
@@ -51,10 +49,11 @@ function initialize() {
 
 // Geolocation handler - if error, show error, if no error, show location with marker and infowindow
 function handleNoGeolocation(errorFlag) {
+	var content;
 	if (errorFlag) {
-		var content = 'Error: The Geolocation service failed.';
+		content = 'Error: The Geolocation service failed.';
 	} else {
-		var content = 'Error: Your browser doesn\'t support geolocation.';
+		content = 'Error: Your browser doesn\'t support geolocation.';
 	}
 	var options = {
 		map: map,
@@ -123,7 +122,7 @@ function codeAddress() {
 			service.nearbySearch(request, POIcallback);
 
 		} else {
-			alert('Geocode was not successful for the following reason: ' + status);
+			window.alert('Geocode was not successful for the following reason: ' + status);
 		}
 	});
 }
