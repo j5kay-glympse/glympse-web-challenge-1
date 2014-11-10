@@ -3,10 +3,12 @@
   "description": "Simple Map Destination Picker",
   "version": "1.0.0",
   "homepage": "https://github.com/JasonGlympse/glympse-web-challenge-1",
-  "authors": [{
-    "name": "Jason Keimig",
-    "url": "http://github.com/JasonGlympse/"
-  }],
+  "authors": [
+    {
+      "name": "Jason Keimig",
+      "url": "http://github.com/JasonGlympse/"
+    }
+  ],
   "main": "app/index.html",
   "moduleType": [
     "amd"
@@ -26,6 +28,7 @@
     "requirejs": "~2.1.11",
     "almond": "~0.2.9",
     "famous-polyfills": "~0.3.0",
-	"jquery": "~2.1.1"
+    "jquery": "~2.1.1",
+    "google-map": "GoogleWebComponents/google-map#~0.3.2"
   }
 }
