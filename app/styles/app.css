@@ -61,10 +61,14 @@ input[type="submit"] {
 	}
 	h1 {
 		margin: 0.25em;
-		font-size: 1.6em;
+		font-size: 1.2em;
 	}
 	input[type="submit"], input[type="text"] {
 		margin: 0.25em;
 		font-size: 1em;
+	}
+	#map { 
+		height: 75%;
+		margin: 10px 0;
 	}
 } 

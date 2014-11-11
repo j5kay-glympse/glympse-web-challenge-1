@@ -3,7 +3,7 @@ define(function(require, exports, module) {
 	function GlympseMap() {
 		/*global google*/
 
-		var map, geocoder, geopos, service, infowindow;
+		var map, geocoder, geopos, service, infowindow, firstMarker;
 		var markers = [];
 		var glympse = new google.maps.LatLng(47.622328, -122.334737);
 		var directionsDisplay = new google.maps.DirectionsRenderer();
@@ -33,7 +33,7 @@ define(function(require, exports, module) {
 						content: '<div style="line-height:1.35;overflow:hidden;white-space:nowrap;font-size:1.4em;font-weight:500;">You are here!</div>',
 						maxWidth: 1000
 					});
-					var firstMarker = new google.maps.Marker({
+					firstMarker = new google.maps.Marker({
 						map: map,
 						position: geopos,
 						icon: {url: '/../content/images/glympse-small.png'},
@@ -47,8 +47,6 @@ define(function(require, exports, module) {
 				handleNoGeolocation(false);
 			}
 		}
-
-		// navigator.geolocation.watchPosition();
 
 		// Geolocation handler - if error, show error, if no error, show location with marker and infowindow
 		function handleNoGeolocation(errorFlag) {
@@ -125,7 +123,7 @@ define(function(require, exports, module) {
 					service.nearbySearch(request, POIcallback);
 
 				} else {
-					window.alert('Geocode was not successful for the following reason: ' + status);
+					console.log('Geocode was not successful for the following reason: ' + status);
 				}
 			});
 		}
