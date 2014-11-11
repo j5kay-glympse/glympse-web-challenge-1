@@ -7,8 +7,7 @@ require.config({
         famous: '../lib/famous/src',
         requirejs: '../lib/requirejs/require',
         almond: '../lib/almond/almond',
-        jquery: '../lib/jquery/dist/jquery',
-        map: '../lib/map/map'
+        jquery: '../lib/jquery/dist/jquery'
     },
     packages: [
 
