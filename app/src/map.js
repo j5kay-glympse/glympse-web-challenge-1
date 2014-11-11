@@ -12,6 +12,7 @@ define(function(require, exports, module) {
 
 		// Initialize the map
 		function initialize() {
+			console.log('initialize is running nao');
 			geocoder = new google.maps.Geocoder();
 			// Styles from SnazzyMaps
 			var styleOptions = [{'stylers':[{'hue':'#16a085'},{'saturation':0}]},{'featureType':'road','elementType':'geometry','stylers':[{'lightness':100},{'visibility':'simplified'}]},{'featureType':'road','elementType':'labels','stylers':[{'visibility':'off'}]}];
@@ -207,8 +208,8 @@ define(function(require, exports, module) {
 				}
 			});
 		}
-
-		google.maps.event.addDomListener(window, 'load', initialize);
+		
+		$(document).ready(initialize);
 	}
 	module.exports = GlympseMap;
 });
