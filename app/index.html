@@ -26,7 +26,7 @@
         <script type=text/javascript src="lib/jquery/dist/jquery.min.js"></script>
         <!-- endbuild -->
 
-         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_GXK0M7hBTMSpl0ZpuYWzfJs-HclSMZs&libraries=places"></script>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_GXK0M7hBTMSpl0ZpuYWzfJs-HclSMZs&libraries=places"></script>
         
         <!-- process:remove:dev -->
         <script type="text/javascript" src="src/main.js"></script>
@@ -43,6 +43,7 @@
             <form id="geocode-form">
                 <input id="address" type="text" value="San Francisco, CA">
                 <input type="submit" value="GEOCODE">
+                <span id="dialog">Cannot geocode. Please try another address!</span>
             </form>
         </div>
 		<div id="map"></div>

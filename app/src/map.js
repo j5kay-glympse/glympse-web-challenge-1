@@ -27,12 +27,18 @@ define(function(require, exports, module) {
 				navigator.geolocation.watchPosition(function(position) {
 					geopos = new google.maps.LatLng(position.coords.latitude,
 													position.coords.longitude);
+					if (infowindow) {
+						infowindow.setMap(null);
+					}
 					infowindow = new google.maps.InfoWindow({
 						map: map,
 						position: geopos,
 						content: '<div style="line-height:1.35;overflow:hidden;white-space:nowrap;font-size:1.4em;font-weight:500;">You are here!</div>',
 						maxWidth: 1000
 					});
+					if (firstMarker) {
+						firstMarker.setMap(null);
+					}
 					firstMarker = new google.maps.Marker({
 						map: map,
 						position: geopos,
@@ -67,6 +73,7 @@ define(function(require, exports, module) {
 		}
 
 		function codeAddress() {
+			$('#dialog').hide();
 			// Get address from user input, create div
 			var address = document.getElementById('address').value;
 			var addressContent = document.createElement('div');
@@ -123,6 +130,7 @@ define(function(require, exports, module) {
 					service.nearbySearch(request, POIcallback);
 
 				} else {
+					$('#dialog').show();
 					console.log('Geocode was not successful for the following reason: ' + status);
 				}
 			});

@@ -50,6 +50,10 @@ input[type="submit"] {
 	text-shadow: 1px 1px 1px #888;
 }
 
+#dialog {
+	display: none;
+}
+
 .backfaceVisibility {
 	-webkit-backface-visibility: visible;
 	backface-visibility: visible;
