@@ -4,5 +4,16 @@ define(function(require, exports, module) {
     // import dependencies
     var $ = require('jquery');
 
-	console.log('Map Challenge! - size=' + $(document).width() + 'x' + $(document).height());
+    require(['async', 'config', 'angular'], function(async, config, angular) {
+
+        require(['async!http://maps.google.com/maps/api/js?key=' + config.MAP_KEY], function() {
+          
+            var mapOptions = {
+              center: { lat: -34.397, lng: 150.644 },
+              zoom: 8
+            };
+            var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+        });
+    });
 });
