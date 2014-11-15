@@ -15,3 +15,8 @@ dist
 .tmp
 app/lib
 .yo-rc.json
+
+
+# Misc for Env #
+################
+.vimrc
