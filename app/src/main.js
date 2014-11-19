@@ -4,16 +4,30 @@ define(function(require, exports, module) {
     // import dependencies
     var $ = require('jquery');
 
-    require(['async', 'config', 'angular'], function(async, config, angular) {
+    exports.$ = $;
 
-        require(['async!http://maps.google.com/maps/api/js?key=' + config.MAP_KEY], function() {
-          
-            var mapOptions = {
-              center: { lat: -34.397, lng: 150.644 },
-              zoom: 8
-            };
-            var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+    require(['async', 'config'], function(async, config) {
 
+        var reqUrl = 'async!' +
+                  'http://maps.google.com/maps/api/js?libraries=places&key=' +
+                  config.MAP_KEY;
+
+        require([reqUrl], function() {
+            
+            var map = new google.maps.Map(
+                document.getElementById('map'), config.MAP_OPTS);
+
+            
+            // forgot that the app shouldn't bootstrap immediately or else the 
+            // dependency won't exist.
+            // via http://stackoverflow.com/questions/16286605/ \
+            // initialize-angularjs-service-with-asynchronous-data
+
+            angular.module('myMap', []).value('gMap', map).value('google', google);
+
+            $(function() {
+                angular.bootstrap(document, ['mapApp']);
+            });
         });
     });
 });

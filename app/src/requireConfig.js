@@ -19,7 +19,9 @@ require.config({
         noext: '../lib/requirejs-plugins/src/noext',
         propertyParser: '../lib/requirejs-plugins/src/propertyParser',
         'Markdown.Converter': '../lib/requirejs-plugins/lib/Markdown.Converter',
-        text: '../lib/requirejs-plugins/lib/text'
+        text: '../lib/requirejs-plugins/lib/text',
+        bootstrap: '../lib/bootstrap/dist/js/bootstrap',
+        'font-awesome': '../lib/font-awesome/fonts/*',
     },
     packages: [
 
