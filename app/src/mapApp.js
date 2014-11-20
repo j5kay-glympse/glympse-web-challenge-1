@@ -17,7 +17,7 @@ mapApp.controller('NavController',
         // is bound within angular as well as on a generic on('click')
         // @todo: find better way to bind the on('click') to the external
         // menu button
-        if(!this.$root.$$phase)
+        if (!this.$root.$$phase)
             this.$apply();
     };
 
@@ -69,7 +69,7 @@ mapApp.controller('NavController',
         var lat = pos.coords.latitude.toFixed(5),
             lng = pos.coords.longitude.toFixed(5);
 
-        if(!$scope.currPos || 
+        if (!$scope.currPos || 
            $scope.rawCurrPos.lat != lat || 
            $scope.rawCurrPos.lng != lng) {
 
@@ -86,7 +86,7 @@ mapApp.controller('NavController',
         
     $scope.displayStartPosition = function() {
         
-        if($scope.displayingStartPosition)
+        if ($scope.displayingStartPosition)
             return;
 
         $scope.displayingStartPosition = true;
@@ -105,12 +105,12 @@ mapApp.controller('NavController',
 
     /** Initialization Elements **/
 
-    if(navigator.geolocation) {
+    if (navigator.geolocation) {
         navigator.geolocation.watchPosition($scope.getPositionSuccess, $scope.getPositionFail, {timeout: 2000});
 
         $timeout(function() {
 
-            if(!$scope.positionAutoSet)
+            if (!$scope.positionAutoSet)
                 $scope.displayStartPosition();
 
         }, 5000);
@@ -147,15 +147,15 @@ mapApp.controller('DirectionsController',
     
     $scope.marker = new google.maps.Marker({
         map: gMap,
-        title: "Me"
+        title: 'Me'
     });
 
     $scope.$on('startChosen', function(e, start) {
         $scope.start = start;
 
-        if($scope.start.geometry)
+        if ($scope.start.geometry)
             var start = $scope.start.geometry.location;
-        else if($scope.start.lat)
+        else if ($scope.start.lat)
             var start = $scope.start;
 
         gMap.setCenter(start); 
@@ -177,19 +177,19 @@ mapApp.controller('DirectionsController',
     $scope.setDirections  = function() {
         console.log('setDirections', $scope.start, $scope.dest);
         
-        if(!$scope.start || !$scope.dest)
+        if (!$scope.start || !$scope.dest)
             return;
 
         // todo: clean this up by wrapping start and dest in 
         // an adapter with function latLng()
-        if($scope.start.geometry)
+        if ($scope.start.geometry)
             var start = $scope.start.geometry.location;
-        else if($scope.start.lat)
+        else if ($scope.start.lat)
             var start = $scope.start;
 
-        if($scope.dest.geometry)
+        if ($scope.dest.geometry)
             var dest = $scope.dest.geometry.location;
-        else if($scope.dest.lat)
+        else if ($scope.dest.lat)
             var dest = $scope.dest.lat;
 
         var request = {
@@ -200,7 +200,7 @@ mapApp.controller('DirectionsController',
         
         $scope.directionsService.route(request, function(response, status) {
             
-            if(status == google.maps.DirectionsStatus.OK) {
+            if (status == google.maps.DirectionsStatus.OK) {
                $scope.directionsRenderer.setDirections(response); 
             }
         });
