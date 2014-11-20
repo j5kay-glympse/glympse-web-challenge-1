@@ -26,6 +26,8 @@ mapApp.controller('NavController',
 
     /** Geolocation Elements **/
 
+    $scope.startPos = null;
+
     // object literal of {lat: float, lng: float} rounded to 5 decimal
     // used to evaluate if user moved
     $scope.rawCurrPos = null;
@@ -53,7 +55,6 @@ mapApp.controller('NavController',
             var place = $scope.destPositionAutoComplete.getPlace();
 
             $scope.destPos = place;
-            $rootScope.$broadcast('setDirections', $scope.currPos, $scope.destPos);
             $rootScope.$broadcast('destChosen', place); 
         }
     );
@@ -68,14 +69,21 @@ mapApp.controller('NavController',
 
         var lat = pos.coords.latitude.toFixed(5),
             lng = pos.coords.longitude.toFixed(5);
-
+        
+        // initialize starting position
+        if (!$scope.startPos) {
+            $scope.startPos = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+            $rootScope.$broadcast('startChosen', $scope.startPos); 
+        }
+            
+        // set current position
         if (!$scope.currPos || 
            $scope.rawCurrPos.lat != lat || 
            $scope.rawCurrPos.lng != lng) {
 
             $scope.rawCurrPos = {lat: lat, lng: lng};
             $scope.currPos = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
-            $rootScope.$broadcast('startChosen', $scope.currPos); 
+            $rootScope.$broadcast('currPos', $scope.currPos); 
 
         }
     };
@@ -139,15 +147,29 @@ mapApp.controller('DirectionsController',
     
     // instances of google.maps.places.PlaceResult, or a google.maps.LatLng object
     $scope.start = null;
+    $scope.curr  = null;
     $scope.dest  = null;
 
     $scope.directionsService = new google.maps.DirectionsService;
     $scope.directionsRenderer = new google.maps.DirectionsRenderer();
     $scope.directionsRenderer.setMap(gMap);
     
-    $scope.marker = new google.maps.Marker({
+    $scope.startMarker = new google.maps.Marker({
         map: gMap,
-        title: 'Me'
+        title: 'Start'
+    });
+
+    var img = {
+        url: 'content/silly_walks/walk2.png',
+        size: new google.maps.Size(40, 60),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(5, 59)
+    };
+    
+    $scope.currMarker = new google.maps.Marker({
+        map: gMap,
+        title: 'Current',
+        icon: img
     });
 
     $scope.$on('startChosen', function(e, start) {
@@ -157,13 +179,31 @@ mapApp.controller('DirectionsController',
             var start = $scope.start.geometry.location;
         else if ($scope.start.lat)
             var start = $scope.start;
+        
+        if (!start)
+            return;
 
         gMap.setCenter(start); 
 
-        $scope.marker.setPosition(start);
+        $scope.startMarker.setPosition(start);
 
         console.log('received start', start);
         $scope.setDirections();
+    });
+    
+    $scope.$on('currPos', function(e, curr) {
+        $scope.curr = curr;
+        
+        if ($scope.curr.geometry)
+            var pos = $scope.curr.geometry.location;
+        else if ($scope.curr.lat)
+            var pos = $scope.curr;
+           
+        if (!pos)
+            return;
+
+        $scope.currMarker.setPosition(curr);
+
     });
     
     $scope.$on('destChosen', function(e, dest) {
