@@ -44,9 +44,9 @@
     </head>
     <body>
         <div id="header" class="container-fluid">
-            <div class="col-xs-1"><i class="fa fa-bars"></i></div>
+            <div id ="nav-location-bar" class="col-xs-1"><i class="fa fa-bars"></i></div>
             <div class="col-xs-10"><h1>Get Directions</h1></div>
-            <div class="col-xs-1"><i class="fa fa-search"></i></div>
+            <div id="nav-search-bar" class="col-xs-1"><button type="button" class="btn btn-primary"><i class="fa fa-search"></i> <span class="badge"></span></button></div>
         </div>
         <div id="map" class="container-fluid" ng-controller="DirectionsController">
             <!-- short lived loading spinner -->
@@ -76,9 +76,32 @@
 
 
         <div id="search-menu" ng-controller="SearchController">
-            <div id="search-inner" class="ng-hide" ng-show="displayingSearch">
+            <div id="search-inner" class="ng-hide" ng-show="displayingMenu">
                 
+                <button type="button" class="close" ng-click="menuToggle()">
+                    <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                </button>
                 
+                <div id="search-results">
+                    
+                    <div ng-repeat="place in places" ng-click="onPlaceClick(place.id, $event)" class="place {{$even ? 'even' : ''}}" style="background-image: url({{place.icon}})" data-place-id="{{place.id}}">
+                        <h4 class="place-name">{{place.name}}</h4> 
+                       
+                        <div class="types">{{place.types | placeTypes }}</div>
+                        <div class="open-now {{place.opening_hours.open_now ? 'yes' : 'no'}}">Open now? <span>{{place.opening_hours.open_now ? 'Yes' : 'No'}}</span></div>
+
+                        <div class="place-additional">
+                            
+                            <div class="price">Price: {{place.price_level | placePrice}} </div>
+                            <div class="rating">Rating: {{place.rating}} / 5.0 </div>
+                            <div class="photo" ng-repeat="photo in place.photos">
+                                <img ng-src="{{photo.getUrl({maxWidth: 180, maxHeight: 180})}}">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
         </div>
     </body>
