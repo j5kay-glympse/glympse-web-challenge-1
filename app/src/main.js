@@ -2,32 +2,41 @@
 define(function(require, exports, module) {
     'use strict';
     // import dependencies
-    var $ = require('jquery');
+    var $      = require('jquery'),
+        async  = require('async'),
+        config = require('config'),
+        angular = require('angular');
 
     exports.$ = $;
+    
+    
+    var reqUrl = 'async!' +
+                 'http://maps.google.com/maps/api/js?libraries=places&key=' +
+                 config.MAP_KEY;
 
-    require(['async', 'config'], function(async, config) {
+    // The object 'google' isn't returned when requiring the asynchronous map
+    // url. But window.google does exist
+    require([reqUrl], function(undefined) {
+       
+        
+        var map = new google.maps.Map(
+            document.getElementById('map'), config.MAP_OPTS);
+        
 
-        var reqUrl = 'async!' +
-                  'http://maps.google.com/maps/api/js?libraries=places&key=' +
-                  config.MAP_KEY;
+        // setup our map app's dependency on the map module
 
-        require([reqUrl], function() {
-            
-            var map = new google.maps.Map(
-                document.getElementById('map'), config.MAP_OPTS);
+        angular.module('map', []).value('gMap', map).value('google', google);
 
-            
-            // forgot that the app shouldn't bootstrap immediately or else the 
-            // dependency won't exist.
-            // via http://stackoverflow.com/questions/16286605/ \
-            // initialize-angularjs-service-with-asynchronous-data
+        require('mapApp');
 
-            angular.module('myMap', []).value('gMap', map).value('google', google);
 
-            $(function() {
-                angular.bootstrap(document, ['mapApp']);
-            });
+        // forgot that the app shouldn't bootstrap immediately or else the 
+        // dependency won't exist.
+        // via http://stackoverflow.com/questions/16286605/ \
+        // initialize-angularjs-service-with-asynchronous-data
+        
+        $(function() {
+            angular.bootstrap(document, ['mapApp']);
         });
     });
 });

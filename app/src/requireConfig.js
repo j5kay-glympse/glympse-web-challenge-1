@@ -1,7 +1,9 @@
 /*globals require*/
 require.config({
     shim: {
-
+        angular: {
+            exports: 'angular'
+        }
     },
     paths: {
         famous: '../lib/famous/src',
