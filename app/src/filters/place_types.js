@@ -13,7 +13,7 @@ define([], function() {
                 // with our removal of underscores to create words
                 return str.
                         replace('_', ' ').
-                        replace(/\w\S*/g, function(txt){
+                        replace(/\w\S*/g, function(txt) {
                             return txt.charAt(0).toUpperCase() + 
                                    txt.substr(1).toLowerCase();
                         });
@@ -27,8 +27,9 @@ define([], function() {
                 var result = [];
 
                 for (var i=0; i<types.length; ++i) {
-                    if (ignored.indexOf(types[i]) != -1)
+                    if (ignored.indexOf(types[i]) != -1) {
                         continue;
+                    }
 
                     result.push(titleCase(types[i]));
                 }

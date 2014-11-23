@@ -1,4 +1,4 @@
-define( [
+define([
     'angular',
     'controllers/nav_controller',
     'controllers/search_controller',

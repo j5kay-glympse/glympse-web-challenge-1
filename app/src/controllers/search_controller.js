@@ -15,7 +15,7 @@ define(['lib/position_adapter', 'jquery'], function(PositionAdapter, $) {
 
         $scope.placesService = new google.maps.places.PlacesService(gMap);
             
-        $scope.badge = angular.element('#nav-search-bar .badge');
+        $scope.badge = $('#nav-search-bar .badge');
 
         $scope.menuToggle = function() {
             $scope.displayingMenu = !$scope.displayingMenu;
@@ -24,20 +24,20 @@ define(['lib/position_adapter', 'jquery'], function(PositionAdapter, $) {
             // is bound within angular as well as on a generic on('click')
             // @todo: find better way to bind the on('click') to the external
             // menu button
-            if (!this.$root.$$phase)
+            if (!this.$root.$$phase) {
                 this.$apply();
+            }
         };
 
-        angular.
-            element('#nav-search-bar button').
-            on('click', $scope.menuToggle.bind($scope));
+        $('#nav-search-bar button').on('click', $scope.menuToggle.bind($scope));
 
         // @param dest PositionAdapter. Should include a PlaceResult as dest.gPlaceResult
         $scope.$on('destChosen', function(e, dest) {
             
             // avoids cyclicabl destination lookup
-            if($scope.currPlace == dest.gPlaceResult)
+            if ($scope.currPlace == dest.gPlaceResult) {
                 return;
+            }
 
             $scope.displayingMenu = false;
 
@@ -59,10 +59,11 @@ define(['lib/position_adapter', 'jquery'], function(PositionAdapter, $) {
                 $scope.places = results;
                 $scope.$apply();
 
-                for (var i=0; i<results.length; ++i)
+                for (var i=0; i<results.length; ++i) {
                     $scope.placesMap[results[i].id] = results[i];
+                }
 
-                angular.element('.badge').text(results.length);
+                $('.badge').text(results.length);
             }
         };
 
@@ -70,13 +71,14 @@ define(['lib/position_adapter', 'jquery'], function(PositionAdapter, $) {
             
             var place = $scope.placesMap[placeId];
 
-            if(!place)
+            if (!place) {
                 return;
+            }
 
             $scope.currPlace = place;
 
-            angular.element('#search-results .place-additional').hide();
-            angular.element($event.currentTarget).find('.place-additional').show();
+            $('#search-results .place-additional').hide();
+            $($event.currentTarget).find('.place-additional').show();
                 
             $rootScope.$broadcast('destChosen', new PositionAdapter(place));
         };
@@ -90,7 +92,7 @@ define(['lib/position_adapter', 'jquery'], function(PositionAdapter, $) {
             });
 
             console.log('on photos click photo urls', $scope.placesMap[placeId].photos.length, urls);
-        }
+        };
     }
 
     return ['$scope', '$rootScope', 'gMap', 'google', SearchController];

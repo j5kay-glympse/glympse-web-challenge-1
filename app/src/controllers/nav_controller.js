@@ -1,4 +1,4 @@
-define(['lib/position_adapter'], function(PositionAdapter) {
+define(['lib/position_adapter', 'jquery'], function(PositionAdapter, $) {
     'use strict';
 
     function NavController($scope, $rootScope, $timeout, gMap, google) {
@@ -16,11 +16,12 @@ define(['lib/position_adapter'], function(PositionAdapter) {
             // is bound within angular as well as on a generic on('click')
             // @todo: find better way to bind the on('click') to the external
             // menu button
-            if (!this.$root.$$phase)
+            if (!this.$root.$$phase) {
                 this.$apply();
+            }
         };
 
-        angular.element('#nav-location-bar .fa.fa-bars').on('click', $scope.menuToggle.bind($scope));
+        $('#nav-location-bar .fa.fa-bars').on('click', $scope.menuToggle.bind($scope));
        
 
         /** Geolocation Elements **/
@@ -44,7 +45,7 @@ define(['lib/position_adapter'], function(PositionAdapter) {
         $scope.positionAutoSet = false;
 
         $scope.destPositionAutoComplete = new google.maps.places.Autocomplete(
-            angular.element('#dest-pos').get(0),
+            $('#dest-pos').get(0),
             { bounds: gMap.getBounds() }
         );
 
@@ -87,11 +88,12 @@ define(['lib/position_adapter'], function(PositionAdapter) {
             
         $scope.displayStartPosition = function() {
             
-            if ($scope.displayingStartPosition)
+            if ($scope.displayingStartPosition) {
                 return;
+            }
 
             $scope.displayingStartPosition = true;
-            $scope.startPositionAutoComplete = new google.maps.places.Autocomplete(angular.element('#start-pos').get(0));
+            $scope.startPositionAutoComplete = new google.maps.places.Autocomplete($('#start-pos').get(0));
 
             google.maps.event.addListener($scope.startPositionAutoComplete, 
                 'place_changed', 
@@ -111,15 +113,16 @@ define(['lib/position_adapter'], function(PositionAdapter) {
 
             $timeout(function() {
 
-                if (!$scope.positionAutoSet)
+                if (!$scope.positionAutoSet) {
                     $scope.displayStartPosition();
+                }
 
             }, 5000);
         }
         else {
             $scope.displayStartPosition();
         }
-    };
+    }
     
     return ['$scope', '$rootScope', '$timeout', 'gMap', 'google', NavController];
 });

@@ -3,6 +3,10 @@ require.config({
     shim: {
         angular: {
             exports: 'angular'
+        },
+
+        gmap: {
+            exports: 'google'
         }
     },
     paths: {
@@ -23,7 +27,7 @@ require.config({
         'Markdown.Converter': '../lib/requirejs-plugins/lib/Markdown.Converter',
         text: '../lib/requirejs-plugins/lib/text',
         bootstrap: '../lib/bootstrap/dist/js/bootstrap',
-        'font-awesome': '../lib/font-awesome/fonts/*',
+        'font-awesome': '../lib/font-awesome/fonts/*'
     },
     packages: [
 

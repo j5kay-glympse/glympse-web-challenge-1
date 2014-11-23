@@ -25,8 +25,9 @@ define([], function() {
 
         init: function(position) {
 
-            if (!position || typeof position != 'object')
+            if (!position || typeof position != 'object') {
                 throw new Error('Invalid position object in new PositionAdapter');
+            }
 
             if (position.coords) {
                 this.html5Pos = position;
@@ -47,22 +48,26 @@ define([], function() {
                 this.lng = this.gPlaceResult.geometry.location.lng();
             }
 
-            else
+            else {
                 throw new Error('Unsupported position object in new PositionAdapter');
+            }
 
         },
 
         toLatLng: function() {
-            if (this.gLatLng)
+            if (this.gLatLng) {
                 return this.gLatLng;
-            else
+            }
+            else {
                 return new google.maps.LatLng(this.lat, this.lng);
+            }
         },
 
         isEqualTo: function(pos) {
            
-            if (!pos instanceof PositionAdapter)
+            if (!pos instanceof PositionAdapter) {
                 pos = new PositionAdapter(pos);
+            }
 
             return pos.lat == this.lat && pos.lng == this.lng;
         }

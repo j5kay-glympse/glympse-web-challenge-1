@@ -8,7 +8,7 @@ define(['lib/position_adapter', 'jquery'], function(PositionAdapter, $) {
         $scope.curr  = null;
         $scope.dest  = null;
 
-        $scope.directionsService = new google.maps.DirectionsService;
+        $scope.directionsService = new google.maps.DirectionsService();
         $scope.directionsRenderer = new google.maps.DirectionsRenderer();
         $scope.directionsRenderer.setMap(gMap);
         
@@ -57,8 +57,9 @@ define(['lib/position_adapter', 'jquery'], function(PositionAdapter, $) {
         $scope.setDirections  = function() {
             console.log('setDirections', $scope.start, $scope.dest);
             
-            if (!$scope.start || !$scope.dest)
+            if (!$scope.start || !$scope.dest) {
                 return;
+            }
 
             var request = {
                 origin: $scope.start.toLatLng(),
