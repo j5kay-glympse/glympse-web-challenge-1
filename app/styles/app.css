@@ -1,3 +1,11 @@
+/* 
+ * Since we're invoking angular via main.js, need to cloak angular elements
+ * see https://docs.angularjs.org/api/ng/directive/ngCloak 
+ */
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
 html, body {
   background: #fff;
   height: 100%;
