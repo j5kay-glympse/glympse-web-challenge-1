@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="en">
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <title>Glympse Web Challenge #1</title>
@@ -9,8 +9,12 @@
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
         <meta name="msapplication-tap-highlight" content="no" />
         
+        <!-- TODO: get bootstrap mixed into app.css with LESS -->
+
         <!-- build:css(app/) css/app.css -->
         <link rel="stylesheet" type="text/css" href="styles/app.css" />
+        <link rel="stylesheet" type="text/css" href="lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="lib/bootstrap/dist/css/bootstrap-theme.min.css" />
         <!-- bower:css -->
         <!-- endbower -->
         <!-- endbuild -->
@@ -24,6 +28,11 @@
         <!-- build:js(app/) src/jquery.js -->
         <script type=text/javascript src="lib/jquery/dist/jquery.min.js"></script>
         <!-- endbuild -->
+
+        <!-- process:template
+            <!-- Best way I could get env specific map key for the time being -->
+           <script type="text/javascript" src="http://maps.google.com/maps/api/js?libraries=places&key=<%= gmap_id %>"></script>
+        /process -->
         
         <!-- process:remove:dev -->
         <script type="text/javascript" src="src/main.js"></script>
@@ -32,9 +41,75 @@
         <!-- process:remove:dist -->
         <script type="text/javascript" src="lib/requirejs/require.js" data-main="src/requireConfig"></script>
         <!-- /process -->
+
+        <!-- Silly walk icons extracted from http://chaplin007.deviantart.com/art/Ministry-of-Silly-Walks-17439101 -->
     </head>
     <body>
-		<h1>Simple Map Destination Picker</h1>
-		<div id="map">PUT MAP HERE!</div>
+        <div id="header" class="container-fluid">
+            <div id ="nav-location-bar" class="col-xs-1"><span class="glyphicon glyphicon-align-justify"></span></div>
+            <div class="col-xs-10"><h1>Get Directions</h1></div>
+            <div id="nav-search-bar" class="col-xs-1"><button type="button" class="btn btn-primary" disabled="disabled"><span class="glyphicon glyphicon-search"></span> <span class="badge"></span></button></div>
+        </div>
+
+        <div id="map" class="container-fluid" ng-controller="DirectionsController">
+            <!-- short lived loading spinner -->
+            <div id="loading">Loading... <span class="glyphicon glyphicon-refresh"></span></div>
+        </div>
+
+        <div id="location-menu" ng-controller="NavController">
+
+            <div id="loc-inner" ng-cloak ng-show="displayingMenu">
+
+                <button type="button" class="close" ng-click="menuToggle()">
+                    <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                </button>
+
+                <div id="start-pos-wrap" ng-show="displayingStartPosition">
+                    <label for="start-pos">Start</label>
+                    <input type="text" id="start-pos" ng-model="startPosField">
+                    <br>
+                </div>
+
+                <div id="dest-pos-wrap">
+                    <label for="dest-post">Destination</label>
+                    <input type="text" id="dest-pos" ng-model="destPosField">
+                </div>
+            </div>
+        </div>
+
+
+        <div id="search-menu" ng-controller="SearchController">
+            <div id="search-inner" ng-cloak ng-show="displayingMenu">
+                
+                <button type="button" class="close" ng-click="menuToggle()">
+                    <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                </button>
+
+                <div id="no-results" ng-show="! places.length">
+                    No results yet. Try searching on the left.
+                </div>
+                
+                <div id="search-results">
+                    
+                    <div ng-repeat="place in places" ng-click="onPlaceClick(place.id, $event)" class="place {{$even ? 'even' : ''}}" ng-class="place == currPlace  ? 'selected' : ''" ng-style="{'background-image': 'url({{place.icon}})'}" data-place-id="{{place.id}}">
+                        <h4 class="place-name">{{place.name}}</h4> 
+                       
+                        <div class="types">{{place.types | placeTypes }}</div>
+                        <div class="open-now {{place.opening_hours.open_now ? 'yes' : 'no'}}">Open now? <span>{{place.opening_hours.open_now ? 'Yes' : 'No'}}</span></div>
+
+                        <div class="place-additional">
+                            
+                            <div class="price">Price: {{place.price_level | placePrice}} </div>
+                            <div class="rating">Rating: {{place.rating}} / 5.0 </div>
+                            <div class="photo" ng-repeat="photo in place.photos">
+                                <img ng-src="{{photo.getUrl({maxWidth: 180, maxHeight: 180})}}">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
     </body>
 </html>

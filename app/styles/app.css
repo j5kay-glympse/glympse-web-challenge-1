@@ -1,5 +1,125 @@
-html {
+/* 
+ * Since we're invoking angular via main.js, need to cloak angular elements
+ * see https://docs.angularjs.org/api/ng/directive/ngCloak 
+ */
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+html, body {
   background: #fff;
+  height: 100%;
+}
+
+#header {
+    font-size: 36px;
+}
+
+#header .glyphicon-align-justify {
+    margin-top: 10px;
+    cursor: pointer; 
+}
+
+#header h1 {
+    text-align: center;
+}
+
+#map {
+  width: 100%;
+  height: 90%;
+  margin: 0;
+  padding: 0;
+  position: inherit;
+  background-color: #eae9e5;
+}
+
+#loading {
+    height: 50%;
+    position: relative;
+    top: 40%;
+    text-align: center;
+}
+
+#location-menu {
+    position: absolute;
+    left: 0;
+    top: 0; 
+    width: 300px;
+}
+
+#location-menu .close, #search-menu .close {
+    color: rgb(51, 51, 51);
+}
+
+#loc-inner {
+    padding: 10px 10px 40px 40px;
+    background-color: white;
+    height: 100%;
+}
+
+#start-pos-wrap, #dest-pos-wrap {
+    margin-top: 15px;
+}
+
+#loc-inner label {
+    display: block;
+}
+
+#loc-inner input {
+    width: 80%;
+    display: block;
+}
+
+#search-menu {
+    position: absolute;
+    top: 0;
+    right: 0; 
+    width: 300px;
+}
+
+#search-inner {
+    height: 100%;
+    overflow-y: scroll;
+    padding: 10px;
+    background-color: white;
+}
+
+#no-results {
+    padding: 5px;
+    margin-top: 50px;
+}
+
+#search-results {
+    margin-right: 20px;
+}
+
+.place {
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 30px;
+    cursor: pointer;
+    padding: 10px 0 10px 50px;
+}
+
+.place.even {
+    background-color: #E9E5DC;
+}
+
+.place.selected {
+    background-color: #CADFAA;
+}
+
+.place h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.open-now.yes {
+    font-weight: bold;
+}
+
+.place-additional {
+    display: none;
 }
 
 .backfaceVisibility {

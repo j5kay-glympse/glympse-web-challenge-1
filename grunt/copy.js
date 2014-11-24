@@ -13,6 +13,17 @@ module.exports = {
         // '{,*/}*.html',
         'styles/fonts/{,*/}*.*'
       ]
+    },
+    
+    {
+      expand: true,
+      dot: true,
+      flatten: true,
+      cwd: '<%= config.app %>',
+      dest: '<%= config.dist %>/fonts',
+      src: [
+        'lib/bootstrap/fonts/*'
+      ]
     }]
   }
 };
