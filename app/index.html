@@ -48,7 +48,7 @@
         <div id="header" class="container-fluid">
             <div id ="nav-location-bar" class="col-xs-1"><span class="glyphicon glyphicon-align-justify"></span></div>
             <div class="col-xs-10"><h1>Get Directions</h1></div>
-            <div id="nav-search-bar" class="col-xs-1"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> <span class="badge"></span></button></div>
+            <div id="nav-search-bar" class="col-xs-1"><button type="button" class="btn btn-primary" disabled="disabled"><span class="glyphicon glyphicon-search"></span> <span class="badge"></span></button></div>
         </div>
 
         <div id="map" class="container-fluid" ng-controller="DirectionsController">
@@ -84,6 +84,10 @@
                 <button type="button" class="close" ng-click="menuToggle()">
                     <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
                 </button>
+
+                <div id="no-results" ng-show="! places.length">
+                    No results yet. Try searching on the left.
+                </div>
                 
                 <div id="search-results">
                     

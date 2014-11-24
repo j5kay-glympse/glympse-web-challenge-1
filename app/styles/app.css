@@ -84,6 +84,11 @@ html, body {
     background-color: white;
 }
 
+#no-results {
+    padding: 5px;
+    margin-top: 50px;
+}
+
 #search-results {
     margin-right: 20px;
 }

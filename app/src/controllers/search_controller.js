@@ -77,6 +77,7 @@ define(['lib/position_adapter', 'jquery'], function(PositionAdapter, $) {
                 }
 
                 $('.badge').text(results.length);
+                $('#nav-search-bar button').removeAttr('disabled');
             }
         };
 
