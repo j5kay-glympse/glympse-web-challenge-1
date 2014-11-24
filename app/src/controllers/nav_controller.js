@@ -1,10 +1,15 @@
 define(['lib/position_adapter', 'jquery'], function(PositionAdapter, $) {
     'use strict';
 
+    /**
+     * Handles the selection of start and endpoints. 
+     * It tries to use navigator.geolocation, but if it is rejected or
+     * fails, will fallback to showing a starting position input.
+     */ 
     function NavController($scope, $rootScope, $timeout, gMap, google) {
 
         /** Display Elements **/
-
+        
         $scope.displayingStartPosition = false;
 
         $scope.displayingMenu = false;
@@ -21,16 +26,13 @@ define(['lib/position_adapter', 'jquery'], function(PositionAdapter, $) {
             }
         };
 
-        $('#nav-location-bar .glyphicon-align-justify').on('click', $scope.menuToggle.bind($scope));
+        $('#nav-location-bar .glyphicon-align-justify').
+            on('click', $scope.menuToggle.bind($scope));
        
 
         /** Geolocation Elements **/
 
         $scope.startPos = null;
-
-        // object literal of {lat: float, lng: float} rounded to 5 decimal
-        // used to evaluate if user moved
-        $scope.rawCurrPos = null;
 
         // google.maps.LatLng class
         $scope.currPos = null;
@@ -38,10 +40,10 @@ define(['lib/position_adapter', 'jquery'], function(PositionAdapter, $) {
         // google.maps.places.PlaceResult
         $scope.destPos = null;
 
-        // Some browsers, on selecting 'not now' for geolocation, 
-        // will not fire the failure callback. We'll wait an appropriate
-        // amount of time, then automatically show the location menu if
-        // this is still false.
+        // Some browsers on selecting 'not now' for geolocation 
+        // will not fire the failure callback. We'll wait a reasonable
+        // amount of time and then automatically show the location menu
+        // if this is still false.
         $scope.positionAutoSet = false;
 
         $scope.destPositionAutoComplete = new google.maps.places.Autocomplete(
@@ -56,23 +58,32 @@ define(['lib/position_adapter', 'jquery'], function(PositionAdapter, $) {
 
                 $scope.destPos = place;
                 $rootScope.$broadcast('destChosen', $scope.destPos); 
+                $scope.displayingMenu = false;
             }
         );
 
         /**
+         * Callback when current position is discovered via geolocation 
+         * (both the first time and on position update).
+         * The first time it's called, $scope.startPos hasn't been set.
+         *
          * @param pos Object containing {coords: { latitude: xxx, longitude: xxx }}
          */
         $scope.getPositionSuccess = function(pos) {
             
             $scope.positionAutoSet = true;
+
             $scope.displayingStartPosition = false;
 
             var adaptedPos = new PositionAdapter(pos);
 
             // initialize starting position
             if (!$scope.startPos) {
-                $scope.startPos = new PositionAdapter(pos);
-                $rootScope.$broadcast('startChosen', $scope.startPos); 
+                $scope.startChosen(new PositionAdapter(pos));
+
+                $scope.$apply(function() {
+                    $scope.displayingMenu = true;
+                });
             }
                 
             // set current position
@@ -81,11 +92,18 @@ define(['lib/position_adapter', 'jquery'], function(PositionAdapter, $) {
                 $rootScope.$broadcast('currPos', $scope.currPos); 
             }
         };
-
+        
+        /**
+         * Callback for geolocation lookup failure
+         */
         $scope.getPositionFail = function() {
             $scope.displayStartPosition();
         };
             
+        /**
+         * Forceful display of the start position input with autocomplete.
+         * Used if geolocation is rejected or not available
+         */
         $scope.displayStartPosition = function() {
             
             if ($scope.displayingStartPosition) {
@@ -93,23 +111,35 @@ define(['lib/position_adapter', 'jquery'], function(PositionAdapter, $) {
             }
 
             $scope.displayingStartPosition = true;
-            $scope.startPositionAutoComplete = new google.maps.places.Autocomplete($('#start-pos').get(0));
+            $scope.startPositionAutoComplete = 
+                new google.maps.places.Autocomplete($('#start-pos').get(0));
 
             google.maps.event.addListener($scope.startPositionAutoComplete, 
                 'place_changed', 
                 function() {
-                    var place = new PositionAdapter($scope.startPositionAutoComplete.getPlace());
+                    var place = new PositionAdapter(
+                                    $scope.startPositionAutoComplete.getPlace());
 
-                    $scope.startPos = place;
-                    $rootScope.$broadcast('startChosen', $scope.startPos); 
+                    $scope.startChosen(place);
                 });
         };
+
+        /**
+         * @param pos PositionAdapter
+         */
+        $scope.startChosen = function(pos) {
+            $scope.startPos = pos;
+            $rootScope.$broadcast('startChosen', $scope.startPos); 
+        }
 
 
         /** Initialization Elements **/
 
         if (navigator.geolocation) {
-            navigator.geolocation.watchPosition($scope.getPositionSuccess, $scope.getPositionFail, {timeout: 2000});
+            navigator.geolocation.watchPosition(
+                $scope.getPositionSuccess, 
+                $scope.getPositionFail, 
+                {timeout: 2000});
 
             $timeout(function() {
 

@@ -1,11 +1,18 @@
 define(['lib/position_adapter', 'jquery'], function(PositionAdapter, $) {
     'use strict';
 
+    /**
+     * Searches for nearby POIs when a destination is originally chosen.
+     * It displays extra information about POIs when clicked and will 
+     * notify the other controllers that a new destiation has been chosen.
+     */
     function SearchController($scope, $rootScope, gMap, google) {
 
+        // @todo: figure out better layout to get this panel to show 100% height
         $(function() {
             $('#search-inner').css('height', $(window).height() + 'px');
         });
+
         $scope.displayingMenu = false;
 
         $scope.places = [];
@@ -31,11 +38,17 @@ define(['lib/position_adapter', 'jquery'], function(PositionAdapter, $) {
 
         $('#nav-search-bar button').on('click', $scope.menuToggle.bind($scope));
 
-        // @param dest PositionAdapter. Should include a PlaceResult as dest.gPlaceResult
+        /**
+         * @param dest PositionAdapter. Should include a 
+         * google.maps.PlaceResult as dest.gPlaceResult
+         */
         $scope.$on('destChosen', function(e, dest) {
             
+            if (!dest.gPlaceResult) {
+                return;
+            }
             // avoids cyclicabl destination lookup
-            if ($scope.currPlace == dest.gPlaceResult) {
+            else if ($scope.currPlace == dest.gPlaceResult) {
                 return;
             }
 
