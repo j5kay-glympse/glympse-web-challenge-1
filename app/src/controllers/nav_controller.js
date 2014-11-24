@@ -21,7 +21,7 @@ define(['lib/position_adapter', 'jquery'], function(PositionAdapter, $) {
             }
         };
 
-        $('#nav-location-bar .fa.fa-bars').on('click', $scope.menuToggle.bind($scope));
+        $('#nav-location-bar .glyphicon-align-justify').on('click', $scope.menuToggle.bind($scope));
        
 
         /** Geolocation Elements **/

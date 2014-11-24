@@ -15,8 +15,9 @@ html, body {
     font-size: 36px;
 }
 
-#header i.fa-bars {
-   cursor: pointer; 
+#header .glyphicon-align-justify {
+    margin-top: 10px;
+    cursor: pointer; 
 }
 
 #header h1 {
