@@ -1,6 +1,8 @@
-define(['angular', 'config'], function(angular) {
-
-    var config = require('config');
+define(['angular', 'config'], function(angular, config) {
+    
+    if (!window.google || !window.google.maps) {
+        throw new Error('google maps not available in map.js');
+    }
 
     var map = new window.google.maps.Map(
                 document.getElementById(config.MAP_ID), config.MAP_OPTS);
