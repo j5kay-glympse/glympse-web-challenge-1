@@ -11,6 +11,7 @@ define(['lib/position_adapter', 'jquery'], function(PositionAdapter, $) {
         // @todo: figure out better layout to get this panel to show 100% height
         $(function() {
             $('#search-inner').css('height', $(window).height() + 'px');
+            $('#nav-search-bar button').prop('disabled', true);
         });
 
         $scope.displayingMenu = false;
@@ -77,7 +78,7 @@ define(['lib/position_adapter', 'jquery'], function(PositionAdapter, $) {
                 }
 
                 $('.badge').text(results.length);
-                $('#nav-search-bar button').removeAttr('disabled');
+                $('#nav-search-bar button').prop('disabled', false);
             }
         };
 
