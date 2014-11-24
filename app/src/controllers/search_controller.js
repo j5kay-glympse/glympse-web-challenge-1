@@ -39,7 +39,7 @@ define(['lib/position_adapter', 'jquery'], function(PositionAdapter, $) {
         $('#nav-search-bar button').on('click', $scope.menuToggle.bind($scope));
 
         /**
-         * @param dest PositionAdapter. Should include a 
+         * param dest PositionAdapter. Should include a 
          * google.maps.PlaceResult as dest.gPlaceResult
          */
         $scope.$on('destChosen', function(e, dest) {

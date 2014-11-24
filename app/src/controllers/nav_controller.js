@@ -130,7 +130,7 @@ define(['lib/position_adapter', 'jquery'], function(PositionAdapter, $) {
         $scope.startChosen = function(pos) {
             $scope.startPos = pos;
             $rootScope.$broadcast('startChosen', $scope.startPos); 
-        }
+        };
 
 
         /** Initialization Elements **/
