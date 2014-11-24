@@ -92,7 +92,7 @@
                 
                 <div id="search-results">
                     
-                    <div ng-repeat="place in places" ng-click="onPlaceClick(place.id, $event)" class="place {{$even ? 'even' : ''}}" ng-style="{'background-image': 'url({{place.icon}})'}" data-place-id="{{place.id}}">
+                    <div ng-repeat="place in places" ng-click="onPlaceClick(place.id, $event)" class="place {{$even ? 'even' : ''}}" ng-class="place == currPlace  ? 'selected' : ''" ng-style="{'background-image': 'url({{place.icon}})'}" data-place-id="{{place.id}}">
                         <h4 class="place-name">{{place.name}}</h4> 
                        
                         <div class="types">{{place.types | placeTypes }}</div>

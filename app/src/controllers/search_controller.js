@@ -95,17 +95,6 @@ define(['lib/position_adapter', 'jquery'], function(PositionAdapter, $) {
                 
             $rootScope.$broadcast('destChosen', new PositionAdapter(place));
         };
-
-        $scope.onPhotosClick = function(placeId, $event) {
-            
-            $event.stopPropagation();
-
-            var urls = $scope.placesMap[placeId].photos.map(function(photo) {
-                return photo.getUrl({maxWidth: 800, maxHeight: 600});
-            });
-
-            console.log('on photos click photo urls', $scope.placesMap[placeId].photos.length, urls);
-        };
     }
 
     return ['$scope', '$rootScope', 'gMap', 'google', SearchController];

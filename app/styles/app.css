@@ -104,6 +104,10 @@ html, body {
     background-color: #E9E5DC;
 }
 
+.place.selected {
+    background-color: #CADFAA;
+}
+
 .place h4 {
     margin-top: 0;
     margin-bottom: 10px;
