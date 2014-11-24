@@ -1,5 +1,6 @@
 define([
     'angular',
+    'map',
     'controllers/nav_controller',
     'controllers/search_controller',
     'controllers/directions_controller',
@@ -9,6 +10,7 @@ define([
 
 ], function(
     angular,
+    map,
 
     NavController,
     SearchController,

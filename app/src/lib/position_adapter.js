@@ -1,4 +1,4 @@
-define([], function() {
+define(['map'], function(map) {
     'use strict';
 
     /**
@@ -35,7 +35,7 @@ define([], function() {
                 this.lng = this.html5Pos.coords.longitude;
             }
 
-            else if (position instanceof google.maps.LatLng) {
+            else if (position instanceof map.google.maps.LatLng) {
                 this.gLatLng = position;
                 this.lat = this.gLatLng.lat();
                 this.lng = this.gLatLng.lng();
@@ -59,7 +59,7 @@ define([], function() {
                 return this.gLatLng;
             }
             else {
-                return new google.maps.LatLng(this.lat, this.lng);
+                return new map.google.maps.LatLng(this.lat, this.lng);
             }
         },
 
