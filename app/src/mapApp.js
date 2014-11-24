@@ -1,3 +1,6 @@
+// using angular organization based on 
+// http://solutionoptimist.com/2013/09/30/requirejs-angularjs-dependency-\
+// injection/
 define([
     'angular',
     'map',
