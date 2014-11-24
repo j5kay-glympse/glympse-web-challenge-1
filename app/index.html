@@ -50,6 +50,12 @@
             <div class="col-xs-10"><h1>Get Directions</h1></div>
             <div id="nav-search-bar" class="col-xs-1"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> <span class="badge"></span></button></div>
         </div>
+
+        <div id="gen-error" class="alert alert-danger hidden">
+            <strong>Sorry!</strong> Something's gone pear shaped. Please reload to see if it's fixed.
+        </div>
+
+
         <div id="map" class="container-fluid" ng-controller="DirectionsController">
             <!-- short lived loading spinner -->
             <div id="loading">Loading... <span class="glyphicon glyphicon-refresh"></span></div>
