@@ -5,8 +5,8 @@
     },
     "globals": {
         "DocumentFragment": true,
-	"console": true,
-	"$": true
+        "console": true,
+        "$": true
     },
     "rules": {
         "valid-jsdoc": 0,
@@ -15,9 +15,9 @@
         "consistent-this": 2,
         "no-constant-condition": 1,
         "no-underscore-dangle": 0,
-	"no-console": 0,
+        "no-console": 0,
         "no-use-before-define": [1, "nofunc"],
-	"no-trailing-spaces": 0,
+        "no-trailing-spaces": 0,
         "func-names": 0,
         "func-style": [2, "declaration"],
         "new-cap": 1,
@@ -28,6 +28,6 @@
         "one-var": 0,
         "space-infix-ops": 0,
         "strict": 0,
-	"eqeqeq": 0
+        "eqeqeq": 0
     }
 }

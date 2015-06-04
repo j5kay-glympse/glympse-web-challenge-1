@@ -1,6 +1,6 @@
 /*global module:false*/
 
-/*Generated initially from grunt-init, heavily inspired by yo webapp*/
+/* Generated initially from grunt-init, heavily inspired by yo webapp */
 
 module.exports = function(grunt) {
   'use strict';

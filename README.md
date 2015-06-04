@@ -77,4 +77,4 @@ If you would like to have your server be accessible to other devices on your loc
 If you don't like your browser being opened for use a ```--no-open``` flag to disable the feature
 
 ## Release History
- * 2014-10-29   v1.0.0   Heavily inspired on the [Yeoman Generator](https://github.com/FamousTools/generator-famous) for [Famo.us](http://famo.us)
+ * 2014-10-29   v1.0.0   Heavily inspired by the [Yeoman Generator](https://github.com/FamousTools/generator-famous) for [Famo.us](http://famo.us)

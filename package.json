@@ -19,7 +19,6 @@
   },
   "devDependencies": {
     "famous-metrics": "^0.1.1",
-    "famous-polyfills": "^0.3.0",
     "grunt": "~0.4.4",
     "grunt-bower-requirejs": "^1.1.0",
     "grunt-contrib-clean": "^0.6.0",
