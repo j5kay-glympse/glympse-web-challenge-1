@@ -21,7 +21,6 @@ a {
 	float: left;
 	width: 23%;
 	height: 100%;
-	border: 1px dashed red;
 	overflow: scroll;
 	padding: 5px;
 	margin: 5px;
@@ -30,25 +29,24 @@ a {
 #placesContainer {
 	overflow: scroll;
 	width: 400px;
-	height: 450px;
 }
 
 #map-canvas {
 	float: left;
-	width: 57%;
+	width: 55%;
 }
 
 .placeDetails:hover {
 	background-color: #b2d1fc;
+	text-decoration: none;
 }
 
 .placeDetails {
-	border-bottom: 1px solid grey;
+	border-bottom: 1px solid #D8D8D8;
 }
 
 #directionsPanel {
-	width: 10%;
+	width: 12%;
 	height: 100%;
-	border: dashed 1px red;
 	float: left;
 }
