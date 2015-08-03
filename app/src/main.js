@@ -13,6 +13,7 @@ define(function(require, exports, module) {
 	var directionsDisplay;
     var directionsService = new google.maps.DirectionsService();
 	var markers = [];
+	var infoWindow = new google.maps.InfoWindow();;
 	var sidebarHtml = '';
 
 	// some base locations
@@ -92,6 +93,8 @@ define(function(require, exports, module) {
 
 	function setActiveMarker(i) {
 		// when user clicks on place detail in sidebar
+		// 0 - close any open infoWindows
+
 		// 1 - activate corresponding marker
 		google.maps.event.trigger(markers[i], 'click');
 		// 2 - display route to dest. on map
@@ -149,8 +152,6 @@ define(function(require, exports, module) {
 	function createMarker(place) {
 		var placeDetailsHtml;
 
-		// init info window
-		var infoWindow = new google.maps.InfoWindow();
 		// init new marker
 		var marker = new google.maps.Marker({
 			map: map,
@@ -178,25 +179,20 @@ define(function(require, exports, module) {
 												result.formatted_phone_number + '<br>' +
 												placeUrl + '<br>';
 
+				// add html content to infoWindow
 				infoWindow.setContent(infoWindowContentString);
+				// open infoWindow
 				infoWindow.open(map, marker);
-
-
-
 
 			});
 		});
 
 		markers.push(marker);
 
-		//console.log('markers.length: ' + markers.length);
-
 		placeDetailsHtml = '<a href="javascript:setActiveMarker(' + (markers.length-1) +')"><div class="placeDetails"><h4>' + place.name + '</h4><div>' + place.formatted_address + '</div></div></a>';
 
-		//console.log('placeDetailsHtml: ' + placeDetailsHtml);
-
 		sidebarHtml += placeDetailsHtml;
-
+		sidebarHtml += placeDetailsHtml;
 	}
 
 	function clearAllMarkers () {
