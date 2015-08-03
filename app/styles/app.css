@@ -19,7 +19,7 @@ a {
 
 #sidebarMenu {
 	float: left;
-	width: 23%;
+	width: 28%;
 	height: 100%;
 	overflow: scroll;
 	padding: 5px;
@@ -33,7 +33,7 @@ a {
 
 #map-canvas {
 	float: left;
-	width: 55%;
+	width: 50%;
 }
 
 .placeDetails:hover {
