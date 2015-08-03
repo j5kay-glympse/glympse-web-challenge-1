@@ -2,7 +2,53 @@ html {
   background: #fff;
 }
 
+body {
+	width: 100%;
+}
+
 .backfaceVisibility {
   -webkit-backface-visibility: visible;
   backface-visibility: visible;
+}
+
+html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
+
+a {
+	text-decoration: none;
+}
+
+#sidebarMenu {
+	float: left;
+	width: 23%;
+	height: 100%;
+	border: 1px dashed red;
+	overflow: scroll;
+	padding: 5px;
+	margin: 5px;
+}
+
+#placesContainer {
+	overflow: scroll;
+	width: 400px;
+	height: 450px;
+}
+
+#map-canvas {
+	float: left;
+	width: 57%;
+}
+
+.placeDetails:hover {
+	background-color: #b2d1fc;
+}
+
+.placeDetails {
+	border-bottom: 1px solid grey;
+}
+
+#directionsPanel {
+	width: 10%;
+	height: 100%;
+	border: dashed 1px red;
+	float: left;
 }
