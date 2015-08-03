@@ -4,9 +4,8 @@ define(function(require, exports, module) {
 
     // import dependencies
     var $ = require('jquery');
-    var Handlebars = require('handlebars');
+});
 
-	//console.log('Map Challenge! - size=' + $(document).width() + 'x' + $(document).height());
 
 	var map;
 	var initialLocation;
@@ -91,20 +90,12 @@ define(function(require, exports, module) {
 		map.setCenter(initialLocation);
 	}
 
-//	function configureDirectionsBtns() {
-//		// configure the showDirectionsBtn per marker
-//		var buttons = document.getElementsByClassName('showDirectionsBtn');
-//		for(var i = 0; i < buttons.length; i++){
-//			buttons[i].addEventListener('click', displayDirections, false);
-//		}
-//	}
-
 	function setActiveMarker(i) {
-		// TODO
 		// when user clicks on place detail in sidebar
 		// 1 - activate corresponding marker
 		google.maps.event.trigger(markers[i], 'click');
 		// 2 - display route to dest. on map
+		displayDirections(markers[i].position);
 	}
 
 	function searchNearby() {
@@ -154,14 +145,6 @@ define(function(require, exports, module) {
 			}
 		});
 	}
-
-//	function displaySearchResultsInSidebar(data) {
-//		// display results in sidebar
-//		var source = $('#placeDetails-template').html();
-//		var placeDetailsTemplate = Handlebars.compile(source);
-//		$('#placesContainer').append(placeDetailsTemplate(data));
-//	}
-
 
 	function createMarker(place) {
 		var placeDetailsHtml;
@@ -227,15 +210,15 @@ define(function(require, exports, module) {
 		$('#placesContainer').html('');
 	}
 
-	function displayDirections() {
+	function displayDirections(dest) {
 		console.log('inside displayDirections...');
-		destination = 'Rancho Bravo Tacos';
+		//destination = 'Rancho Bravo Tacos';
 
 		// route config for directions service
 		var routeConfig = {
 			origin: initialLocation,
-			destination: destination,
-			travelMode: google.maps.TravelMode.DRIVING
+			destination: dest,
+			travelMode: google.maps.TravelMode.WALKING
 		};
 
 		directionsService.route(routeConfig, function(result, status) {
@@ -265,7 +248,4 @@ define(function(require, exports, module) {
     	clearAllMarkers();
     });
 
-});
-
-
-
+// END OF LINE
