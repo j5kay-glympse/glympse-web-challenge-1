@@ -6,3 +6,44 @@ html {
   -webkit-backface-visibility: visible;
   backface-visibility: visible;
 }
+
+html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
+
+a {
+	text-decoration: none;
+}
+
+#sidebarMenu {
+	float: left;
+	width: 28%;
+	height: 100%;
+	overflow: scroll;
+	padding: 5px;
+	margin: 5px;
+}
+
+#placesContainer {
+	overflow: scroll;
+	width: 400px;
+}
+
+#map-canvas {
+	float: left;
+	width: 50%;
+}
+
+.placeDetails:hover {
+	background-color: #b2d1fc;
+	text-decoration: none;
+}
+
+.placeDetails {
+	border-bottom: 1px solid #D8D8D8;
+}
+
+#directionsPanel {
+	width: 12%;
+	height: 100%;
+	float: left;
+	overflow: scroll;
+}
