@@ -15,13 +15,6 @@
         <!-- endbower -->
         <!-- endbuild -->
 
-        <!-- build:js(app/) src/polyfills.js
-        <script type="text/javascript" src="lib/famous-polyfills/functionPrototypeBind.js"></script>
-        <script type="text/javascript" src="lib/famous-polyfills/classList.js"></script>
-        <script type="text/javascript" src="lib/famous-polyfills/requestAnimationFrame.js"></script>
-        -->
-        <!-- endbuild -->
-
         <!-- build:js(app/) src/jquery.js -->
         <script type="text/javascript" src="lib/jquery/dist/jquery.min.js"></script>
         <!-- endbuild -->
@@ -43,9 +36,10 @@
     </head>
     <body>
 		<h1>Local Lunch Locator</h1>
+
 		<!-- SIDEBAR MENU -->
 		<div id="sidebarMenu">
-			<!--
+			<!-- DEV TOOLS FOR DEBUG
 			<button id="searchNearbyBtn" class="btn">Search Nearby</button>
 			<button id="clearAllMarkersBtn" class="btn">Clear All Markers</button>
 			-->
@@ -53,21 +47,6 @@
 			<button id="searchByTextBtn" class="btn">Find Lunch</button>
 			<div id="placesContainer">
 			</div>
-			<!-- Place details template -->
-			<!--
-			<script id="placeDetails-template" type="text/x-handlebars-template">
-				{{#each results}}
-				<a href="javascript:myclick({{gmarkers.length-1}})">
-					<div class="placeDetails">
-						<h4>{{name}}</h4>
-						<div>
-							{{formatted_address}}<br>
-						</div>
-					</div>
-				</a>
-				{{/each}}
-			</script>
-			-->
 		</div>
 
 		<!-- MAP CANVAS -->
