@@ -133,7 +133,6 @@ function searchByText(searchString) {
 			var resultsJson = {
 				results: results
 			}
-			console.log(resultsJson);
 
 			// place marker per result
 			for (var i = 0; i < results.length; i++) {
@@ -162,9 +161,6 @@ function createMarker(place) {
 				alert(status);
 				return;
 			}
-			//debug
-			console.log(result);
-			//console.log(result.website);
 
 			var placeUrl = '';
 			// only display website url if exists
