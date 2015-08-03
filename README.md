@@ -21,25 +21,21 @@ Here is an outline/checklist of all items necessary for a successful challenge r
 	OK - Provide a button/panel that allows the user to type in a destination 
 
 	OK - Perform a search for nearby POIs that match the entered destination input
-TODO  - Use the current map's center/viewport bounds + zoom as params for the search
+	- Use the current map's center/viewport bounds + zoom as params for the search
 
 	OK - Results of the search should appear in a list in some manner for interaction (maps icons, sidebar, pop-up, etc.)
   			- *BONUS*: Show additional info about each search result (distance away, provided images/icons, search result type, etc.)
   			- *BONUS*: Cool list container / UI layout
 
 
+	OK - Each entry should be selectable
 
-
-
-
-1 - Each entry should be selectable
-
-1a - Show/highlight an entry on the map if it is selected
-  			- *BONUS*: center/zoom the map based on user's and destination location
+	OK - Show/highlight an entry on the map if it is selected
+  			OK - *BONUS*: center/zoom the map based on user's and destination location
   			- *BONUS*: make cool animation when transitioning
 
-2 - Retrieve/plot a route from the user's current location to the destination
-  			- *BONUS*: Show additional info about destination via pop-up balloon over destination marker
+	OK - Retrieve/plot a route from the user's current location to the destination
+  			OK - *BONUS*: Show additional info about destination via pop-up balloon over destination marker
   			- *BONUS*: Use custom icon for destination marker
 			- **_SUPER-DUPER BONUS_**: Make a responsive app that accomodates viewport sizes ranging between phone and desktop
 
