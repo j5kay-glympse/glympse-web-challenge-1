@@ -1,4 +1,4 @@
-#Glympse Web Challenge #1
+#Local Lunch Locator
 > Simple Map Destination Picker exercise
 
 ##Challenge outline
