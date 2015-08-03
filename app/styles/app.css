@@ -2,10 +2,6 @@ html {
   background: #fff;
 }
 
-body {
-	width: 100%;
-}
-
 .backfaceVisibility {
   -webkit-backface-visibility: visible;
   backface-visibility: visible;
@@ -49,4 +45,5 @@ a {
 	width: 12%;
 	height: 100%;
 	float: left;
+	overflow: scroll;
 }
