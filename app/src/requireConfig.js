@@ -8,10 +8,18 @@ require.config({
         requirejs: '../lib/requirejs/require',
         almond: '../lib/almond/almond',
         jquery: '../lib/jquery/dist/jquery',
-        handlebars: '../lib/handlebars/handlebars'
+		googlemaps: '../lib/googlemaps-amd/src/googlemaps',
+		async: '../lib/requirejs-plugins/src/async'
+
     },
     packages: [
 
-    ]
+    ],
+	googlemaps: {
+		params: {
+			key: 'AIzaSyAXjjpKlzLPVOMkPrdntY69JGG64lEegqY',
+			libraries: 'places'
+		}
+	}
 });
 require(['main']);
