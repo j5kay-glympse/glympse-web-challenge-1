@@ -95,7 +95,7 @@ define(function(require, exports, module) {
 			// when user clicks on place detail in sidebar:
 			// 1 - activate corresponding marker
 			gmaps.event.trigger(markers[i], 'click');
-			// 2 - display route to dest. on map
+			// 2 - display route to destination on map
 			displayDirections(markers[i].position);
 		}
 
@@ -172,11 +172,11 @@ define(function(require, exports, module) {
 		}
 
 
-		function displayDirections(dest) {
+		function displayDirections(destination) {
 			// route config for directions service
 			var routeConfig = {
 				origin: initialLocation,
-				destination: dest,
+				destination: destination,
 				travelMode: gmaps.TravelMode.WALKING
 			};
 
