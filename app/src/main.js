@@ -20,7 +20,7 @@ define(function(require, exports, module) {
 		var seattle = new gmaps.LatLng(47.6097, -122.3331);
 
 		var browserSupportFlag;
-		var gMarkerIcon = '../content/images/g50px.png';
+		var gMarkerIcon = 'content/images/g50px.png';
 
 		// map options
 		var mapOptions = {
