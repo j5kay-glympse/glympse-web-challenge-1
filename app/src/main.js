@@ -6,7 +6,6 @@ define(function(require, exports, module) {
     var $ = require('jquery');
 
 	require(['googlemaps!'], function(gmaps) {
-		// gmaps is now available as `gmaps`
 		var map;
 		var initialLocation;
 		var placesService;
@@ -19,7 +18,6 @@ define(function(require, exports, module) {
 		// some base locations
 		var nowhere = new gmaps.LatLng(60, 105);
 		var seattle = new gmaps.LatLng(47.6097, -122.3331);
-		var glympsehq = new gmaps.LatLng(47.613734, -122.318008);
 
 		var browserSupportFlag;
 		var gMarkerIcon = '../content/images/g50px.png';
@@ -166,7 +164,7 @@ define(function(require, exports, module) {
 
 			markers.push(marker);
 
-			placeDetailsHtml = '<a href="javascript:setActiveMarker(' + (markers.length-1) +')"><div class="placeDetails"><h4>' + place.name + '</h4><div>' + place.formatted_address + '</div></div></a>';
+			placeDetailsHtml = '<a href="#" class="place-details" markerid="' + (markers.length-1) + '"><div class="placeDetails"><h4>' + place.name + '</h4><div>' + place.formatted_address + '</div></div></a>';
 
 			sidebarHtml += placeDetailsHtml;
 		}
@@ -193,7 +191,20 @@ define(function(require, exports, module) {
 			searchByText(searchText);
 		});
 
+		$(document).on('click', '.place-details', function(e) {
+			e.preventDefault();
+
+			var id = $(this).attr('markerid');
+			var dest = markers[id];
+
+			gmaps.event.trigger(dest, 'click');
+
+			displayDirections(dest.position);
+		});
+
 		// init map
 		initMap();
+
+
 	});
 });
