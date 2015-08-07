@@ -41,8 +41,12 @@ a {
 	border-bottom: 1px solid #D8D8D8;
 }
 
+#searchByTextBtn {
+	display: none;
+}
+
 #directionsPanel {
-	width: 12%;
+	width: auto;
 	height: 100%;
 	float: left;
 	overflow: scroll;

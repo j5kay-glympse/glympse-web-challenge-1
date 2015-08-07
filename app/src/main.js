@@ -66,6 +66,9 @@ define(function(require, exports, module) {
 						icon: gMarkerIcon,
 						title: 'Current Location'
 					});
+
+					// show search btn
+					$('#searchByTextBtn').fadeIn('slow');
 				}, function() {
 					handleNoGeolocation(browserSupportFlag);
 				});
@@ -123,6 +126,10 @@ define(function(require, exports, module) {
 
 					// add sidebarHtml to page
 					$('#placesContainer').append(sidebarHtml);
+				}
+				// handle error condition
+				else {
+					console.log('There was an error connecting to the Places-Service');
 				}
 			});
 		}
