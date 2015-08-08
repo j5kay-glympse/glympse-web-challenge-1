@@ -12,9 +12,6 @@ html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
 a {
 	text-decoration: none;
 }
-#mapTitle {
-	margin-left: 9px;
-}
 
 #sidebarMenu {
 	float: left;
@@ -44,8 +41,9 @@ a {
 	border-bottom: 1px solid #D8D8D8;
 }
 
-#searchByTextBtn {
+#searchInput {
 	display: none;
+	margin: 20px 0 10px 0;
 }
 
 #directionsPanel {

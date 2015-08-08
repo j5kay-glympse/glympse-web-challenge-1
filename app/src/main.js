@@ -68,7 +68,7 @@ define(function(require, exports, module) {
 					});
 
 					// show search btn
-					$('#searchByTextBtn').fadeIn('slow');
+					$('#searchInput').fadeIn('slow');
 				}, function() {
 					handleNoGeolocation(browserSupportFlag);
 				});

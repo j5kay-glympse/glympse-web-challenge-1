@@ -32,21 +32,21 @@
 
     </head>
     <body>
-		<h1 id="mapTitle">Local Lunch Locator v1</h1>
-
 		<!-- SIDEBAR MENU -->
 		<div id="sidebarMenu">
-			<input type="text" id="searchByTextInput" value="Tacos"/>
+			<!-- PAGE TITLE -->
+			<h2 id="mapTitle">Local Lunch Locator v1</h2>
+			<!-- SEARCH INPUT -->
+			<div id="searchInput">
+				<input type="text" id="searchByTextInput" value="Tacos"/>
 				<button id="searchByTextBtn" class="btn btn-primary">Find Lunch</button>
-			<div id="placesContainer">
 			</div>
+			<!-- PLACE DETAILS CONTAINER -->
+			<div id="placesContainer"></div>
 		</div>
-
 		<!-- MAP CANVAS -->
 		<div id="map-canvas"></div>
-
 		<!-- DIRECTIONS PANEL -->
 		<div id="directionsPanel"></div>
-
     </body>
 </html>
