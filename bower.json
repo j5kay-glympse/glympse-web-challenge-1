@@ -1,12 +1,12 @@
 {
   "name": "glympse-web-challenge-1",
-  "description": "Simple Map Destination Picker",
+  "description": "Local Lunch Locator",
   "version": "1.0.1",
-  "homepage": "https://github.com/JasonGlympse/glympse-web-challenge-1",
+  "homepage": "https://github.com/nwhitmont/glympse-web-challenge-1",
   "authors": [
     {
-      "name": "Jason Keimig",
-      "url": "http://github.com/JasonGlympse/"
+      "name": "Nils Whitmont",
+      "url": "https://github.com/nwhitmont"
     }
   ],
   "main": "app/index.html",
@@ -28,6 +28,7 @@
     "requirejs": "~2.1.11",
     "almond": "~0.2.9",
     "jquery": "~2.1.1",
-    "googlemaps-amd": "~1.0.1"
+    "googlemaps-amd": "~1.0.1",
+    "bootstrap-css-only": "~3.3.4"
   }
 }
