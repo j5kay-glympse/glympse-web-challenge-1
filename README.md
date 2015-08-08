@@ -1,4 +1,4 @@
-#Glympse Web Challenge #1
+#Local Lunch Locator
 > Simple Map Destination Picker exercise
 
 ##Challenge outline
@@ -6,28 +6,53 @@ Your challenge is to build a web-app that allows a user to search for, select, a
 
 Here is an outline/checklist of all items necessary for a successful challenge result:
 
-- Leverage the provided app container structure (see instructions below how to set up for the node/grunt/bower environment)
-- Initialize/load your favorite map control (Google, HERE, OSM, etc.)
-- Get the user's current location and show it on the map
-  - Use `navigator.geolocation`
-  - Center map on retrieved latlng at some default zoom level (13-15 are pretty good defaults)
-  - *BONUS*: Show custom user icon
-  - *BONUS*: Show other information about geolocation result (accuracy, elevation, heading, etc.)
-  - *BONUS*: Update user's location as they move around
-- Provide a button/panel that allows the user to type in a destination
-- Perform a search for nearby POIs that match the entered destination input
-  - Use the current map's center/viewport bounds + zoom as params for the search
-- Results of the search should appear in a list in some manner for interaction (maps icons, sidebar, pop-up, etc.)
-  - *BONUS*: Show additional info about each search result (distance away, provided images/icons, search result type, etc.)
-  - *BONUS*: Cool list container / UI layout
-- Each entry should be selectable
-- Show/highlight an entry on the map if it is selected
-  - *BONUS*: center/zoom the map based on user's and destination location
-  - *BONUS*: make cool animation when transitioning
-- Retrieve/plot a route from the user's current location to the destination
-  - *BONUS*: Show additional info about destination via pop-up balloon over destination marker
-  - *BONUS*: Use custom icon for destination marker
-- **_SUPER-DUPER BONUS_**: Make a responsive app that accomodates viewport sizes ranging between phone and desktop
+
+#################################################################################################################################
+
+	OK - Leverage the provided app container structure (see instructions below how to set up for the node/grunt/bower environment)
+	OK - Initialize/load your favorite map control (Google, HERE, OSM, etc.)
+	OK - Get the user's current location and show it on the map
+	OK  - Use `navigator.geolocation`
+	OK  - Center map on retrieved latlng at some default zoom level (13-15 are pretty good defaults)
+	OK  - *BONUS*: Show custom user icon
+  			- *BONUS*: Show other information about geolocation result (accuracy, elevation, heading, etc.)
+  			- *BONUS*: Update user's location as they move around
+
+	OK - Provide a button/panel that allows the user to type in a destination 
+
+	OK - Perform a search for nearby POIs that match the entered destination input
+	- Use the current map's center/viewport bounds + zoom as params for the search
+
+	OK - Results of the search should appear in a list in some manner for interaction (maps icons, sidebar, pop-up, etc.)
+  			- *BONUS*: Show additional info about each search result (distance away, provided images/icons, search result type, etc.)
+  			- *BONUS*: Cool list container / UI layout
+
+
+	OK - Each entry should be selectable
+
+	OK - Show/highlight an entry on the map if it is selected
+  			OK - *BONUS*: center/zoom the map based on user's and destination location
+  			- *BONUS*: make cool animation when transitioning
+
+	OK - Retrieve/plot a route from the user's current location to the destination
+  			OK - *BONUS*: Show additional info about destination via pop-up balloon over destination marker
+  			- *BONUS*: Use custom icon for destination marker
+			- **_SUPER-DUPER BONUS_**: Make a responsive app that accomodates viewport sizes ranging between phone and desktop
+
+
+
+######################################################################################################################################
+
+
+
+
+
+
+
+
+
+
+
 
 There are a couple of wireframes (in `samples/`) of an example mobile UX flow for this destination picker project. By no means are you constrained by these designs. They have been included only as reference examples. Feel free to use other sources of inspiration (i.e. Google Maps' destination search/selection, Bing, etc.)
 

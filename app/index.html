@@ -2,39 +2,56 @@
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <title>Glympse Web Challenge #1</title>
+        <title>Local Lunch Locator</title>
         <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=no" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
         <meta name="msapplication-tap-highlight" content="no" />
-        
+
         <!-- build:css(app/) css/app.css -->
         <link rel="stylesheet" type="text/css" href="styles/app.css" />
+		<link rel="stylesheet" type="text/css" href="lib/bootstrap-css-only/css/bootstrap.min.css" />
         <!-- bower:css -->
         <!-- endbower -->
         <!-- endbuild -->
-        
-        <!-- build:js(app/) src/polyfills.js -->
-        <script type="text/javascript" src="lib/famous-polyfills/functionPrototypeBind.js"></script>
-        <script type="text/javascript" src="lib/famous-polyfills/classList.js"></script>
-        <script type="text/javascript" src="lib/famous-polyfills/requestAnimationFrame.js"></script>
-        <!-- endbuild -->
-        
+
         <!-- build:js(app/) src/jquery.js -->
-        <script type=text/javascript src="lib/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="lib/jquery/dist/jquery.min.js"></script>
         <!-- endbuild -->
-        
+
         <!-- process:remove:dev -->
         <script type="text/javascript" src="src/main.js"></script>
         <!-- /process -->
-        
+
         <!-- process:remove:dist -->
         <script type="text/javascript" src="lib/requirejs/require.js" data-main="src/requireConfig"></script>
         <!-- /process -->
     </head>
     <body>
-		<h1>Simple Map Destination Picker</h1>
-		<div id="map">PUT MAP CONTROL HERE!</div>
+		<!-- SIDEBAR MENU -->
+		<div id="sidebarMenu">
+			<!-- PAGE TITLE -->
+			<h2 id="mapTitle">Local Lunch Locator</h2>
+			<!-- SEARCH INPUT -->
+			<div id="searchInput">
+				<input type="text" id="searchByTextInput" value="Tacos" class="left form-control"/>
+				<div id="travelModeSelector" class="left">
+					<select id="travelMode" class="form-control" onchange="displayDirections();">
+						<option value="WALKING">Walking</option>
+						<option value="BICYCLING">Bicycling</option>
+						<option value="TRANSIT">Transit</option>
+						<option value="DRIVING">Driving</option>
+					</select>
+				</div>
+				<button id="searchByTextBtn" class="btn btn-primary left">Find Lunch</button>
+			</div>
+			<!-- PLACE DETAILS CONTAINER -->
+			<div id="placesContainer"></div>
+		</div>
+		<!-- MAP CANVAS -->
+		<div id="map-canvas"></div>
+		<!-- DIRECTIONS PANEL -->
+		<div id="directionsPanel"></div>
     </body>
 </html>
