@@ -35,11 +35,19 @@
 		<!-- SIDEBAR MENU -->
 		<div id="sidebarMenu">
 			<!-- PAGE TITLE -->
-			<h2 id="mapTitle">Local Lunch Locator v1</h2>
+			<h2 id="mapTitle">Local Lunch Locator</h2>
 			<!-- SEARCH INPUT -->
 			<div id="searchInput">
-				<input type="text" id="searchByTextInput" value="Tacos"/>
-				<button id="searchByTextBtn" class="btn btn-primary">Find Lunch</button>
+				<input type="text" id="searchByTextInput" value="Tacos" class="left form-control"/>
+				<div id="travelModeSelector" class="left">
+					<select id="travelMode" class="form-control" onchange="displayDirections();">
+						<option value="WALKING">Walking</option>
+						<option value="BICYCLING">Bicycling</option>
+						<option value="TRANSIT">Transit</option>
+						<option value="DRIVING">Driving</option>
+					</select>
+				</div>
+				<button id="searchByTextBtn" class="btn btn-primary left">Find Lunch</button>
 			</div>
 			<!-- PLACE DETAILS CONTAINER -->
 			<div id="placesContainer"></div>

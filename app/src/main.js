@@ -92,14 +92,6 @@ define(function(require, exports, module) {
 			map.setCenter(initialLocation);
 		}
 
-		function setActiveMarker(i) {
-			// when user clicks on place detail in sidebar:
-			// 1 - activate corresponding marker
-			gmaps.event.trigger(markers[i], 'click');
-			// 2 - display route to destination on map
-			displayDirections(markers[i].position);
-		}
-
 		function searchByText(searchString) {
 			console.log('searching for --> ' + searchString);
 
@@ -176,13 +168,14 @@ define(function(require, exports, module) {
 			sidebarHtml += placeDetailsHtml;
 		}
 
-
 		function displayDirections(destination) {
+			// get mode from selector
+			var travelMode = document.getElementById('travelMode').value;
 			// route config for directions service
 			var routeConfig = {
 				origin: initialLocation,
 				destination: destination,
-				travelMode: gmaps.TravelMode.WALKING
+				travelMode: travelMode
 			};
 
 			directionsService.route(routeConfig, function(result, status) {
@@ -202,16 +195,14 @@ define(function(require, exports, module) {
 			e.preventDefault();
 
 			var id = $(this).attr('markerid');
-			var dest = markers[id];
+			var destination = markers[id];
+			// activate marker
+			gmaps.event.trigger(destination, 'click');
 
-			gmaps.event.trigger(dest, 'click');
-
-			displayDirections(dest.position);
+			displayDirections(destination.position);
 		});
 
 		// init map
 		initMap();
-
-
 	});
 });
