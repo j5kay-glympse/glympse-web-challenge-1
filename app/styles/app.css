@@ -12,10 +12,13 @@ html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
 a {
 	text-decoration: none;
 }
+#mapTitle {
+	margin-left: 9px;
+}
 
 #sidebarMenu {
 	float: left;
-	width: 28%;
+	width: 27%;
 	height: 100%;
 	overflow: scroll;
 	padding: 5px;
@@ -46,7 +49,7 @@ a {
 }
 
 #directionsPanel {
-	width: auto;
+	width: 22%;
 	height: 100%;
 	float: left;
 	overflow: scroll;
