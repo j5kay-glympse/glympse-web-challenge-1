@@ -24,6 +24,10 @@
         <!-- build:js(app/) src/jquery.js -->
         <script type=text/javascript src="lib/jquery/dist/jquery.min.js"></script>
         <!-- endbuild -->
+		
+		<!-- build:js(app/) src/googlemaps.js -->
+		<script type="text/javascript" src="lib/google-maps/lib/Google.min.js"></script>
+		<!-- endbuild -->
         
         <!-- process:remove:dev -->
         <script type="text/javascript" src="src/main.js"></script>
@@ -32,9 +36,23 @@
         <!-- process:remove:dist -->
         <script type="text/javascript" src="lib/requirejs/require.js" data-main="src/requireConfig"></script>
         <!-- /process -->
+		
+		
     </head>
     <body>
-		<h1>Simple Map Destination Picker</h1>
-		<div id="map">PUT MAP CONTROL HERE!</div>
+		<div class="vert-panel">
+			<div id="map">PUT MAP CONTROL HERE!</div>
+		</div>
+		<div class="vert-panel overlay" id="search-list-panel">
+			<header class="horz-panel">
+				<h1>Simple Map Destination Picker</h1>
+				<input id="searchbox" type="search" placeholder="Where to?"/>
+				<button id="list-toggle" style="display:none;">List</button>
+
+			</header>
+			<section id="list-panel" class="list" style="display:none;">
+				<ul></ul>
+			</section>
+		</div>
     </body>
 </html>

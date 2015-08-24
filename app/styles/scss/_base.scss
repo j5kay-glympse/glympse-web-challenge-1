@@ -1,0 +1,43 @@
+$source: 'Source Sans Pro';
+html {
+  background: #fff;
+}
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    /* to avoid scrollbars */
+}
+body {
+	font-family: $source, sans-serif;
+}
+ul {
+	list-style:none;
+	margin:0;
+	padding:0;
+}
+.backfaceVisibility {
+  -webkit-backface-visibility: visible;
+  backface-visibility: visible;
+}
+.vert-panel {
+	min-height: 100%;
+    @include display-flex;
+    @include flex-direction(column);
+	@include align-content(stretch);
+}
+.horz-panel {
+	min-width: 100%;
+    @include display-flex;
+    @include flex-direction(row);
+	@include align-content(stretch);
+}
+.overlay {
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+}
+.name {
+	font-weight:600;
+}

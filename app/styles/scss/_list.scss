@@ -1,0 +1,16 @@
+#list-panel {
+	flex:1;
+	background-color:rgba(255,255,255,.8);
+	overflow: scroll;
+	padding: .5em;
+}
+
+li{
+	border-bottom: solid 1px #DEDEDE;
+	padding:.5em;
+	cursor:default;
+	&:hover {
+		background-color:#333;
+		color:#FFF;
+	}
+}
