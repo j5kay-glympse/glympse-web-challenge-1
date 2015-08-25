@@ -45,7 +45,6 @@
 		</div>
 		<div class="vert-panel overlay" id="search-list-panel">
 			<header class="horz-panel">
-				<h1>Simple Map Destination Picker</h1>
 				<input id="searchbox" type="search" placeholder="Where to?"/>
 				<button id="list-toggle" style="display:none;">List</button>
 
@@ -53,6 +52,17 @@
 			<section id="list-panel" class="list" style="display:none;">
 				<ul></ul>
 			</section>
+		</div>
+		<div class="vert-panel" id ="directions" style="display:none;">
+			<header>
+				<h1>Directions</h1>
+				<button class="close">Close</button> 
+			</header>
+			<section id="directions-map"></section>
+			<section id="directions-list"></section>
+		</div>
+		<div class="modal overlay loading">
+			<img src="../content/images/loading-bubbles.svg" width="64" height="64">
 		</div>
     </body>
 </html>

@@ -14,4 +14,4 @@ require.config({
 
     ]
 });
-require(['main', 'map']);
+require(['main']);

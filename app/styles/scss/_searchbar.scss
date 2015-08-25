@@ -12,7 +12,6 @@ header {
 	* {
 		margin: .25em .5em;
 	}
-	h1 { font-size: .7em;}
 	@include justify-content(space-around);
 	button {
 	    font-size: 1.5em;
