@@ -6,20 +6,17 @@ define(function(require, exports, module) {
 
 	console.log('Map Challenge! - size=' + $(document).width() + 'x' + $(document).height());
 	
-	var map, mapContainer, userLoc, infowindow, placesService, directionsService, directionsDisplay;
-	var placemarkers = []; 
-	var places = [];
-	
 	var GoogleMapsLoader = require('google-maps');
 	GoogleMapsLoader.LIBRARIES = ['places'];
 	GoogleMapsLoader.KEY = 'AIzaSyCvmdPIDxTI_gJVBaHhWl61M7pqKc516Bo';
-	
-	mapContainer = document.getElementById('map');
-	mapContainer.innerHTML = '<p>Locating…</p>';
     
-	
-    GoogleMapsLoader.load(function(google) {
-		console.log('google loader load');  
+	GoogleMapsLoader.load(function(google) {
+		var map, mapContainer, userLoc, infowindow, placesService, leftPanel;
+		var placemarkers = []; 
+		var places = [];	
+		mapContainer = document.getElementById('map');
+		leftPanel = document.getElementById('leftPanel');
+		//Get User Location
 		if (!navigator.geolocation){
 			mapContainer.innerHTML = 'Geolocation is not supported by your browser';
 			return;
@@ -29,15 +26,10 @@ define(function(require, exports, module) {
 			center:  { lat: 47.6097, lng: -122.3331},
 			zoom: 13
 		});
-		
+		var directionsDisplay = new google.maps.DirectionsRenderer();
+		var directionsService = new google.maps.DirectionsService();
 		placesService = new google.maps.places.PlacesService(map);
-		directionsService = new google.maps.DirectionsService(map);
 		infowindow = new google.maps.InfoWindow();
-		directionsDisplay = new google.maps.DirectionsRenderer();
-		map.addListener('bounds_changed', function() {   
-		});
-
-  
 	
 	function geolocSuccess(position) {
 		$('.modal.overlay').fadeOut('fast');
@@ -49,6 +41,10 @@ define(function(require, exports, module) {
 			label:'U'
 		});
 		map.panTo(marker.getPosition());
+		infowindow.setContent('<strong>You</strong><br> Accuracy: ' + position.coords.accuracy + 'm');
+		google.maps.event.addListener(marker, 'click', function() {
+			infowindow.open(map, marker);
+		});
     }
 
     function geolocError() {
@@ -64,7 +60,7 @@ define(function(require, exports, module) {
 		places = results;
         if (status === google.maps.places.PlacesServiceStatus.OK) {
             for (var i = 0; i < results.length; i++) {
-                createMarker(results[i]);
+                createMarker(i);
             }
         }
 		if (places.length > 0) {
@@ -74,7 +70,8 @@ define(function(require, exports, module) {
 		setPlacesOnMap(map);
     }
 
-    function createMarker(place) {
+    function createMarker(i) {
+		var place = places[i];
         var placeLoc = place.geometry.location;
         var marker = new google.maps.Marker({
             map: map,
@@ -87,22 +84,28 @@ define(function(require, exports, module) {
 		listItem = '<li id="place-' + place.id + '">' + listItemContent + '</li>';
 		$('#list-panel ul').append(listItem);
 		$('#list-panel ul li').last().click(function() {
+			$('#list-panel ul li').removeClass('selected');
+			$(this).addClass('selected');
 			getDirectionsTo(place);
-			$('#list-toggle').click();
 		});
 		
+		
         google.maps.event.addListener(marker, 'click', function() {
-            infowindow.setContent(listItemContent);
-            infowindow.open(map, this);
-			$('.directions a').click(function() {
-				getDirectionsTo(place);
+            var e = '#list-panel ul li:nth-child(' + (i + 1) +')';
+			openLeftPanel();
+			
+			$('#list-panel').animate({scrollTop: $(e).offset().top
+			}, 1000, function() {
+				$(e).click();
 			});
+
         });
     }
 	function formatPlaceInfo(place){
 		return '<div class="name">' + place.name + '</div>' +
-		'<div class="address">' + place.formatted_address + 
-		'</div><div class="directions"><button>Get Directions</button></div>';	
+		'<div class="address">' + place.formatted_address + '</div>' +
+		'<div>' + place.types[0] +'</div>' +
+		'</div><div class="directions"></div>';	
 	}
 	
 	function setPlacesOnMap(map) {
@@ -114,25 +117,22 @@ define(function(require, exports, module) {
 	function clearMarkers() {
         //Clears Map
 		setPlacesOnMap(null);
-		//Clears list
-		$('#list-panel ul').html('');
-		//Hide List Button
-		$('#search-list-panel button').hide();
 	}
 
 	// Deletes all markers in the array by removing references to them.
 	function deletePlaceMarkers() {
 		clearMarkers();
 		placemarkers = [];
+		//Clears list
+		$('#list-panel ul').html('');
+		//Hide List Button
+		$('#search-list-panel button').hide();
 	}
 	
 	function getDirectionsTo(place){
-		var directionsMap = new google.maps.Map(document.getElementById('directions-map'), {
-			center: userLoc,
-			zoom: 13
-		});
+	
+		directionsDisplay.setMap(null);
 		
-		directionsDisplay.setMap(directionsMap);
 		directionsDisplay.setPanel(document.getElementById('directions-list'));
 		var directionsRequest = {
               origin: userLoc,
@@ -146,16 +146,21 @@ define(function(require, exports, module) {
             else {
                 console.log('Directions request failed:' + status);
 			}
-          });
-          $('#directions').show();
+        });
+		directionsDisplay.setMap(map);
+		setPlacesOnMap(null);
 	}
-	$('#directions .close').click(function(){
-		var d = $('#directions');
-		d.hide();
-		d.children('section').html('');
-	});
+	function openLeftPanel(){
+		$('#left-panel').animate({ width:'300px'},'fast', function() {
+			$('#left-panel').addClass('open');
+			$('#list-toggle').text('-');
+		});
+	}
+	
 	$('#searchbox').keyup(function() {
 		var val  = $('#searchbox').val();
+		directionsDisplay.setMap(null);
+		resetMap();
 		if (val != '') {
 			var request = {
 				bounds: map.getBounds(),
@@ -171,17 +176,21 @@ define(function(require, exports, module) {
 	
 	
 	$('#list-toggle').click(function() {
-		$('#list-panel').slideToggle('fast', function() {
-			if ($('#list-panel').is(':visible')) {
-				$('#list-toggle').text('Map');
-				$('#search-list-panel').addClass('open');
-			}
-			else {
-				$('#list-toggle').text('List');
-				$('#search-list-panel').removeClass('open');
-			}
-		});
+		var p = $('#left-panel');
+		if ($(p).hasClass('open')) {
+			$(p).animate({ width:'0'},'fast', function() {
+				$(p).removeClass('open');
+				$('#list-panel ul li').removeClass('selected');
+				$('#list-toggle').text('+');
+				setPlacesOnMap(map);
+				resetMap();
+			});
+		}
+		else {
+			openLeftPanel();
+		}
 	});
 	
-    });
+	});//GoogleLoader func
+	
 });
