@@ -1,0 +1,22 @@
+#left-panel {
+	width:300px;
+}
+#list-panel {
+	flex:1;
+	overflow: scroll;
+}
+
+li{
+	background-color: #FFF;
+	border-bottom: solid 3px #DEDEDE;
+	border-top: solid 2px #FFF;
+	margin:.75em;
+	padding:.5em;
+	cursor:default;
+	&:hover {
+		border-bottom: solid 3px #AAA;
+	}
+	&.selected {
+		background-color:#CCC;
+	}
+}

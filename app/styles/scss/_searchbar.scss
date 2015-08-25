@@ -1,0 +1,25 @@
+#search-list-panel {
+	min-height:inherit;
+	overflow: hidden;
+	max-height: 100%;
+	flex:1;
+	&.list-open {
+		min-height:100%;
+	}
+}
+header {
+	background: rgba(255,255,255,.8);
+	
+	* {
+		margin: .25em .5em;
+	}
+	@include justify-content(space-around);
+	button {
+	    font-size: 1.5em;
+	    padding: 0 1em;
+	}
+}
+#searchbox {
+	flex:1;
+	font-size:2em;
+}

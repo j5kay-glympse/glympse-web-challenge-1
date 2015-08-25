@@ -22,6 +22,7 @@ module.exports = function (grunt) {
     'useminPrepare',
     'requirejs',
     'concat',
+	'compass',
     'cssmin',
     'uglify',
     'copy:dist',

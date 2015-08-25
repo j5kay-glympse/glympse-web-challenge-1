@@ -24,6 +24,10 @@
         <!-- build:js(app/) src/jquery.js -->
         <script type=text/javascript src="lib/jquery/dist/jquery.min.js"></script>
         <!-- endbuild -->
+		
+		<!-- build:js(app/) src/googlemaps.js -->
+		<script type="text/javascript" src="lib/google-maps/lib/Google.min.js"></script>
+		<!-- endbuild -->
         
         <!-- process:remove:dev -->
         <script type="text/javascript" src="src/main.js"></script>
@@ -32,9 +36,29 @@
         <!-- process:remove:dist -->
         <script type="text/javascript" src="lib/requirejs/require.js" data-main="src/requireConfig"></script>
         <!-- /process -->
+		
+		
     </head>
     <body>
-		<h1>Simple Map Destination Picker</h1>
-		<div id="map">PUT MAP CONTROL HERE!</div>
+		<div class="horz-panel" id="container">
+			<div class="vert-panel" style="width:0;" id="left-panel">
+				
+				<section id="list-panel" class="list">
+					<ul></ul>
+				</section>
+				<section id="directions-list" style="display:none;"></section>
+			</div>
+			<div class="vert-panel" id="search-list-panel">
+				<header class="horz-panel">
+					<button id="list-toggle">+</button>
+					<input id="searchbox" type="search" placeholder="Where to?"/>
+				</header>
+				<div id="map">PUT MAP CONTROL HERE!</div>
+			</div>
+		</div>
+		
+		<div class="modal overlay loading">
+			<img src="../content/images/loading-bubbles.svg" width="64" height="64">
+		</div>
     </body>
 </html>
