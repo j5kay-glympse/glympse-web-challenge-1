@@ -1,7 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,400italic,300,700);
 /* line 2, scss/_base.scss */
 html {
-  background: #fff;
+  background: #333;
 }
 
 /* line 5, scss/_base.scss */
@@ -18,13 +18,19 @@ body {
 }
 
 /* line 14, scss/_base.scss */
+#container {
+  width: 100%;
+  height: 100%;
+}
+
+/* line 18, scss/_base.scss */
 ul {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-/* line 19, scss/_base.scss */
+/* line 23, scss/_base.scss */
 button {
   border: none;
   border-radius: 3px;
@@ -32,13 +38,13 @@ button {
   color: #FFF;
 }
 
-/* line 28, scss/_base.scss */
+/* line 32, scss/_base.scss */
 .backfaceVisibility {
   -webkit-backface-visibility: visible;
   backface-visibility: visible;
 }
 
-/* line 32, scss/_base.scss */
+/* line 36, scss/_base.scss */
 .vert-panel {
   min-height: 100%;
   display: -webkit-flex;
@@ -49,7 +55,7 @@ button {
   align-content: stretch;
 }
 
-/* line 38, scss/_base.scss */
+/* line 42, scss/_base.scss */
 .horz-panel, header {
   min-width: 100%;
   display: -webkit-flex;
@@ -60,40 +66,26 @@ button {
   align-content: stretch;
 }
 
-/* line 44, scss/_base.scss */
+/* line 48, scss/_base.scss */
 .overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
 }
-/* line 49, scss/_base.scss */
+/* line 53, scss/_base.scss */
 .overlay.modal {
   background-color: rgba(0, 0, 0, 0.4);
   height: 100%;
   z-index: 9;
 }
 
-/* line 55, scss/_base.scss */
+/* line 59, scss/_base.scss */
 .name {
   font-weight: 600;
 }
 
-/* line 58, scss/_base.scss */
-#directions {
-  background: #fff;
-  padding: .5em;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-/* line 64, scss/_base.scss */
-#directions #directions-map {
-  width: 100%;
-  height: 450px;
-}
-
-/* line 69, scss/_base.scss */
+/* line 63, scss/_base.scss */
 .loading {
   display: -webkit-flex;
   display: flex;
@@ -105,7 +97,7 @@ button {
   justify-content: center;
   text-align: center;
 }
-/* line 75, scss/_base.scss */
+/* line 69, scss/_base.scss */
 .loading * {
   -webkit-align-self: center;
   align-self: center;
@@ -113,6 +105,7 @@ button {
 
 /* line 1, scss/_map.scss */
 #map {
+  height: 100%;
   width: 100%;
   flex: 1;
 }
@@ -122,43 +115,47 @@ button {
   min-height: inherit;
   overflow: hidden;
   max-height: 100%;
+  flex: 1;
 }
-/* line 5, scss/_searchbar.scss */
+/* line 6, scss/_searchbar.scss */
 #search-list-panel.list-open {
   min-height: 100%;
 }
 
-/* line 9, scss/_searchbar.scss */
+/* line 10, scss/_searchbar.scss */
 header {
   background: rgba(255, 255, 255, 0.8);
   -webkit-justify-content: space-around;
   justify-content: space-around;
 }
-/* line 12, scss/_searchbar.scss */
+/* line 13, scss/_searchbar.scss */
 header * {
   margin: .25em .5em;
 }
-/* line 16, scss/_searchbar.scss */
+/* line 17, scss/_searchbar.scss */
 header button {
   font-size: 1.5em;
   padding: 0 1em;
 }
 
-/* line 21, scss/_searchbar.scss */
+/* line 22, scss/_searchbar.scss */
 #searchbox {
   flex: 1;
   font-size: 2em;
 }
 
 /* line 1, scss/_list.scss */
-#list-panel {
-  flex: 1;
-  background-color: rgba(0, 0, 0, 0.5);
-  overflow: scroll;
-  padding: .5em;
+#left-panel {
+  width: 300px;
 }
 
-/* line 8, scss/_list.scss */
+/* line 4, scss/_list.scss */
+#list-panel {
+  flex: 1;
+  overflow: scroll;
+}
+
+/* line 9, scss/_list.scss */
 li {
   background-color: #FFF;
   border-bottom: solid 3px #DEDEDE;
@@ -167,7 +164,11 @@ li {
   padding: .5em;
   cursor: default;
 }
-/* line 15, scss/_list.scss */
+/* line 16, scss/_list.scss */
 li:hover {
   border-bottom: solid 3px #AAA;
+}
+/* line 19, scss/_list.scss */
+li.selected {
+  background-color: #CCC;
 }

@@ -2,6 +2,7 @@
 	min-height:inherit;
 	overflow: hidden;
 	max-height: 100%;
+	flex:1;
 	&.list-open {
 		min-height:100%;
 	}
