@@ -9,18 +9,19 @@ require.config({
         },
         'ui-router': {
             deps: [
-              'angular'
+                'angular'
             ],
             exports: 'ui-router'
         }
     },
     paths: {
-        'famous': '../lib/famous/src',
-        'requirejs': '../lib/requirejs/require',
-        'almond': '../lib/almond/almond',
-        'jquery': '../lib/jquery/dist/jquery',
-        'angular': '../lib/angular/angular',
-        'ui-router': '../lib/angular-ui-router/release/angular-ui-router'
+        famous: '../lib/famous/src',
+        requirejs: '../lib/requirejs/require',
+        almond: '../lib/almond/almond',
+        jquery: '../lib/jquery/dist/jquery',
+        angular: '../lib/angular/angular',
+        'ui-router': '../lib/angular-ui-router/release/angular-ui-router',
+        'angular-ui-router': '../lib/angular-ui-router/release/angular-ui-router'
     },
     packages: [
 

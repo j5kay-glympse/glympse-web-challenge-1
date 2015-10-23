@@ -36,12 +36,20 @@
     "grunt-processhtml": "^0.3.3",
     "grunt-rev": "^0.1.0",
     "grunt-usemin": "^2.1.1",
+    "jasmine-core": "^2.3.4",
     "jquery": "^2.1.1",
+    "karma": "^0.13.14",
+    "karma-jasmine": "^0.3.6",
+    "karma-jasmine-jquery": "^0.1.1",
+    "karma-phantomjs-launcher": "^0.2.1",
+    "karma-requirejs": "^0.2.2",
     "load-grunt-config": "^0.13.1",
+    "phantomjs": "^1.9.18",
+    "requirejs": "^2.1.20",
     "time-grunt": "^1.0.0"
   },
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt lint && karma start"
   },
   "dependencies": {
     "less-plugin-autoprefix": "^1.5.1",
