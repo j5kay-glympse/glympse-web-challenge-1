@@ -6,5 +6,5 @@ define(function(require, exports, module) {
     var ng = require('angular');
     console.log(ng.merge({}, {test: 'big'}));
 
-	console.log('Map Challenge! - size=' + $(document).width() + 'x' + $(document).height());
+	  console.log('Map Challenge! - size=' + $(document).width() + 'x' + $(document).height());
 });
