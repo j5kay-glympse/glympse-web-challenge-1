@@ -14,3 +14,8 @@ node_modules
 dist
 .tmp
 app/lib
+
+# IntelliJ Files #
+##################
+**/*.idea
+**/*.iml
