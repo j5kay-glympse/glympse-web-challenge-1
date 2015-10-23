@@ -2,11 +2,7 @@ module.exports =  {
   compile: {
     options: {
       optimize: 'uglify2',
-      uglify2: {
-        mangler: {
-          toplevel: true
-        }
-      },
+      findNestedDependencies: true,
       baseUrl: '<%= config.app %>/src',
       mainConfigFile: '<%= config.app %>/src/requireConfig.js',
       name: 'almond',

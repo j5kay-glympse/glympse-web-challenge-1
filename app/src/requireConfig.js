@@ -2,16 +2,12 @@
 require.config({
     shim: {
         angular: {
-            deps: [
-                'jquery'
-            ],
+            deps: ['jquery'],
             exports: 'angular'
         },
-        'ui-router': {
-            deps: [
-                'angular'
-            ],
-            exports: 'ui-router'
+        uiRouter: {
+            deps: ['angular'],
+            exports: 'uiRouter'
         }
     },
     paths: {
@@ -20,11 +16,16 @@ require.config({
         almond: '../lib/almond/almond',
         jquery: '../lib/jquery/dist/jquery',
         angular: '../lib/angular/angular',
-        'ui-router': '../lib/angular-ui-router/release/angular-ui-router',
-        'angular-ui-router': '../lib/angular-ui-router/release/angular-ui-router'
+        uiRouter: '../lib/angular-ui-router/release/angular-ui-router',
+        tpl: '../lib/requirejs-tpl-angular/tpl',
+        text: '../lib/text/text',
+        domReady: '../lib/domReady/domReady'
     },
     packages: [
 
+    ],
+    deps: [
+        './app'
     ]
 });
 require(['main']);

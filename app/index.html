@@ -8,33 +8,41 @@
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
         <meta name="msapplication-tap-highlight" content="no" />
-        
+
         <!-- build:css(app/) css/app.css -->
         <link rel="stylesheet" type="text/css" href="styles/app.css" />
         <!-- bower:css -->
         <!-- endbower -->
         <!-- endbuild -->
-        
+
         <!-- build:js(app/) src/polyfills.js -->
         <script type="text/javascript" src="lib/famous-polyfills/functionPrototypeBind.js"></script>
         <script type="text/javascript" src="lib/famous-polyfills/classList.js"></script>
         <script type="text/javascript" src="lib/famous-polyfills/requestAnimationFrame.js"></script>
         <!-- endbuild -->
-        
+
         <!-- build:js(app/) src/jquery.js -->
         <script type=text/javascript src="lib/jquery/dist/jquery.min.js"></script>
         <!-- endbuild -->
-        
+
         <!-- process:remove:dev -->
         <script type="text/javascript" src="src/main.js"></script>
         <!-- /process -->
-        
+
         <!-- process:remove:dist -->
         <script type="text/javascript" src="lib/requirejs/require.js" data-main="src/requireConfig"></script>
         <!-- /process -->
     </head>
     <body>
-		<h1>Simple Map Destination Picker</h1>
-		<div id="map">PUT MAP CONTROL HERE!</div>
+        <div class="body" ui-view></div>
+
+        <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSpmpSaV6b8UuQQ_WEbLLah02Z-7SSMj8&callback=initMap">
+        </script>
+        <script>
+            window.initMap = function() {
+                window.mapIsReady = true;
+            };
+        </script>
     </body>
 </html>

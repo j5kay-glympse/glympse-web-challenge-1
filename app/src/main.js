@@ -1,10 +1,10 @@
-/* globals define */
-define(function(require, exports, module) {
+define(function(require) {
 	'use strict';
-	// import dependencies
-	var $ = require('jquery');
-	var ng = require('angular');
-	console.log(ng.merge({}, {test: 'big'}));
 
-	console.log('Map Challenge! - size=' + $(document).width() + 'x' + $(document).height());
+	var ng = require('angular');
+	require('./app');
+
+	require(['domReady!'], function() {
+		ng.bootstrap(window.document.querySelector('body'), ['app']);
+	});
 });
