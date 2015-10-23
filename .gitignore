@@ -15,6 +15,7 @@ dist
 .tmp
 app/lib
 app/styles/app.css
+coverage
 
 # IntelliJ Files #
 ##################

@@ -15,7 +15,7 @@ require.config({
         }
     },
     paths: {
-        famous: '../lib/famous/src',
+        famous: '../lib/famous/dist/famous',
         requirejs: '../lib/requirejs/require',
         almond: '../lib/almond/almond',
         jquery: '../lib/jquery/dist/jquery',

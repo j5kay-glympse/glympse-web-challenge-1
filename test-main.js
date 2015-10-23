@@ -19,6 +19,30 @@ require.config({
   // dynamically load all test files
   deps: allTestFiles,
 
+  shim: {
+    angular: {
+      deps: [
+        'jquery'
+      ],
+      exports: 'angular'
+    },
+    'ui-router': {
+      deps: [
+        'angular'
+      ],
+      exports: 'ui-router'
+    }
+  },
+  paths: {
+    famous: 'app/lib/famous/dist/famous',
+    requirejs: 'app/lib/requirejs/require',
+    almond: 'app/lib/almond/almond',
+    jquery: 'app/lib/jquery/dist/jquery',
+    angular: 'app/lib/angular/angular',
+    'ui-router': 'app/lib/angular-ui-router/release/angular-ui-router',
+    'angular-ui-router': 'app/lib/angular-ui-router/release/angular-ui-router'
+  },
+
   // we have to kickoff jasmine, as it is asynchronous
   callback: window.__karma__.start
 });
