@@ -6,14 +6,14 @@ Your challenge is to build a web-app that allows a user to search for, select, a
 
 Here is an outline/checklist of all items necessary for a successful challenge result:
 
-- Leverage the provided app container structure (see instructions below how to set up for the node/grunt/bower environment)
-- Initialize/load your favorite map control (Google, HERE, OSM, etc.)
+- ~~Leverage the provided app container structure (see instructions below how to set up for the node/grunt/bower environment)~~
+- ~~Initialize/load your favorite map control (Google, HERE, OSM, etc.)~~
 - Get the user's current location and show it on the map
-  - Use `navigator.geolocation`
-  - Center map on retrieved latlng at some default zoom level (13-15 are pretty good defaults)
-  - *BONUS*: Show custom user icon
-  - *BONUS*: Show other information about geolocation result (accuracy, elevation, heading, etc.)
-  - *BONUS*: Update user's location as they move around
+  - ~~Use `navigator.geolocation`~~
+  - ~~Center map on retrieved latlng at some default zoom level (13-15 are pretty good defaults)~~
+  - ~~*BONUS*: Show custom user icon~~
+  - ~~*BONUS*: Show other information about geolocation result (accuracy, elevation, heading, etc.)~~
+  - ~~*BONUS*: Update user's location as they move around~~
 - Provide a button/panel that allows the user to type in a destination
 - Perform a search for nearby POIs that match the entered destination input
   - Use the current map's center/viewport bounds + zoom as params for the search
@@ -31,7 +31,7 @@ Here is an outline/checklist of all items necessary for a successful challenge r
 
 There are a couple of wireframes (in `samples/`) of an example mobile UX flow for this destination picker project. By no means are you constrained by these designs. They have been included only as reference examples. Feel free to use other sources of inspiration (i.e. Google Maps' destination search/selection, Bing, etc.)
 
-And to be clear, the goal of this challenge is to get through the tasks in a clean and reasonable manner to adquetly demonstrate your various web development skills. You can certainly spend a lot of time finessing the experience, which would be awesome, but *absolutely* not required.
+And to be clear, the goal of this challenge is to get through the tasks in a clean and reasonable manner to adequately demonstrate your various web development skills. You can certainly spend a lot of time finessing the experience, which would be awesome, but *absolutely* not required.
 
 ##Review-ready state
 

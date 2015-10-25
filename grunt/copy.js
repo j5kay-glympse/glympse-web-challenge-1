@@ -9,6 +9,7 @@ module.exports = {
       src: [
         'content/**/**.*',
         '.htaccess',
+        'src/mapBootstrapper.js',
         'images/{,*/}*.webp',
         // '{,*/}*.html',
         'styles/fonts/{,*/}*.*'

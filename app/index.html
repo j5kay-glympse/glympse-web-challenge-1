@@ -8,6 +8,9 @@
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
         <meta name="msapplication-tap-highlight" content="no" />
+        <link rel="shortcut icon" href="/content/images/favicon.ico">
+
+        <link href='https://fonts.googleapis.com/css?family=Lato:400,900' rel='stylesheet' type='text/css'>
 
         <!-- build:css(app/) css/app.css -->
         <link rel="stylesheet" type="text/css" href="styles/app.css" />
@@ -32,17 +35,13 @@
         <!-- process:remove:dist -->
         <script type="text/javascript" src="lib/requirejs/require.js" data-main="src/requireConfig"></script>
         <!-- /process -->
+
+        <script src="src/mapBootstrapper.js"></script>
+        <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSpmpSaV6b8UuQQ_WEbLLah02Z-7SSMj8&callback=mapBootstrapperCallback">
+        </script>
     </head>
     <body>
         <div class="body" ui-view></div>
-
-        <script async defer
-                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSpmpSaV6b8UuQQ_WEbLLah02Z-7SSMj8&callback=initMap">
-        </script>
-        <script>
-            window.initMap = function() {
-                window.mapIsReady = true;
-            };
-        </script>
     </body>
 </html>

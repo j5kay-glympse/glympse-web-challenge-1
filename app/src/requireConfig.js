@@ -2,11 +2,15 @@
 require.config({
     shim: {
         angular: {
-            deps: ['jquery'],
+            deps: [
+                'jquery'
+            ],
             exports: 'angular'
         },
         uiRouter: {
-            deps: ['angular'],
+            deps: [
+                'angular'
+            ],
             exports: 'uiRouter'
         }
     },
@@ -19,7 +23,10 @@ require.config({
         uiRouter: '../lib/angular-ui-router/release/angular-ui-router',
         tpl: '../lib/requirejs-tpl-angular/tpl',
         text: '../lib/text/text',
-        domReady: '../lib/domReady/domReady'
+        domReady: '../lib/domReady/domReady',
+        'angular-ui-router': '../lib/angular-ui-router/release/angular-ui-router',
+        'requirejs-tpl-angular': '../lib/requirejs-tpl-angular/tpl',
+        'angular-mocks': '../lib/angular-mocks/angular-mocks'
     },
     packages: [
 

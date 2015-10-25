@@ -4,5 +4,9 @@ define(function(require) {
 
 	require('./routes');
 	require('./controllers/index');
-	require('./services/map');
+	require('./factories/map');
+	require('./services/geolocation');
+	require('./services/notification');
+	require('./directives/loadingIndicator');
+	require('./directives/geoData');
 });

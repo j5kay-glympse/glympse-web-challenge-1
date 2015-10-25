@@ -41,6 +41,9 @@ require.config({
       ],
       exports: 'angular'
     },
+    'angularMocks': {
+      deps: ['angular']
+    },
     uiRouter: {
       deps: [
         'angular'
@@ -54,6 +57,7 @@ require.config({
     'almond': 'app/lib/almond/almond',
     'jquery': 'app/lib/jquery/dist/jquery',
     'angular': 'app/lib/angular/angular',
+    'angularMocks': 'app/lib/angular-mocks/angular-mocks',
     uiRouter: 'app/lib/angular-ui-router/release/angular-ui-router',
     'angular-ui-router': 'app/lib/angular-ui-router/release/angular-ui-router',
     'tpl': 'app/lib/requirejs-tpl-angular/tpl',

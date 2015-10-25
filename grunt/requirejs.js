@@ -9,7 +9,10 @@ module.exports =  {
       include: 'main',
       insertRequire: ['main'],
       out: '<%= config.dist %>/src/main.js',
-      wrap: true
+      wrap: true,
+      paths: {
+        googleMaps: 'empty:'
+      }
     }
   }
 };

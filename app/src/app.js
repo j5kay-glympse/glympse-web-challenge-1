@@ -1,5 +1,5 @@
 /* globals define */
-define(function(require, exports, module) {
+define(function(require) {
 	'use strict';
 
 	var ng = require('angular');
