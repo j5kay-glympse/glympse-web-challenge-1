@@ -26,7 +26,8 @@ require.config({
         domReady: '../lib/domReady/domReady',
         'angular-ui-router': '../lib/angular-ui-router/release/angular-ui-router',
         'requirejs-tpl-angular': '../lib/requirejs-tpl-angular/tpl',
-        'angular-mocks': '../lib/angular-mocks/angular-mocks'
+        'angular-mocks': '../lib/angular-mocks/angular-mocks',
+        bootstrap: '../lib/bootstrap/dist/js/bootstrap'
     },
     packages: [
 

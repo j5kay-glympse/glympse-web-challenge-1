@@ -5,6 +5,7 @@ define(function(require) {
 	app.controller('indexCtrl', ['$scope', 'mapFactory', function($scope, mapFactory) {
 		$scope.isLoading = true;
 		$scope.search = search;
+		$scope.searchTerm = '';
 
 		// Setup main map
 		var mainMap = mapFactory();
@@ -14,7 +15,11 @@ define(function(require) {
 		});
 
 		function search() {
-			return mainMap.search($scope.searchTerm);
+			mainMap.search($scope.searchTerm, function(results) {
+				console.log(results);
+				$scope.searchResults = results;
+				$scope.$digest();
+			});
 		}
 	}]);
 });

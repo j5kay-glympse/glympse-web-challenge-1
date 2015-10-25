@@ -9,13 +9,19 @@ define(function(require) {
 	var ng = require('angular');
 	var module = require('./../module');
 
-	module.factory('mapFactory', ['$window', '$q', '$timeout', 'geolocation', 'searchFactory', function($window, $q, $timeout, geolocation, searchFactory) {
+	module.factory('mapFactory', [
+		'$window', '$q', '$timeout', 'geolocation', 'searchFactory', 'directionsFactory',
+		function($window, $q, $timeout, geolocation, searchFactory, directionsFactory
+	) {
 		return function() {
 			var map;
 			var places;
+			var directions;
 			var markers = [];
 			var userMarker;
-			var currentMarker;
+			var focusedMarker;
+			var destinationMarker;
+			var currentInfoPopup;
 			var element;
 			var options = {
 				zoomLevel: 15
@@ -77,22 +83,25 @@ define(function(require) {
 				places = searchFactory(map);
 				places.init();
 
-				var w = ng.element($window);
-				w.bind('orientationchange resize', function() {
+				directions = directionsFactory(map);
+				directions.init();
+
+				var win = ng.element($window);
+				win.bind('orientationchange resize', function() {
 
 					// Orientationchange doesn't work without a setTimeout
 					$timeout(recenter);
 				});
 
 				var image = '/content/images/marker.png';
-				userMarker = currentMarker = new $window.google.maps.Marker({
+				userMarker = focusedMarker = new $window.google.maps.Marker({
 					position: userCoords,
 					map: map,
 					icon: image
 				});
 
 				userMarker.addListener('click', function() {
-					currentMarker = userMarker;
+					focusedMarker = userMarker;
 					recenter();
 				});
 			}
@@ -103,7 +112,7 @@ define(function(require) {
 			}
 
 			function recenter() {
-				map.panTo(currentMarker.getPosition());
+				map.panTo(focusedMarker.getPosition());
 			}
 
 			function getCoords(data) {
@@ -112,10 +121,10 @@ define(function(require) {
 
 			function search(term, callback) {
 				if (places) {
-					console.log(places);
 					places.search(term, function(results) {
 						clearAllMarkers();
 						addMarkers(results);
+						addOptions(results);
 						if (callback) {
 							callback(results);
 						}
@@ -136,16 +145,79 @@ define(function(require) {
 			}
 
 			function addMarker(place) {
+				var image = {
+					url: place.icon,
+					scaledSize: new $window.google.maps.Size(32, 32)
+				};
 				var marker = new $window.google.maps.Marker({
 					position: place.geometry.location,
-					map: map
+					map: map,
+					icon: image
 				});
 
 				marker.addListener('click', function() {
-					currentMarker = marker;
+					focusedMarker = marker;
+					openInfoPopup(place, marker);
 					recenter();
 				});
+
+				marker.placeId = place.place_id;
+
 				markers.push(marker);
+			}
+
+			function openInfoPopup(place, marker) {
+				if (currentInfoPopup) {
+					currentInfoPopup.close();
+				}
+				currentInfoPopup = new $window.google.maps.InfoWindow();
+				currentInfoPopup.setContent(place.name);
+				currentInfoPopup.open(map, marker);
+			}
+
+			function setDestinationMarker(place, marker) {
+				if (destinationMarker) {
+
+					// Reset destination marker if previously set
+					var defaultImage = {
+						url: place.icon,
+						scaledSize: new $window.google.maps.Size(32, 32)
+					};
+					destinationMarker.setIcon(defaultImage);
+				}
+
+				destinationMarker = marker;
+				var destinationImage = 'content/images/destination.png';
+				destinationMarker.setIcon(destinationImage);
+			}
+
+			function addOptions(places) {
+				places.forEach(function(place) {
+					var marker = getMarkerById(place.place_id);
+					place.focus = function() {
+
+						// Fit the map to both the user and the destination
+						var bounds = new $window.google.maps.LatLngBounds();
+						bounds.extend(place.geometry.location);
+						bounds.extend(userMarker.getPosition());
+						map.fitBounds(bounds);
+						openInfoPopup(place, marker);
+					};
+					place.getDirections = function() {
+						directions.getRoute(userMarker.getPosition(), place.geometry.location);
+						setDestinationMarker(place, marker);
+					};
+				});
+			}
+
+			function getMarkerById(placeId) {
+				var selectedMarker;
+				markers.forEach(function(marker) {
+					if (marker.placeId === placeId) {
+						selectedMarker = marker;
+					}
+				});
+				return selectedMarker;
 			}
 
 			function _setPlaces(mock) {
