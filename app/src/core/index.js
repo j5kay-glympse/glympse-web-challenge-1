@@ -9,4 +9,5 @@ define(function(require) {
 	require('./services/notification');
 	require('./directives/loadingIndicator');
 	require('./directives/geoData');
+	require('./directives/searchBox');
 });

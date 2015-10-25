@@ -4,9 +4,11 @@ define(function(require) {
 	var ng = require('angular');
 	var module = require('./../module');
 
-	module.factory('mapFactory', ['$window', '$q', 'geolocation', function($window, $q, geolocation) {
+	module.factory('mapFactory', ['$window', '$q', '$timeout', 'geolocation', function($window, $q, $timeout, geolocation) {
 		return function() {
 			var map;
+			var userMarker;
+			var currentMarker;
 			var element;
 			var options = {
 				zoomLevel: 15
@@ -51,30 +53,51 @@ define(function(require) {
 					if (!map) {
 						createNewMap(data);
 					} else {
-						panToLocation(data);
+						updateLocation(data);
 					}
 					deferred.resolve();
 				});
 			}
 
 			function createNewMap(data) {
-				var coords = {lat: data.coords.latitude, lng: data.coords.longitude};
+				var userCoords = getCoords(data);
 				map = new $window.google.maps.Map(element, {
-					center: coords,
+					center: userCoords,
 					zoom: options.zoomLevel,
-					streetViewControl: false
+					disableDefaultUI: true
+				});
+
+				var w = ng.element($window);
+				w.bind('orientationchange resize', function() {
+
+					// Orientationchange doesn't work without a setTimeout
+					$timeout(recenter);
 				});
 
 				var image = '/content/images/marker.png';
-				var marker = new $window.google.maps.Marker({
-					position: coords,
+				userMarker = currentMarker = new $window.google.maps.Marker({
+					position: userCoords,
 					map: map,
 					icon: image
 				});
+
+				userMarker.addListener('click', function() {
+					currentMarker = userMarker;
+					recenter();
+				});
 			}
 
-			function panToLocation(data) {
-				map.panTo({lat: data.coords.latitude, lng: data.coords.longitude});
+			function updateLocation(data) {
+				var userCoords = getCoords(data);
+				userMarker.setPosition(userCoords);
+			}
+
+			function recenter() {
+				map.panTo(currentMarker.getPosition());
+			}
+
+			function getCoords(data) {
+				return {lat: data.coords.latitude, lng: data.coords.longitude};
 			}
 
 			return {

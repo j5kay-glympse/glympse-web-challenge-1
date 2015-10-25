@@ -15,7 +15,7 @@ define(function(require) {
 					$window.navigator.geolocation.watchPosition(
 						updatePosition,
 						onError,
-						{enableHighAccuracy: true, timeout: timeoutVal, maximumAge: 0}
+						{enableHighAccuracy: true, timeout: timeoutVal, maximumAge: 1000}
 					);
 				}
 				else {

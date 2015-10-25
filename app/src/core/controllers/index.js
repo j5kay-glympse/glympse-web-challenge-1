@@ -4,12 +4,17 @@ define(function(require) {
 
 	app.controller('indexCtrl', ['$scope', 'mapFactory', function($scope, mapFactory) {
 		$scope.isLoading = true;
-		var mainMap = mapFactory();
+		$scope.search = search;
 
-		// TODO: replace with directive
+		// Setup main map
+		var mainMap = mapFactory();
 		var element = document.getElementById('main-map');
 		mainMap.init(element).then(function() {
 			$scope.isLoading = false;
 		});
+
+		function search() {
+			console.log($scope.searchTerm);
+		}
 	}]);
 });
