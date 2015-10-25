@@ -14,7 +14,7 @@ define(function(require) {
 		});
 
 		function search() {
-			console.log($scope.searchTerm);
+			return mainMap.search($scope.searchTerm);
 		}
 	}]);
 });

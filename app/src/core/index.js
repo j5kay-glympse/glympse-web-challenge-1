@@ -5,6 +5,7 @@ define(function(require) {
 	require('./routes');
 	require('./controllers/index');
 	require('./factories/map');
+	require('./factories/search');
 	require('./services/geolocation');
 	require('./services/notification');
 	require('./directives/loadingIndicator');

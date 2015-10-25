@@ -3,10 +3,11 @@ define(function(require) {
 	'use strict';
 
 	require('./map');
+	require('./search');
 	require('angularMocks');
 
 	describe('map', function() {
-		var mapFact, windowMock, geolocationService;
+		var mapFact, searchFact, windowMock, geolocationService;
 
 		beforeEach(function() {
 			module(function($provide) {
@@ -21,17 +22,32 @@ define(function(require) {
 						maps: {
 							Map: function() {
 								return {
-									panTo: function() {}
+									panTo: function() {},
+									getBounds: function() {}
 								};
 							},
-							Marker: function() {}
+							places: {
+								PlacesService: function() {
+									return {
+										nearbySearch: function() {}
+									};
+								}
+							},
+							Marker: function() {
+								return {
+									addListener: function() {},
+									setPosition: function() {},
+									setMap: function() {}
+								};
+							}
 						}
 					}
 				});
 			});
 			module('app.core');
-			inject(function(mapFactory, $window, geolocation) {
+			inject(function(mapFactory, $window, geolocation, searchFactory) {
 				mapFact = mapFactory;
+				searchFact = searchFactory;
 				windowMock = $window;
 				geolocationService = geolocation;
 				geolocationService.init = function() {};
@@ -71,6 +87,39 @@ define(function(require) {
 			map.init();
 
 			expect(windowMock.google.maps.Map.calls.count()).toBe(1);
+		});
+
+		it('calls the callback after searching', function() {
+			windowMock.map.ready = true;
+			geolocationService.observe = function(callback) {
+				callback({
+					coords: {
+						latitude: 1,
+						longitude: 1
+					}
+				});
+			};
+
+			var map = mapFact();
+			map.init();
+
+			map._setPlaces({
+				search: function(term, callback) {
+					callback([{
+						geometry: {
+							location: {lat: 1, long: 1}
+						}
+					}]);
+				}
+			});
+
+			var callbacksExecuted = 0;
+			function callback() {
+				callbacksExecuted++;
+			}
+			map.search('test', callback);
+
+			expect(callbacksExecuted).toBe(1);
 		});
 
 	});

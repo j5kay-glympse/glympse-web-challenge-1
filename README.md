@@ -8,15 +8,15 @@ Here is an outline/checklist of all items necessary for a successful challenge r
 
 - ~~Leverage the provided app container structure (see instructions below how to set up for the node/grunt/bower environment)~~
 - ~~Initialize/load your favorite map control (Google, HERE, OSM, etc.)~~
-- Get the user's current location and show it on the map
+- ~~Get the user's current location and show it on the map~~
   - ~~Use `navigator.geolocation`~~
   - ~~Center map on retrieved latlng at some default zoom level (13-15 are pretty good defaults)~~
   - ~~*BONUS*: Show custom user icon~~
   - ~~*BONUS*: Show other information about geolocation result (accuracy, elevation, heading, etc.)~~
   - ~~*BONUS*: Update user's location as they move around~~
-- Provide a button/panel that allows the user to type in a destination
-- Perform a search for nearby POIs that match the entered destination input
-  - Use the current map's center/viewport bounds + zoom as params for the search
+- ~~Provide a button/panel that allows the user to type in a destination~~
+- ~~Perform a search for nearby POIs that match the entered destination input~~
+  - ~~Use the current map's center/viewport bounds + zoom as params for the search~~
 - Results of the search should appear in a list in some manner for interaction (maps icons, sidebar, pop-up, etc.)
   - *BONUS*: Show additional info about each search result (distance away, provided images/icons, search result type, etc.)
   - *BONUS*: Cool list container / UI layout

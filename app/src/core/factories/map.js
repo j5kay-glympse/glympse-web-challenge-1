@@ -1,12 +1,19 @@
+/**
+ * Initializes and keeps track of Google maps, each with a user location and points
+ * of interest. All map requests should pass through here so we can create a
+ * replaceable interface to switch out our map service in the future
+ */
 define(function(require) {
 	'use strict';
 
 	var ng = require('angular');
 	var module = require('./../module');
 
-	module.factory('mapFactory', ['$window', '$q', '$timeout', 'geolocation', function($window, $q, $timeout, geolocation) {
+	module.factory('mapFactory', ['$window', '$q', '$timeout', 'geolocation', 'searchFactory', function($window, $q, $timeout, geolocation, searchFactory) {
 		return function() {
 			var map;
+			var places;
+			var markers = [];
 			var userMarker;
 			var currentMarker;
 			var element;
@@ -67,6 +74,9 @@ define(function(require) {
 					disableDefaultUI: true
 				});
 
+				places = searchFactory(map);
+				places.init();
+
 				var w = ng.element($window);
 				w.bind('orientationchange resize', function() {
 
@@ -100,8 +110,52 @@ define(function(require) {
 				return {lat: data.coords.latitude, lng: data.coords.longitude};
 			}
 
+			function search(term, callback) {
+				if (places) {
+					console.log(places);
+					places.search(term, function(results) {
+						clearAllMarkers();
+						addMarkers(results);
+						if (callback) {
+							callback(results);
+						}
+					});
+				}
+			}
+
+			function clearAllMarkers() {
+				markers.forEach(function(marker) {
+					marker.setMap(null);
+				});
+			}
+
+			function addMarkers(places) {
+				places.forEach(function(place) {
+					addMarker(place);
+				});
+			}
+
+			function addMarker(place) {
+				var marker = new $window.google.maps.Marker({
+					position: place.geometry.location,
+					map: map
+				});
+
+				marker.addListener('click', function() {
+					currentMarker = marker;
+					recenter();
+				});
+				markers.push(marker);
+			}
+
+			function _setPlaces(mock) {
+				places = mock;
+			}
+
 			return {
-				init: initWhenReady
+				init: initWhenReady,
+				search: search,
+				_setPlaces: _setPlaces
 			};
 		};
 	}]);
