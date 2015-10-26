@@ -4,21 +4,23 @@ module.exports = function (grunt) {
   grunt.registerTask('serve', function (target) {
 
     if (target === 'dist') {
-      return grunt.task.run(['build', 'connect:dist:keepalive']);
+      grunt.task.run(['build', 'connect:dist:keepalive']);
+    } else {
+      grunt.task.run([
+        'clean:server',
+        'processhtml:dev',
+        'less:dev',
+        'connect:livereload',
+        'watch'
+      ]);
     }
-
-    grunt.task.run([
-      'clean:server',
-      'processhtml:dev',
-      'connect:livereload',
-      'watch'
-    ]);
   });
 
   grunt.registerTask('build', [
     'clean:dist',
     'lint',
     'processhtml:dist',
+    'less:dist',
     'useminPrepare',
     'requirejs',
     'concat',
@@ -34,7 +36,7 @@ module.exports = function (grunt) {
     'jscs',
     'eslint'
   ]);
-  
+
   grunt.registerTask('test', [
     'lint'
   ]);

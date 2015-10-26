@@ -1,0 +1,33 @@
+<form ng-submit="search()">
+	<div class="row">
+		<div class="col-lg-4 search-box">
+			<div class="input-group">
+				<input type="text" class="form-control"
+							 placeholder="Where do you want to go?" ng-model="term">
+					<span class="input-group-btn">
+						<button class="btn btn-default" type="submit">Search</button>
+					</span>
+			</div>
+			<div class="show-hide-results">
+				<div ng-show="showResults && hasResults" ng-click="close()">
+					<a><span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>hide results</a>
+				</div>
+				<div ng-show="!showResults && hasResults" ng-click="open()">
+					<a><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>show results</a>
+				</div>
+				<div class="no-results" ng-show="results.length === 0">
+					No Results
+				</div>
+			</div>
+			<div class="results" ng-show="showResults">
+				<ul>
+					<li ng-repeat="result in results">
+						<div search-result close="close()" result="result"></div>
+						<hr>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</form>
+

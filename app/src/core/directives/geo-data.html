@@ -1,0 +1,29 @@
+<div class="geo-data">
+	<span class="heading">Location Data</span class="heading">
+	<div ng-if="accuracy" class="row">
+		<div class="col-xs-6">
+			Accuracy:
+		</div>
+		<div class="col-xs-6">
+			{{accuracy}} m
+		</div>
+	</div>
+
+	<div ng-if="altitude" class="row">
+		<div class="col-xs-6">
+			Altitude:
+		</div>
+		<div class="col-xs-6">
+			{{altitude}} m
+		</div>
+	</div>
+
+	<div ng-if="heading" class="row">
+		<div class="col-xs-6">
+			Heading
+		</div>
+		<div class="col-xs-6">
+			{{heading}}&deg;
+		</div>
+	</div>
+</div>
