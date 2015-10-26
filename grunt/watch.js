@@ -23,8 +23,9 @@ module.exports = function (grunt) {
         interrupt: true
       }
     },
-    css: {
-      files: ['<%= config.app %>/styles/{,*/}*.css']
+    less: {
+      files: ['<%= config.app %>/styles/{,*/}*.less'],
+      tasks: ['less']
     },
     html: {
       files: ['<%= config.app %>/{,*/}*.html'],

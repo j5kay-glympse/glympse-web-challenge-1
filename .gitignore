@@ -14,3 +14,10 @@ node_modules
 dist
 .tmp
 app/lib
+app/styles/app.css
+coverage
+
+# IntelliJ Files #
+##################
+**/*.idea
+**/*.iml
