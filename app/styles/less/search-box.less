@@ -8,20 +8,26 @@ div.search-box {
   padding: 1rem 1rem;
   border-radius: 0.2rem;
   box-shadow: 0 0.2rem fade(@black, 30%);
+  z-index:1;
 
   div.show-hide-results {
     text-align: center;
-    span, a{
+    span, a {
       margin-top: 1rem;
       cursor: pointer;
       margin-right: 0.5rem;
     }
+    div.no-results {
+      margin-top: 1rem;
+    }
   }
 
   div.results {
+
+    overflow-y: auto;
+
     ul {
       max-height: 60vh;
-      overflow-y: auto;
       padding-left: 0;
       margin-top: 2rem;
       margin-left:2rem;
@@ -31,5 +37,12 @@ div.search-box {
       list-style-type: none;
       overflow-x: hidden;
     }
+  }
+
+  @media screen and (max-width: @screen-md-max) {
+    left: 0;
+    top: 0;
+    min-width: 100%;
+    border-radius: 0;
   }
 }

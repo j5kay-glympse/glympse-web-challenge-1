@@ -17,17 +17,17 @@ Here is an outline/checklist of all items necessary for a successful challenge r
 - ~~Provide a button/panel that allows the user to type in a destination~~
 - ~~Perform a search for nearby POIs that match the entered destination input~~
   - ~~Use the current map's center/viewport bounds + zoom as params for the search~~
-- Results of the search should appear in a list in some manner for interaction (maps icons, sidebar, pop-up, etc.)
-  - *BONUS*: Show additional info about each search result (distance away, provided images/icons, search result type, etc.)
-  - *BONUS*: Cool list container / UI layout
-- Each entry should be selectable
-- Show/highlight an entry on the map if it is selected
-  - *BONUS*: center/zoom the map based on user's and destination location
-  - *BONUS*: make cool animation when transitioning
-- Retrieve/plot a route from the user's current location to the destination
-  - *BONUS*: Show additional info about destination via pop-up balloon over destination marker
-  - *BONUS*: Use custom icon for destination marker
-- **_SUPER-DUPER BONUS_**: Make a responsive app that accomodates viewport sizes ranging between phone and desktop
+- ~~Results of the search should appear in a list in some manner for interaction (maps icons, sidebar, pop-up, etc.)~~
+  - ~~*BONUS*: Show additional info about each search result (distance away, provided images/icons, search result type, etc.)~~
+  - ~~*BONUS*: Cool list container / UI layout~~
+- ~~Each entry should be selectable~~
+- ~~Show/highlight an entry on the map if it is selected~~
+  - ~~*BONUS*: center/zoom the map based on user's and destination location~~
+  - ~~*BONUS*: make cool animation when transitioning~~
+- ~~Retrieve/plot a route from the user's current location to the destination~~
+  - ~~*BONUS*: Show additional info about destination via pop-up balloon over destination marker~~
+  - ~~*BONUS*: Use custom icon for destination marker~~
+- ~~**_SUPER-DUPER BONUS_**: Make a responsive app that accomodates viewport sizes ranging between phone and desktop~~
 
 There are a couple of wireframes (in `samples/`) of an example mobile UX flow for this destination picker project. By no means are you constrained by these designs. They have been included only as reference examples. Feel free to use other sources of inspiration (i.e. Google Maps' destination search/selection, Bing, etc.)
 

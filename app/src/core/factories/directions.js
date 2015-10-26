@@ -17,11 +17,11 @@ define(function(require) {
 					directionsDisplay = new $window.google.maps.DirectionsRenderer({
 						suppressMarkers: true
 					});
-					directionsDisplay.setMap(map);
 				}
 			}
 
 			function getRoute(origin, destination) {
+				directionsDisplay.setMap(map);
 				directionsService.route({
 					origin: origin,
 					destination: destination,
@@ -35,9 +35,19 @@ define(function(require) {
 				});
 			}
 
+			function clear() {
+				directionsDisplay.setMap(null);
+			}
+
+			function _getDirectionsDisplay() {
+				return directionsDisplay;
+			}
+
 			return {
 				init: init,
-				getRoute: getRoute
+				getRoute: getRoute,
+				clear: clear,
+				_getDirectionsDisplay: _getDirectionsDisplay
 			};
 		};
 	}]);

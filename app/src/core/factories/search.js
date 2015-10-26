@@ -24,8 +24,10 @@ define(function(require) {
 					keyword: term
 				};
 				placesService.nearbySearch(request, function(results, status) {
-					if (status == $window.google.maps.places.PlacesServiceStatus.OK) {
+					if (status === $window.google.maps.places.PlacesServiceStatus.OK) {
 						callback(results);
+					} else if (status === $window.google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
+						callback([]);
 					}
 				});
 			}

@@ -4,6 +4,7 @@ define(function(require) {
 
 	require('./map');
 	require('./search');
+	require('./directions');
 	require('angularMocks');
 
 	describe('map', function() {
@@ -20,10 +21,12 @@ define(function(require) {
 					},
 					google: {
 						maps: {
+							Size: function() {},
 							Map: function() {
 								return {
 									panTo: function() {},
-									getBounds: function() {}
+									getBounds: function() {},
+									fitBounds: function() {}
 								};
 							},
 							places: {
@@ -35,10 +38,39 @@ define(function(require) {
 							},
 							Marker: function() {
 								return {
-									addListener: function() {},
+									addListener: function(type, callback) {
+										callback();
+									},
 									setPosition: function() {},
+									getPosition: function() {},
+									setMap: function() {},
+									setIcon: function() {}
+								};
+							},
+							DirectionsService: function() {
+								return {
+									route: function() {}
+								};
+							},
+							DirectionsRenderer: function() {
+								return {
 									setMap: function() {}
 								};
+							},
+							InfoWindow: function() {
+								return {
+									setContent: function() {},
+									open: function() {},
+									close: function() {}
+								};
+							},
+							LatLngBounds: function() {
+								return {
+									extend: function() {}
+								};
+							},
+							TravelMode: {
+								DRIVING: 'DRIVING'
 							}
 						}
 					}
@@ -56,6 +88,33 @@ define(function(require) {
 				spyOn(windowMock.google.maps, 'Map').and.callThrough();
 			});
 		});
+
+		function setupSearch() {
+			windowMock.map.ready = true;
+			geolocationService.observe = function(callback) {
+				callback({
+					coords: {
+						latitude: 1,
+						longitude: 1
+					}
+				});
+			};
+
+			var map = mapFact();
+			map.init();
+
+			map._setPlaces({
+				search: function(term, callback) {
+					callback([{
+						geometry: {
+							location: {lat: 1, long: 1}
+						}
+					}]);
+				}
+			});
+
+			return map;
+		}
 
 		it('registers a callback if $window.map.ready is not set', function() {
 			windowMock.map.ready = false;
@@ -90,28 +149,7 @@ define(function(require) {
 		});
 
 		it('calls the callback after searching', function() {
-			windowMock.map.ready = true;
-			geolocationService.observe = function(callback) {
-				callback({
-					coords: {
-						latitude: 1,
-						longitude: 1
-					}
-				});
-			};
-
-			var map = mapFact();
-			map.init();
-
-			map._setPlaces({
-				search: function(term, callback) {
-					callback([{
-						geometry: {
-							location: {lat: 1, long: 1}
-						}
-					}]);
-				}
-			});
+			var map = setupSearch();
 
 			var callbacksExecuted = 0;
 			function callback() {
@@ -120,6 +158,24 @@ define(function(require) {
 			map.search('test', callback);
 
 			expect(callbacksExecuted).toBe(1);
+		});
+
+		it('attaches focus and getDirections callbacks to places array', function() {
+			var map = setupSearch();
+
+			var placesArray;
+			function callback(data) {
+				placesArray = data;
+			}
+			map.search('test', callback);
+
+			expect(placesArray.length).toBe(1);
+			var place = placesArray[0];
+			expect(typeof place.focus).toEqual('function');
+			expect(typeof place.getDirections).toEqual('function');
+
+			place.focus();
+			place.getDirections();
 		});
 
 	});

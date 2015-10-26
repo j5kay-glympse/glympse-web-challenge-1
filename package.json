@@ -50,7 +50,9 @@
     "time-grunt": "^1.0.0"
   },
   "scripts": {
-    "test": "grunt lint && karma start"
+    "test": "grunt lint && karma start",
+    "start": "grunt serve",
+    "build": "grunt build"
   },
   "dependencies": {
     "less-plugin-autoprefix": "^1.5.1",

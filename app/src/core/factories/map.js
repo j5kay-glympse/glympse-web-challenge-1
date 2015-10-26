@@ -7,11 +7,14 @@ define(function(require) {
 	'use strict';
 
 	var ng = require('angular');
+	var $ = require('jquery');
 	var module = require('./../module');
 
+	var markerTooltip = require('text!./../directives/marker-tooltip.html');
+
 	module.factory('mapFactory', [
-		'$window', '$q', '$timeout', 'geolocation', 'searchFactory', 'directionsFactory',
-		function($window, $q, $timeout, geolocation, searchFactory, directionsFactory
+		'$window', '$q', '$timeout', '$interpolate', 'geolocation', 'searchFactory', 'directionsFactory',
+		function($window, $q, $timeout, $interpolate, geolocation, searchFactory, directionsFactory
 	) {
 		return function() {
 			var map;
@@ -122,6 +125,9 @@ define(function(require) {
 			function search(term, callback) {
 				if (places) {
 					places.search(term, function(results) {
+						if (directions) {
+							directions.clear();
+						}
 						clearAllMarkers();
 						addMarkers(results);
 						addOptions(results);
@@ -171,8 +177,12 @@ define(function(require) {
 					currentInfoPopup.close();
 				}
 				currentInfoPopup = new $window.google.maps.InfoWindow();
-				currentInfoPopup.setContent(place.name);
+				var content = $interpolate(markerTooltip)(place);
+				currentInfoPopup.setContent(content);
 				currentInfoPopup.open(map, marker);
+				$('#current-tooltip').bind('click', function() {
+					place.getDirections();
+				});
 			}
 
 			function setDestinationMarker(place, marker) {
@@ -206,6 +216,7 @@ define(function(require) {
 					place.getDirections = function() {
 						directions.getRoute(userMarker.getPosition(), place.geometry.location);
 						setDestinationMarker(place, marker);
+						openInfoPopup(place, marker);
 					};
 				});
 			}
@@ -224,10 +235,15 @@ define(function(require) {
 				places = mock;
 			}
 
+			function _getPlaces() {
+				return places;
+			}
+
 			return {
 				init: initWhenReady,
 				search: search,
-				_setPlaces: _setPlaces
+				_setPlaces: _setPlaces,
+				_getPlaces: _getPlaces
 			};
 		};
 	}]);

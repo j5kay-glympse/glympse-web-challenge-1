@@ -9,11 +9,14 @@
 					</span>
 			</div>
 			<div class="show-hide-results">
-				<div ng-show="showResults" ng-click="close()">
+				<div ng-show="showResults && hasResults" ng-click="close()">
 					<a><span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>hide results</a>
 				</div>
 				<div ng-show="!showResults && hasResults" ng-click="open()">
 					<a><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>show results</a>
+				</div>
+				<div class="no-results" ng-show="results.length === 0">
+					No Results
 				</div>
 			</div>
 			<div class="results" ng-show="showResults">
