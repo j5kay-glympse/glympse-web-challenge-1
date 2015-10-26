@@ -18,9 +18,11 @@
     "node": ">= 0.10.0"
   },
   "devDependencies": {
+    "bower": "^1.6.5",
     "famous-metrics": "^0.1.1",
     "grunt": "~0.4.5",
     "grunt-bower-requirejs": "^1.1.0",
+    "grunt-cli": "^0.1.13",
     "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-concat": "^0.5.0",
     "grunt-contrib-connect": "^0.8.0",
@@ -51,6 +53,7 @@
   },
   "scripts": {
     "test": "grunt lint && karma start",
+    "postinstall": "bower cache clean && bower install",
     "start": "grunt serve",
     "build": "grunt build"
   },
