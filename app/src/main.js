@@ -78,6 +78,7 @@ define(function(require, exports, module) {
 		}
 
 		function createMarker(place) {
+
           	var placeLoc = place.geometry.location;
           	var marker = new google.maps.Marker({
 				map: map,
@@ -144,6 +145,7 @@ define(function(require, exports, module) {
 		function deletePlaceMarkers() {
 			clearMarkers();
 			searchMarkers = [];
+			$('#list-section ul').empty();
 		}
 
 		function openSearchPanel(){
@@ -203,6 +205,7 @@ define(function(require, exports, module) {
         });
 
         $('#search-input').keyup(function() {
+        	deletePlaceMarkers();
         	var searchQuery = $('#search-input').val();
 
 			if (searchQuery != '') {
