@@ -1,0 +1,25 @@
+#map-controls {
+
+	position: absolute;
+	bottom: 15px;
+	right: 0;
+	z-index: 1;
+
+	button {
+
+		box-shadow: 0px 0px 10px #888;
+
+		&#search-button {
+        	background-image:url(../../content/images/destination.png);
+		}
+
+		&#traffic-button {
+			background-image:url(../../content/images/traffic-off.png);
+
+			&.enabled {
+				background-image:url(../../content/images/traffic-on.png);
+			}
+		}
+	}
+}
+

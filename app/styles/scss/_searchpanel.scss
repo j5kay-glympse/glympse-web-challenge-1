@@ -1,0 +1,43 @@
+#search-panel {
+	height: 0;
+	width: 100%;
+	position: absolute;
+	z-index: 20;
+	top: 0;
+	background-color: #888;
+
+	box-shadow: 0px 10px 10px #555;
+
+	& > div {
+		display: none;
+	}
+	&.open {
+		& > div {
+			display: block;
+		}
+	}
+
+	#search-input {
+		height: 30px;
+		width: 50%;
+		margin: 12px 15px;
+		float: left;
+	}
+
+	#display-type-button {
+		float: right;
+		width: 102px;
+		box-shadow: 0px 0px 10px #555;
+		background-position: 12px 5px;
+		text-align: right;
+		padding-right: 10px;
+
+		&.map-button {
+			background-image:url(../../content/images/map.png);
+		}
+
+		&.list-button {
+			background-image:url(../../content/images/list.png);
+		}
+	}
+}
