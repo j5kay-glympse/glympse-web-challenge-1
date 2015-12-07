@@ -33,11 +33,11 @@
 		padding-right: 10px;
 
 		&.map-button {
-			background-image:url(../../content/images/map.png);
+			background-image: $map-image;
 		}
 
 		&.list-button {
-			background-image:url(../../content/images/list.png);
+			background-image: $list-image;
 		}
 	}
 }

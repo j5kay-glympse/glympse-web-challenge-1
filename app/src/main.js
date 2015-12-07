@@ -20,29 +20,8 @@ define(function(require, exports, module) {
             return;
         }
 
-        mapCanvas = document.getElementById('map');
-        mapOptions = {
-	  		center: new google.maps.LatLng(-34.397, 150.644),
-	  		zoom: 13,
-	  		mapTypeControlOptions: {
-				style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
-				position: google.maps.ControlPosition.TOP_RIGHT,
-				mapTypeIds: [
-					google.maps.MapTypeId.ROADMAP,
-					google.maps.MapTypeId.TERRAIN,
-					google.maps.MapTypeId.SATELLITE,
-					google.maps.MapTypeId.HYBRID
-				]
-	  		},
-	  		zoomControlOptions: {
-				position: google.maps.ControlPosition.LEFT_BOTTOM
-			},
-			streetViewControlOptions: {
-				position: google.maps.ControlPosition.LEFT_BOTTOM
-			}
-        }
+        initMap();
 
-        map = new google.maps.Map(mapCanvas, mapOptions);
         directionsRenderer = new google.maps.DirectionsRenderer();
 		directionsService = new google.maps.DirectionsService();
         placesService = new google.maps.places.PlacesService(map);
@@ -91,8 +70,6 @@ define(function(require, exports, module) {
 		}
 
 		function createMarker(place) {
-
-          	var placeLoc = place.geometry.location;
           	var marker = new google.maps.Marker({
 				map: map,
 				position: place.geometry.location
@@ -100,7 +77,13 @@ define(function(require, exports, module) {
 
           	searchMarkers.push(marker);
 
+			//marker and info window button click events
 			google.maps.event.addListener(marker, 'click', function() {
+				$(searchMarkers).each(function(){
+					this.setLabel(null);
+				});
+				marker.setLabel('!');
+
 				var infoWindowContent  = '<div class="selected-place"><div class="name">' + place.name + '</div>'
 										+ '<button class="directions-button round-button"></div>';
 
@@ -118,6 +101,8 @@ define(function(require, exports, module) {
           	var listItemContent = formatPlaceDataForList(place);
           	var listItem = '<li id="place-' + place.id + '">' + listItemContent + '</li>';
 			$('#list-section ul').append(listItem);
+
+			//search result info panel click event
 			$('#list-section ul li .info-panel').last().click(function() {
 				$('#list-section ul li').removeClass('selected');
 				$(this).parent().addClass('selected');
@@ -129,6 +114,7 @@ define(function(require, exports, module) {
 				toggleDisplayType();
 			});
 
+			//search result directions button click event
 			$('#list-section ul li button').last().click(function() {
 				requestDirections(place);
 			});
@@ -150,7 +136,7 @@ define(function(require, exports, module) {
 		function requestDirections(place) {
 			clearDirections();
 
-			directionsRenderer.setPanel(document.getElementById('directions-list'));
+			directionsRenderer.setPanel(document.getElementById('directions-panel'));
 
 			var directionsRequest = {
 				  origin: curLocation,
@@ -165,6 +151,8 @@ define(function(require, exports, module) {
 					}
 					directionsRenderer.setOptions(rendererOptions)
 					directionsRenderer.setDirections(response);
+
+					$('#direction-list-button').show();
 				}
 				else {
 					console.log('ERR: failed to retrieve directions:' + status);
@@ -212,6 +200,23 @@ define(function(require, exports, module) {
 
 		function clearDirections() {
 			directionsRenderer.setMap(null);
+			$('#direction-list-button').hide();
+		}
+
+		function openDirectionsPanel(){
+			var directionsPanel = $('#directions-panel');
+			if (directionsPanel.hasClass('open')) {
+				directionsPanel.animate({ height:'0', top:'100%'}, 'fast', function() {
+					directionsPanel.removeClass('open');
+					$('#direction-list-button').removeClass('open');
+				});
+			}
+			else {
+				directionsPanel.animate({ height:'75%', top:'15%'}, 'fast', function() {
+					directionsPanel.addClass('open');
+					$('#direction-list-button').addClass('open');
+				});
+			}
 		}
 
 		function openSearchPanel(){
@@ -235,7 +240,7 @@ define(function(require, exports, module) {
 				trafficLayer.setMap(null);
 			}
 			else {
-			$('#traffic-button').addClass('enabled');
+				$('#traffic-button').addClass('enabled');
 				trafficLayer.setMap(map);
 			}
 
@@ -279,6 +284,36 @@ define(function(require, exports, module) {
 				setDisplayTypeToMap();
 			}
 		}
+
+		function initMap() {
+			mapCanvas = document.getElementById('map');
+			mapOptions = {
+				center: new google.maps.LatLng(-34.397, 150.644),
+				zoom: 13,
+				mapTypeControlOptions: {
+					style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
+					position: google.maps.ControlPosition.TOP_RIGHT,
+					mapTypeIds: [
+						google.maps.MapTypeId.ROADMAP,
+						google.maps.MapTypeId.TERRAIN,
+						google.maps.MapTypeId.SATELLITE,
+						google.maps.MapTypeId.HYBRID
+					]
+				},
+				zoomControlOptions: {
+					position: google.maps.ControlPosition.LEFT_BOTTOM
+				},
+				streetViewControlOptions: {
+					position: google.maps.ControlPosition.LEFT_BOTTOM
+				}
+			}
+
+			map = new google.maps.Map(mapCanvas, mapOptions);
+		}
+
+		$('#direction-list-button').click(function() {
+			openDirectionsPanel();
+		});
 
         $('#search-button').click(function() {
         	openSearchPanel();

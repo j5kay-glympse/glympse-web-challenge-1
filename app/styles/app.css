@@ -68,6 +68,34 @@ input {
       #map-controls button#traffic-button.enabled {
         background-image: url(../../content/images/traffic-on.png); }
 
+#direction-list-button {
+  position: absolute;
+  bottom: 15px;
+  left: 48%;
+  z-index: 10;
+  background-image: url(../../content/images/show-directions.png); }
+  #direction-list-button.open {
+    -ms-transform: rotate(180deg);
+    /* IE 9 */
+    -webkit-transform: rotate(180deg);
+    /* Chrome, Safari, Opera */
+    transform: rotate(180deg); }
+
+#directions-panel {
+  height: 0;
+  width: 85%;
+  position: absolute;
+  z-index: 5;
+  bottom: 10%;
+  left: 7.5%;
+  top: 100%;
+  background-color: #888;
+  overflow-y: scroll; }
+  #directions-panel > div {
+    box-shadow: 0px 0px 10px #333;
+    background: #AAA;
+    padding: 1px 10px; }
+
 #search-panel {
   height: 0;
   width: 100%;
@@ -131,10 +159,5 @@ input {
         right: 5%;
         box-shadow: 0px 0px 10px #888;
         background-image: url(../../content/images/direction.png); }
-  #list-section #directions-list > div {
-    margin: 80px 50px 0 50px;
-    box-shadow: 0px 0px 10px #333;
-    background: #AAA;
-    padding: 1px 10px; }
 
 /*# sourceMappingURL=app.css.map */

@@ -10,16 +10,33 @@
 		box-shadow: 0px 0px 10px #888;
 
 		&#search-button {
-        	background-image:url(../../content/images/destination.png);
+        	background-image: $destination-image;
 		}
 
 		&#traffic-button {
-			background-image:url(../../content/images/traffic-off.png);
+			background-image: $traffic-off-image;
 
 			&.enabled {
-				background-image:url(../../content/images/traffic-on.png);
+				background-image: $traffic-on-image;
 			}
 		}
+
+
+	}
+}
+
+#direction-list-button {
+	position: absolute;
+	bottom: 15px;
+	left: 48%;
+	z-index: 10;
+
+	background-image: $show-directions-image;
+
+	&.open {
+		-ms-transform: rotate(180deg); /* IE 9 */
+		-webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+		transform: rotate(180deg);
 	}
 }
 
