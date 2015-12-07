@@ -12,7 +12,8 @@ define(function(require, exports, module) {
     GoogleMapsLoader.LIBRARIES = ['geometry', 'places'];
 
 	GoogleMapsLoader.load(function(google) {
-	    var map, mapCanvas, mapOptions, curLocMarker, placesService, infoWindow, searchMarkers, trafficLayer, directionsRenderer, directionsService;
+	    var map, mapCanvas, mapOptions, curLocation, curLocMarker, placesService, infoWindow,
+	    	searchMarkers, trafficLayer, directionsRenderer, directionsService, selectedPlace;
 
 	    if (!navigator.geolocation) {
 	        console.log('geolocation not available')
@@ -39,7 +40,6 @@ define(function(require, exports, module) {
 			streetViewControlOptions: {
 				position: google.maps.ControlPosition.LEFT_BOTTOM
 			}
-
         }
 
         map = new google.maps.Map(mapCanvas, mapOptions);
@@ -53,24 +53,37 @@ define(function(require, exports, module) {
         navigator.geolocation.getCurrentPosition(getPositionSuccess, getPositionFailure);
 
         function getPositionSuccess(position) {
-			var pos = {
-				lat: position.coords.latitude,
-				lng: position.coords.longitude
+        	var posCoords = position.coords;
+			curLocation = {
+				lat: posCoords.latitude,
+				lng: posCoords.longitude
 		 	};
 
 		 	curLocMarker = new google.maps.Marker({
-				position: pos,
+				position: curLocation,
 				map: map,
 				title: 'current location',
 				icon: "../content/images/marker.png"
 			});
 
-		    map.setCenter(pos);
+		    recenterMapOnCurrentPosition();
 
-		    curLocMarker.addListener('click', function() {
-				map.setZoom(15);
+			google.maps.event.addListener(curLocMarker, 'click', function() {
+				var positionInfo = '<div>Lat: ' + posCoords.latitude + '</div>'
+								+ '<div>Lng: ' + posCoords.longitude + '</div>'
+								+ '<div>Acc: ' + posCoords.accuracy + '</div>'
+								+ '<div>Heading: ' + posCoords.heading + '</div>';
+				infoWindow.setContent(positionInfo);
+				infoWindow.open(map, this);
+
 				map.setCenter(curLocMarker.getPosition());
 			});
+        }
+
+        function recenterMapOnCurrentPosition()
+        {
+        	map.setCenter(curLocation);
+        	map.setZoom(13);
         }
 
         function getPositionFailure() {
@@ -87,38 +100,92 @@ define(function(require, exports, module) {
 
           	searchMarkers.push(marker);
 
+			google.maps.event.addListener(marker, 'click', function() {
+				var infoWindowContent  = '<div class="selected-place"><div class="name">' + place.name + '</div>'
+										+ '<button class="directions-button round-button"></div>';
+
+            	infoWindow.setContent(infoWindowContent);
+            	infoWindow.open(map, this);
+
+            	selectedPlace = place;
+
+            	var button = $('.selected-place button');
+            	button.click(function() {
+					requestDirections(selectedPlace);
+				});
+          	});
+
           	var listItemContent = formatPlaceDataForList(place);
           	var listItem = '<li id="place-' + place.id + '">' + listItemContent + '</li>';
 			$('#list-section ul').append(listItem);
-			$('#list-section ul li').last().click(function() {
+			$('#list-section ul li .info-panel').last().click(function() {
 				$('#list-section ul li').removeClass('selected');
-				$(this).addClass('selected');
-				//requestDirections(place);
+				$(this).parent().addClass('selected');
+
+				centerMapOnSelectedLocation(place, marker);
+				selectedPlace = place;
+				clearDirections();
+				setMarkersOnMap(map);
+				toggleDisplayType();
 			});
 
-          	google.maps.event.addListener(marker, 'click', function() {
-            	infoWindow.setContent(place.name);
-            	infoWindow.open(map, this);
-          	});
+			$('#list-section ul li button').last().click(function() {
+				requestDirections(place);
+			});
         }
 
 		function formatPlaceDataForList(place){
-			var distAway = google.maps.geometry.spherical.computeDistanceBetween (curLocMarker.position, place.geometry.location);
+			var distAway = google.maps.geometry.spherical.computeDistanceBetween(curLocMarker.position, place.geometry.location);
 			distAway = (distAway * 0.000621371192).toFixed(2); //convert meters to miles and round to 2 decimal places
 			var regExp = new RegExp('_', 'g');
 			var placeType = place.types[0].replace(regExp, ' ');
 
 			return '<div class="info-panel"><div class="name">' + place.name + '</div>' +
-			'<div class="address">' + place.formatted_address + '</div>' +
-			'<div class="place-type">' + placeType + '</div>' +
-			'<div class="distance-away"> Dist. Away: ' + distAway + ' miles</div></div>' +
-			'<button class="directions-button round-button"></div>';
+				'<div class="address">' + place.formatted_address + '</div>' +
+				'<div class="place-type">' + placeType + '</div>' +
+				'<div class="distance-away"> Dist. Away: ' + distAway + ' miles</div></div>' +
+				'</div><button class="directions-button round-button"/>';
 		}
 
 		function requestDirections(place) {
-			//reset directions
-			directionsRenderer.setMap(null);
+			clearDirections();
 
+			directionsRenderer.setPanel(document.getElementById('directions-list'));
+
+			var directionsRequest = {
+				  origin: curLocation,
+				  destination: place.geometry.location,
+				  travelMode: google.maps.TravelMode.DRIVING
+			};
+
+			directionsService.route(directionsRequest, function(response, status) {
+				if (status == google.maps.DirectionsStatus.OK) {
+					var rendererOptions = {
+						markerOptions: {icon: '../content/images/directions-marker.png'}
+					}
+					directionsRenderer.setOptions(rendererOptions)
+					directionsRenderer.setDirections(response);
+				}
+				else {
+					console.log('ERR: failed to retrieve directions:' + status);
+				}
+			});
+			directionsRenderer.setMap(map);
+			setMarkersOnMap(null);
+			setDisplayTypeToMap();
+		}
+
+		function centerMapOnSelectedLocation(place, marker) {
+			var latLngBounds = new google.maps.LatLngBounds();
+			var latLngs = [new google.maps.LatLng(curLocation.lat,curLocation.lng), place.geometry.location];
+			for (var i = 0; i < latLngs.length; i++) {
+			  //  And increase the bounds to take this point
+			  latLngBounds.extend (latLngs[i]);
+			}
+			map.setCenter(latLngBounds.getCenter());
+			map.fitBounds(latLngBounds);
+
+			google.maps.event.trigger( marker, 'click' );
 		}
 
 		function textSearchCallback(results, status) {
@@ -137,15 +204,14 @@ define(function(require, exports, module) {
 			}
 		}
 
-		function clearMarkers() {
-			//Clears Map
+		function clearSearchListAndMarkers() {
 			setMarkersOnMap(null);
-		}
-
-		function deletePlaceMarkers() {
-			clearMarkers();
 			searchMarkers = [];
 			$('#list-section ul').empty();
+		}
+
+		function clearDirections() {
+			directionsRenderer.setMap(null);
 		}
 
 		function openSearchPanel(){
@@ -175,28 +241,42 @@ define(function(require, exports, module) {
 
 		}
 
-		function toggleDisplayType() {
+		function setDisplayTypeToMap() {
 			var mainContainer = $('#main-container');
 			var listSection = $('#list-section');
 			var displayTypeButton = $('#display-type-button');
 
+			mainContainer.data('view-type', 'map')
+			listSection.animate({ width:'0'}, 'fast', function() {
+				listSection.removeClass('open');
+				displayTypeButton.addClass('list-button');
+				displayTypeButton.removeClass('map-button');
+				displayTypeButton.text('LIST');
+			});
+		}
+
+		function setDisplayTypeToList() {
+			var mainContainer = $('#main-container');
+			var listSection = $('#list-section');
+			var displayTypeButton = $('#display-type-button');
+
+			mainContainer.data('view-type', 'list')
+			listSection.animate({ width:'100%'}, 'fast', function() {
+				listSection.addClass('open');
+				displayTypeButton.addClass('map-button');
+				displayTypeButton.removeClass('list-button');
+				displayTypeButton.text('MAP');
+			});
+		}
+
+		function toggleDisplayType() {
+			var mainContainer = $('#main-container');
+
 			if (mainContainer.data('view-type') == 'map') {
-				mainContainer.data('view-type', 'list')
-				listSection.animate({ width:'100%'}, 'fast', function() {
-					listSection.addClass('open');
-					displayTypeButton.addClass('map-button');
-					displayTypeButton.removeClass('list-button');
-					displayTypeButton.text('MAP');
-				});
+				setDisplayTypeToList();
 			}
 			else {
-				mainContainer.data('view-type', 'map')
-				listSection.animate({ width:'0'}, 'fast', function() {
-					listSection.removeClass('open');
-					displayTypeButton.addClass('list-button');
-					displayTypeButton.removeClass('map-button');
-					displayTypeButton.text('LIST');
-				});
+				setDisplayTypeToMap();
 			}
 		}
 
@@ -205,7 +285,8 @@ define(function(require, exports, module) {
         });
 
         $('#search-input').keyup(function() {
-        	deletePlaceMarkers();
+        	clearSearchListAndMarkers();
+        	clearDirections();
         	var searchQuery = $('#search-input').val();
 
 			if (searchQuery != '') {

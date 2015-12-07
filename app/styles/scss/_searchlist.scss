@@ -23,7 +23,7 @@
         	padding: 10px;
         	position: relative;
 
-        	&:hover {
+        	&:hover, &.selected{
         		box-shadow: 0px 0px 10px #333;
         	}
 
@@ -52,8 +52,16 @@
 
 				box-shadow: 0px 0px 10px #888;
 
-				background-image:url(../../content/images/direction.png);
+				background-image: $directions-image;
 			}
         }
 	}
+
+	& #directions-list > div {
+		margin: 80px 50px 0 50px;
+		box-shadow: 0px 0px 10px #333;
+		background: #AAA;
+		padding: 1px 10px;
+	}
 }
+
