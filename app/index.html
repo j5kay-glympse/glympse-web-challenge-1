@@ -8,33 +8,55 @@
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
         <meta name="msapplication-tap-highlight" content="no" />
-        
+
         <!-- build:css(app/) css/app.css -->
         <link rel="stylesheet" type="text/css" href="styles/app.css" />
         <!-- bower:css -->
         <!-- endbower -->
         <!-- endbuild -->
-        
+
         <!-- build:js(app/) src/polyfills.js -->
         <script type="text/javascript" src="lib/famous-polyfills/functionPrototypeBind.js"></script>
         <script type="text/javascript" src="lib/famous-polyfills/classList.js"></script>
         <script type="text/javascript" src="lib/famous-polyfills/requestAnimationFrame.js"></script>
         <!-- endbuild -->
-        
+
         <!-- build:js(app/) src/jquery.js -->
         <script type=text/javascript src="lib/jquery/dist/jquery.min.js"></script>
         <!-- endbuild -->
-        
+
         <!-- process:remove:dev -->
         <script type="text/javascript" src="src/main.js"></script>
         <!-- /process -->
-        
+
         <!-- process:remove:dist -->
         <script type="text/javascript" src="lib/requirejs/require.js" data-main="src/requireConfig"></script>
         <!-- /process -->
     </head>
     <body>
-		<h1>Simple Map Destination Picker</h1>
-		<div id="map">PUT MAP CONTROL HERE!</div>
+		<div id="main-container" data-view-type="map">
+			<section id="map-section">
+				<div id="map"></div>
+				<section id="map-controls">
+					<button id="traffic-button" class="round-button" />
+					<button id="search-button" class="round-button" />
+				</section>
+				<button id="direction-list-button" class="round-button" style="display:none;"/>
+			</section>
+			<section id="list-section">
+				<ul>
+				</ul>
+			</section>
+			<section id="search-panel">
+				<div>
+					<input id="search-input">
+					<button id="display-type-button" class="list-button round-button" >
+					LIST
+					</button>
+				</div>
+			</section>
+			<section id="directions-panel" >
+			</section>
+		</div>
     </body>
 </html>
