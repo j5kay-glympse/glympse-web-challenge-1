@@ -21,7 +21,7 @@
 			<header>
 				<h1>Simple Map Destination Picker</h1>
 			</header>
-			<div id="map"></div>
+			<div id="map" class="map"></div>
 		</div>
 		<!-- build:js(app/) src/polyfills.js -->
 		<!-- endbuild -->
@@ -29,7 +29,9 @@
 		<!-- build:js(app/) src/jquery.js -->
 		<!-- endbuild -->
 
-		<!-- process:remove:dev -->
+		<script src="https://maps.googleapis.com/maps/api/js"></script>
+
+			<!-- process:remove:dev -->
 		<script type="text/javascript" src="src/main.js"></script>
 		<!-- /process -->
 

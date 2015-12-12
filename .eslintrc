@@ -6,7 +6,8 @@
     "globals": {
         "DocumentFragment": true,
         "console": true,
-        "$": true
+        "$": true,
+		"google":true
     },
     "rules": {
         "valid-jsdoc": 0,

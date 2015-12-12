@@ -15,6 +15,17 @@ html, body {
   height: 100%;
   overflow: hidden; }
   .app header {
-    padding: 10px; }
+    padding: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1; }
+
+.map {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; }
 
 /*# sourceMappingURL=../../dist/css/maps/app.css.map */

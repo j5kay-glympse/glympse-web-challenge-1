@@ -7,6 +7,18 @@ define(function(require, exports, module) {
 
 	// import dependencies
     var $ = require('jquery');
+	var getUserLocation = require('getUserLocation');
 
-	console.log('Map Challenge! - size=' + $(document).width() + 'x' + $(document).height());
+	// Init google maps
+	var map = new google.maps.Map(document.getElementById('map'), {
+		center: {lat: 47.6097, lng: -122.3331},
+		zoom: 13
+	});
+
+	// Init info window
+	var infoWindow = new google.maps.InfoWindow({map: map});
+
+	// get our users location on the map via geolocation
+	getUserLocation(map, infoWindow);
+
 });
