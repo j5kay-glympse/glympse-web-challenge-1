@@ -1,8 +1,20 @@
 html {
-  background: #fff;
-}
+  box-sizing: border-box; }
 
-.backfaceVisibility {
-  -webkit-backface-visibility: visible;
-  backface-visibility: visible;
-}
+*, *:before, *:after {
+  box-sizing: inherit; }
+
+html, body {
+  height: 100%; }
+
+.app {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; }
+  .app header {
+    padding: 10px; }
+
+/*# sourceMappingURL=../../dist/css/maps/app.css.map */
