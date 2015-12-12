@@ -18,6 +18,7 @@
     "node": ">= 0.10.0"
   },
   "devDependencies": {
+    "bower": "^1.7.1",
     "famous-metrics": "^0.1.1",
     "grunt": "~0.4.4",
     "grunt-bower-requirejs": "^1.1.0",
@@ -35,8 +36,8 @@
     "grunt-processhtml": "^0.3.3",
     "grunt-rev": "^0.1.0",
     "grunt-usemin": "^2.1.1",
+    "jquery": "^2.1.1",
     "load-grunt-config": "^0.13.1",
-	"jquery": "^2.1.1",
     "time-grunt": "^1.0.0"
   },
   "scripts": {
