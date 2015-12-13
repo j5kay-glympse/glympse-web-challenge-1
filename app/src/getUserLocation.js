@@ -1,32 +1,34 @@
 define(function() {
 	'use strict';
 
-	function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-		infoWindow.setPosition(pos);
-		infoWindow.setContent(browserHasGeolocation ?
+	function handleLocationError(browserHasGeolocation, marker, pos) {
+		marker.setPosition(pos);
+		alert(browserHasGeolocation ?
 			'Error: The Geolocation service failed.' :
 			'Error: Your browser doesn\'t support geolocation.');
 	}
 
-	return function(map, infoWindow) {
+	return function(map, marker) {
 		// Try HTML5 geolocation.
+
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(function(position) {
 				var pos = {
 					lat: position.coords.latitude,
 					lng: position.coords.longitude
 				};
-
-				infoWindow.setPosition(pos);
-				infoWindow.setContent('Location found.');
+				marker.setPosition(pos);
+				marker.setMap(map);
 				map.setCenter(pos);
+				console.log(marker);
 			}, function() {
-				handleLocationError(true, infoWindow, map.getCenter());
+				handleLocationError(true, marker, map.getCenter());
 			});
 		} else {
 			// Browser doesn't support Geolocation
-			handleLocationError(false, infoWindow, map.getCenter());
+			handleLocationError(false, marker, map.getCenter());
 		}
+
 	};
 
 });

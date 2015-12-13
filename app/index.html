@@ -18,9 +18,7 @@
     </head>
     <body>
 		<div class="app">
-			<header>
-				<h1>Simple Map Destination Picker</h1>
-			</header>
+			<input id="search" class="search" type="text" placeholder="Search for a Destination">
 			<div id="map" class="map"></div>
 		</div>
 		<!-- build:js(app/) src/polyfills.js -->
@@ -29,7 +27,7 @@
 		<!-- build:js(app/) src/jquery.js -->
 		<!-- endbuild -->
 
-		<script src="https://maps.googleapis.com/maps/api/js"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
 
 			<!-- process:remove:dev -->
 		<script type="text/javascript" src="src/main.js"></script>
