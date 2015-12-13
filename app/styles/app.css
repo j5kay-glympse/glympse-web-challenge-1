@@ -30,6 +30,19 @@ body {
   border: solid 1px lightgray;
   font-family: sans-serif; }
 
+.search-btn {
+  position: absolute;
+  top: 10px;
+  left: 420px;
+  height: 32px;
+  width: 100px;
+  background-color: dodgerblue;
+  border: solid 1px darkblue;
+  padding-top: 6px;
+  text-align: center;
+  cursor: pointer;
+  color: #ffffff; }
+
 .map {
   position: absolute;
   top: 0;
@@ -44,7 +57,7 @@ body {
   border: solid 1px lightgray;
   background-color: #fff;
   width: 400px;
-  height: 200px;
+  max-height: 400px;
   padding: 10px 0;
   overflow-y: scroll;
   display: none;
@@ -83,5 +96,26 @@ body {
     font-size: 0.8em;
     color: darkgrey;
     font-weight: 300; }
+
+.directions {
+  position: absolute;
+  top: 50px;
+  left: 10px;
+  width: 400px;
+  background-color: #fff;
+  padding: 10px;
+  overflow-y: scroll;
+  max-height: 400px;
+  display: none;
+  -webkit-transform: scale(0.9);
+          transform: scale(0.9);
+  opacity: 0;
+  transition: all 300ms ease; }
+  .directions.is-active {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    opacity: 1; }
+  .directions td {
+    padding: 10px 0 10px 10px; }
 
 /*# sourceMappingURL=../../dist/css/maps/app.css.map */

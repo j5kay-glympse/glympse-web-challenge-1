@@ -20,7 +20,6 @@ define(function() {
 				marker.setPosition(pos);
 				marker.setMap(map);
 				map.panTo(pos);
-				console.log("User Marker", marker);
 			}, function() {
 				handleLocationError(true, marker, map.getCenter());
 			});

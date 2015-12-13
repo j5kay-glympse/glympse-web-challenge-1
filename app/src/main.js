@@ -23,8 +23,12 @@ define(function(require, exports, module) {
 	// User Marker
 	var userMarker = new google.maps.Marker({
 		map: null,
-		icon: 'content/images/ic_person_pin_circle_black_36px.svg'
+		icon: 'content/images/ic_person_pin_circle_black_36px.svg',
+		animation: google.maps.Animation.DROP
 	});
+
+	// search result markers
+	var markers = [];
 
 	/**
 	 * User Location
@@ -44,9 +48,11 @@ define(function(require, exports, module) {
 	 * Direction Service
 	 */
 
-	var directionsService = new google.maps.DirectionsService;
-	var directionsDisplay = new google.maps.DirectionsRenderer;
-	directionsDisplay.setMap(map);
+	var directionsService = new google.maps.DirectionsService();
+	var directionsDisplay = new google.maps.DirectionsRenderer();
+	directionsDisplay.setPanel(document.getElementById('directions'));
+
+	var $directions = $('#directions');
 
 	/**
 	 * Destination search service
@@ -62,39 +68,61 @@ define(function(require, exports, module) {
 	var $resultsList = $('#results-list');
 	// listen for when a user selects a result
 	$resultsList.on('click', 'li', function() {
-		hideResults();
+		hidePanel($results);
 		// generate a place object from the place_id
 		service.getDetails({
 			placeId: $(this).data('id')
 		}, function(place, status) {
 			if (status === google.maps.places.PlacesServiceStatus.OK) {
 				navigateTo(place);
+				setTimeout(function() {
+					showPanel($directions);
+				},300);
 			}
 		});
 	});
 
 	// show search results list
-	function showResults() {
-		$results.css('display', 'block');
-		$results[0].clientHeight; // flush our cache
-		$results.addClass('is-active');
+	function showPanel($elem) {
+		$elem.css('display', 'block');
+		$elem[0].clientHeight; // flush our cache
+		$elem.addClass('is-active');
 	}
 
 	// hide search results list
-	function hideResults() {
-		$results.removeClass('is-active');
-		setTimeout(function() {
-			$results.css('display', 'none');
-		}, 300);
+	function hidePanel($elem) {
+		if ($elem.hasClass('is-active')){
+			$elem.removeClass('is-active');
+			setTimeout(function() {
+				$elem.css('display', 'none');
+			}, 300);
+		}
 	}
+
+	input.addEventListener('keydown', function() {
+		hidePanel($results);
+		hidePanel($directions);
+		directionsDisplay.setMap(null);
+		// Clear out the old markers.
+		markers.forEach(function(marker) {
+			marker.setMap(null);
+		});
+		markers.length = 0;
+		userMarker.setVisible(true);
+	});
+
+	$('#search-btn').on('click', function() {
+		google.maps.event.trigger(input, 'focus');
+		google.maps.event.trigger(input, 'keydown', {
+			keyCode:13
+		});
+	});
 
 	// Bias the SearchBox results towards current map's viewport.
 	map.addListener('bounds_changed', function() {
 		searchBox.setBounds(map.getBounds());
 	});
 
-	// search result markers
-	var markers = [];
 	// Listen for the event fired when the user selects a prediction and retrieve
 	// more details for that place.
 	searchBox.addListener('places_changed', function() {
@@ -103,12 +131,6 @@ define(function(require, exports, module) {
 		if (places.length == 0) {
 			return;
 		}
-
-		// Clear out the old markers.
-		markers.forEach(function(marker) {
-			marker.setMap(null);
-		});
-		markers.length = 0;
 
 		// Clear out the old search results
 		$resultsList.empty();
@@ -126,12 +148,22 @@ define(function(require, exports, module) {
 				};
 
 				// Create a marker for each place.
-				markers.push(new google.maps.Marker({
+				var m = new google.maps.Marker({
 					map: map,
 					icon: icon,
 					title: place.name,
 					position: place.geometry.location
-				}));
+				});
+
+				m.addListener('click', function() {
+					hidePanel($results);
+					navigateTo(place);
+					setTimeout(function() {
+						showPanel($directions);
+					}, 300);
+				});
+
+				markers.push(m);
 
 				$resultsList.append('<li data-id="' + place.place_id + '">' +
 					'<div class="name">' + place.name + '</div>' +
@@ -140,11 +172,12 @@ define(function(require, exports, module) {
 
 			});
 
-			showResults();
+			showPanel($results);
 		} else {
 			// if there is only one result
 			// navigate to our destination
 			navigateTo(places[0]);
+			showPanel($directions);
 		}
 
 	});
@@ -156,8 +189,9 @@ define(function(require, exports, module) {
 		});
 		markers.length = 0;
 		// get rid of our initial user marker
-		userMarker.setMap(null);
+		userMarker.setVisible(false);
 		calculateAndDisplayRoute(
+			map,
 			directionsService,
 			directionsDisplay,
 			userMarker.position,
