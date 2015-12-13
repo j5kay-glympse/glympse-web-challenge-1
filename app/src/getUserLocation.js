@@ -3,7 +3,7 @@ define(function() {
 
 	function handleLocationError(browserHasGeolocation, marker, pos) {
 		marker.setPosition(pos);
-		alert(browserHasGeolocation ?
+		window.alert(browserHasGeolocation ?
 			'Error: The Geolocation service failed.' :
 			'Error: Your browser doesn\'t support geolocation.');
 	}
@@ -19,8 +19,8 @@ define(function() {
 				};
 				marker.setPosition(pos);
 				marker.setMap(map);
-				map.setCenter(pos);
-				console.log(marker);
+				map.panTo(pos);
+				console.log("User Marker", marker);
 			}, function() {
 				handleLocationError(true, marker, map.getCenter());
 			});

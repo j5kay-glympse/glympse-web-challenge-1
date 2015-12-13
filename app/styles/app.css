@@ -7,6 +7,9 @@ html {
 html, body {
   height: 100%; }
 
+body {
+  font-family: sans-serif; }
+
 .app {
   position: absolute;
   top: 0;
@@ -23,7 +26,9 @@ html, body {
   position: absolute;
   top: -100px;
   transition: top 1s ease;
-  outline: none; }
+  outline: none;
+  border: solid 1px lightgray;
+  font-family: sans-serif; }
 
 .map {
   position: absolute;
@@ -31,5 +36,52 @@ html, body {
   left: 0;
   width: 100%;
   height: 100%; }
+
+.results {
+  position: absolute;
+  top: 50px;
+  left: 10px;
+  border: solid 1px lightgray;
+  background-color: #fff;
+  width: 400px;
+  height: 200px;
+  padding: 10px 0;
+  overflow-y: scroll;
+  display: none;
+  -webkit-transform: scale(0.9);
+          transform: scale(0.9);
+  opacity: 0;
+  transition: all 300ms ease; }
+  .results.is-active {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    opacity: 1; }
+  .results strong {
+    display: block;
+    margin-bottom: 10px;
+    padding: 0 10px; }
+  .results ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    overflow: hidden; }
+    .results ul li {
+      border-top: solid 1px lightgray;
+      margin-bottom: 4px;
+      padding: 4px 10px;
+      cursor: pointer;
+      transition: -webkit-transform 300ms ease;
+      transition: transform 300ms ease;
+      transition: transform 300ms ease, -webkit-transform 300ms ease; }
+      .results ul li:hover {
+        -webkit-transform: translateX(4px);
+                transform: translateX(4px); }
+  .results .name {
+    font-size: 0.9em; }
+  .results .address {
+    font-size: 0.8em;
+    color: darkgrey;
+    font-weight: 300; }
 
 /*# sourceMappingURL=../../dist/css/maps/app.css.map */
