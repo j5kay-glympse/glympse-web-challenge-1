@@ -9,6 +9,7 @@ module.exports = {
       src: [
         'content/**/**.*',
         '.htaccess',
+        'favicon.ico',
         'images/{,*/}*.webp',
         // '{,*/}*.html',
         'styles/fonts/{,*/}*.*'

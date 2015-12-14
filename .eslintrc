@@ -19,6 +19,7 @@
         "no-console": 0,
         "no-use-before-define": [1, "nofunc"],
         "no-trailing-spaces": 0,
+        "no-alert": 0,
         "func-names": 0,
         "func-style": [2, "declaration"],
         "new-cap": 1,

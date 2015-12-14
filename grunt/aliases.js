@@ -18,8 +18,8 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'clean:dist',
     'lint',
-	'sass',
-	'postcss',
+    'sass',
+    'postcss',
     'processhtml:dist',
     'useminPrepare',
     'requirejs',

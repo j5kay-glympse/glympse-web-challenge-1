@@ -6,7 +6,7 @@ module.exports = {
         '<%= config.dist %>/css/{,*/}*.css',
         // '<%= config.dist %>/images/{,*/}*.*',
         '<%= config.dist %>/css/fonts/{,*/}*.*',
-        '<%= config.dist %>/*.{ico,png}'
+        '<%= config.dist %>/*.{png}'
       ]
     }
   }

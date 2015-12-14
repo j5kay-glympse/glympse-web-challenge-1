@@ -29,7 +29,6 @@ body {
 	width: 400px;
 	position: absolute;
 	top: -100px;
-	transition: top 1s ease;
 	outline: none;
 	border: solid 1px lightgray;
 	font-family: sans-serif;
@@ -37,8 +36,7 @@ body {
 
 .search-btn {
 	position: absolute;
-	top: 10px;
-	left: 420px;
+	top: -100px;
 	height: 32px;
 	width: 100px;
 	background-color: dodgerblue;
@@ -47,6 +45,12 @@ body {
 	text-align: center;
 	cursor: pointer;
 	color: #ffffff;
+	font-size: 1.2em;
+	transform: translate(10px,10px);
+	user-select: none;
+	&:active {
+		transform: translate(10px,10px) scale(0.95);
+	}
 }
 
 .map {
@@ -56,7 +60,6 @@ body {
 	width: 100%;
 	height: 100%;
 }
-
 
 .results {
 	position: absolute;

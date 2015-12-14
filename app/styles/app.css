@@ -25,15 +25,13 @@ body {
   width: 400px;
   position: absolute;
   top: -100px;
-  transition: top 1s ease;
   outline: none;
   border: solid 1px lightgray;
   font-family: sans-serif; }
 
 .search-btn {
   position: absolute;
-  top: 10px;
-  left: 420px;
+  top: -100px;
   height: 32px;
   width: 100px;
   background-color: dodgerblue;
@@ -41,7 +39,17 @@ body {
   padding-top: 6px;
   text-align: center;
   cursor: pointer;
-  color: #ffffff; }
+  color: #ffffff;
+  font-size: 1.2em;
+  -webkit-transform: translate(10px, 10px);
+          transform: translate(10px, 10px);
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none; }
+  .search-btn:active {
+    -webkit-transform: translate(10px, 10px) scale(0.95);
+            transform: translate(10px, 10px) scale(0.95); }
 
 .map {
   position: absolute;
