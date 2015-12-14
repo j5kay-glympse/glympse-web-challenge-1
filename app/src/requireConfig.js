@@ -4,7 +4,9 @@ require.config({
 
     },
     paths: {
-        famous: '../lib/famous/src',
+        famousClassList: '../lib/famous-polyfills/classList',
+        famousPrototypeBind: '../lib/famous-polyfills/functionPrototypeBind',
+        famousAnimationFrame: '../lib/famous-polyfills/requestAnimationFrame',
         requirejs: '../lib/requirejs/require',
         almond: '../lib/almond/almond',
         jquery: '../lib/jquery/dist/jquery'

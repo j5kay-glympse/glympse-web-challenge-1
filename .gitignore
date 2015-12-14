@@ -14,3 +14,4 @@ node_modules
 dist
 .tmp
 app/lib
+.sass-cache

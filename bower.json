@@ -27,6 +27,8 @@
   "dependencies": {
     "requirejs": "~2.1.11",
     "almond": "~0.2.9",
-    "jquery": "~2.1.1"
+    "jquery": "~2.1.1",
+    "famous-polyfills": "~0.3.0",
+    "normalize-css": "normalize.css#~3.0.3"
   }
 }

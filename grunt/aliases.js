@@ -18,6 +18,8 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'clean:dist',
     'lint',
+    'sass',
+    'postcss',
     'processhtml:dist',
     'useminPrepare',
     'requirejs',
@@ -34,7 +36,7 @@ module.exports = function (grunt) {
     'jscs',
     'eslint'
   ]);
-  
+
   grunt.registerTask('test', [
     'lint'
   ]);
