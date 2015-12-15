@@ -1,0 +1,60 @@
+#list-section {
+	width: 0;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 10;
+	display: none;
+	overflow: scroll;
+
+	&.open {
+		display: block;
+		background-color: #888;
+	}
+
+	ul {
+		margin-top: 80px;
+
+		li {
+			border-radius: 10px;
+        	background-color: #CCC;
+        	margin: 10px;
+        	padding: 10px;
+        	position: relative;
+
+        	&:hover, &.selected{
+        		box-shadow: 0px 0px 10px #333;
+        	}
+
+        	& .name {
+				font-weight: bold;
+				font-size: 20px;
+				margin-bottom: 10px;
+        	}
+
+        	& .address {
+
+        	}
+
+        	& .place-type {
+        		text-transform: capitalize;
+        	}
+
+        	& .distance-away {
+
+        	}
+
+        	& .directions-button {
+				position: absolute;
+				top: 20%;
+				right: 5%;
+
+				box-shadow: 0px 0px 10px #888;
+
+				background-image: $direction-image;
+			}
+        }
+	}
+}
+

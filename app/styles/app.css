@@ -1,8 +1,163 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,700,300,300italic);
 html {
-  background: #fff;
-}
+  background: #333; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0; }
+
+body {
+  font-family: "Roboto", sans-serif; }
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0; }
+
+button {
+  border: none;
+  border-radius: 3px;
+  color: #FFF; }
+  button.round-button {
+    cursor: pointer;
+    border: none;
+    width: 42px;
+    height: 42px;
+    margin: 10px;
+    border-radius: 20px;
+    background-repeat: no-repeat;
+    background-position: center; }
+
+input {
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  padding: 0 10px; }
 
 .backfaceVisibility {
   -webkit-backface-visibility: visible;
-  backface-visibility: visible;
-}
+  backface-visibility: visible; }
+
+#main-container {
+  width: 100%;
+  height: 100%; }
+
+#map,
+#map-section {
+  width: 100%;
+  height: 100%; }
+
+.selected-place .name {
+  float: left;
+  margin-top: 25px; }
+.selected-place .directions-button {
+  box-shadow: 0px 0px 10px #888;
+  background-image: url(../../content/images/direction.png); }
+
+#map-controls {
+  position: absolute;
+  bottom: 15px;
+  right: 0;
+  z-index: 1; }
+  #map-controls button {
+    box-shadow: 0px 0px 10px #888; }
+    #map-controls button#search-button {
+      background-image: url(../../content/images/destination.png); }
+    #map-controls button#traffic-button {
+      background-image: url(../../content/images/traffic-off.png); }
+      #map-controls button#traffic-button.enabled {
+        background-image: url(../../content/images/traffic-on.png); }
+
+#direction-list-button {
+  position: absolute;
+  bottom: 15px;
+  left: 48%;
+  z-index: 10;
+  background-image: url(../../content/images/show-directions.png); }
+  #direction-list-button.open {
+    -ms-transform: rotate(180deg);
+    /* IE 9 */
+    -webkit-transform: rotate(180deg);
+    /* Chrome, Safari, Opera */
+    transform: rotate(180deg); }
+
+#directions-panel {
+  height: 0;
+  width: 85%;
+  position: absolute;
+  z-index: 5;
+  bottom: 10%;
+  left: 7.5%;
+  top: 100%;
+  background-color: #888;
+  overflow-y: scroll; }
+  #directions-panel > div {
+    box-shadow: 0px 0px 10px #333;
+    background: #AAA;
+    padding: 1px 10px; }
+
+#search-panel {
+  height: 0;
+  width: 100%;
+  position: absolute;
+  z-index: 20;
+  top: 0;
+  background-color: #888;
+  box-shadow: 0px 10px 10px #555; }
+  #search-panel > div {
+    display: none; }
+  #search-panel.open > div {
+    display: block; }
+  #search-panel #search-input {
+    height: 30px;
+    width: 50%;
+    margin: 12px 15px;
+    float: left; }
+  #search-panel #display-type-button {
+    float: right;
+    width: 102px;
+    box-shadow: 0px 0px 10px #555;
+    background-position: 12px 5px;
+    text-align: right;
+    padding-right: 10px; }
+    #search-panel #display-type-button.map-button {
+      background-image: url(../../content/images/map.png); }
+    #search-panel #display-type-button.list-button {
+      background-image: url(../../content/images/list.png); }
+
+#list-section {
+  width: 0;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 10;
+  display: none;
+  overflow: scroll; }
+  #list-section.open {
+    display: block;
+    background-color: #888; }
+  #list-section ul {
+    margin-top: 80px; }
+    #list-section ul li {
+      border-radius: 10px;
+      background-color: #CCC;
+      margin: 10px;
+      padding: 10px;
+      position: relative; }
+      #list-section ul li:hover, #list-section ul li.selected {
+        box-shadow: 0px 0px 10px #333; }
+      #list-section ul li .name {
+        font-weight: bold;
+        font-size: 20px;
+        margin-bottom: 10px; }
+      #list-section ul li .place-type {
+        text-transform: capitalize; }
+      #list-section ul li .directions-button {
+        position: absolute;
+        top: 20%;
+        right: 5%;
+        box-shadow: 0px 0px 10px #888;
+        background-image: url(../../content/images/direction.png); }
+
+/*# sourceMappingURL=app.css.map */
