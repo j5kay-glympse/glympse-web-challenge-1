@@ -1,8 +1,16 @@
-html {
-  background: #fff;
+html, body {
+	background: #fff;
+	height: 100%; 
+	margin: 0; 
+	padding: 0; 
+}
+
+#map { 
+	height: 70%; 
+	clear: both;
 }
 
 .backfaceVisibility {
-  -webkit-backface-visibility: visible;
-  backface-visibility: visible;
+	-webkit-backface-visibility: visible;
+	backface-visibility: visible;
 }
