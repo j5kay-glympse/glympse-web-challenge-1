@@ -1,40 +1,56 @@
 <!DOCTYPE HTML>
 <html>
-    <head>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <title>Glympse Web Challenge #1</title>
-        <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=no" />
-        <meta name="mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-        <meta name="msapplication-tap-highlight" content="no" />
-        
-        <!-- build:css(app/) css/app.css -->
-        <link rel="stylesheet" type="text/css" href="styles/app.css" />
-        <!-- bower:css -->
-        <!-- endbower -->
-        <!-- endbuild -->
-        
-        <!-- build:js(app/) src/polyfills.js -->
-        <script type="text/javascript" src="lib/famous-polyfills/functionPrototypeBind.js"></script>
-        <script type="text/javascript" src="lib/famous-polyfills/classList.js"></script>
-        <script type="text/javascript" src="lib/famous-polyfills/requestAnimationFrame.js"></script>
-        <!-- endbuild -->
-        
-        <!-- build:js(app/) src/jquery.js -->
-        <script type=text/javascript src="lib/jquery/dist/jquery.min.js"></script>
-        <!-- endbuild -->
-        
-        <!-- process:remove:dev -->
-        <script type="text/javascript" src="src/main.js"></script>
-        <!-- /process -->
-        
-        <!-- process:remove:dist -->
-        <script type="text/javascript" src="lib/requirejs/require.js" data-main="src/requireConfig"></script>
-        <!-- /process -->
-    </head>
-    <body>
-		<h1>Simple Map Destination Picker</h1>
-		<div id="map">PUT MAP CONTROL HERE!</div>
-    </body>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<title>Glympse Web Challenge #1</title>
+		<meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=no" />
+		<meta name="mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="msapplication-tap-highlight" content="no" />
+		
+		<!-- build:css(app/) css/app.css -->
+		<link rel="stylesheet" type="text/css" href="styles/reset.css" />
+		<link rel="stylesheet" type="text/css" href="styles/app.css" />
+		<!-- bower:css -->
+		<link rel="stylesheet" type="text/css" href="lib/mapbox.js/mapbox.css" />
+		<!-- endbower -->
+		<!-- endbuild -->
+		
+		<!-- build:js(app/) src/polyfills.js -->
+		<script type="text/javascript" src="lib/famous-polyfills/functionPrototypeBind.js"></script>
+		<script type="text/javascript" src="lib/famous-polyfills/classList.js"></script>
+		<script type="text/javascript" src="lib/famous-polyfills/requestAnimationFrame.js"></script>
+		<!-- endbuild -->
+		
+		<!-- build:js(app/) src/jquery.js -->
+		<script type=text/javascript src="lib/jquery/dist/jquery.min.js"></script>
+		<!-- endbuild -->
+		
+		<!-- process:remove:dev -->
+		<script type="text/javascript" src="src/main.js"></script>
+		<!-- /process -->
+		
+		<!-- process:remove:dist -->
+		<script type="text/javascript" src="lib/requirejs/require.js" data-main="src/requireConfig"></script>
+		<!-- /process -->
+	</head>
+	<body>
+		<div id="canvas">
+			<div id="map">
+				<!-- Map goes here .. -->
+			</div>
+			<aside id="index">
+				<section class="search">
+					<form class="poi">
+						<input type="search" name="query"><button type="submit">Search</button>
+					</form>
+				</section>
+				<section class="navigate">
+					<nav class="result">
+					</nav>
+				</section>
+			</aside>
+		</div>
+	</body>
 </html>
