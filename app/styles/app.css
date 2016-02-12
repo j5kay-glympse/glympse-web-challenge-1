@@ -1,8 +1,46 @@
-html {
-  background: #fff;
+
+* {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
+html {
+	background: #fff;
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+
+body {
+	position: relative;
+}
+
+html, body { margin: 0; padding: 0; height: 100%; }
+
 .backfaceVisibility {
-  -webkit-backface-visibility: visible;
-  backface-visibility: visible;
+	-webkit-backface-visibility: visible;
+	backface-visibility: visible;
+}
+
+#map {
+	position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+	margin-right: 380px;
+	overflow: none;
+}
+
+#index {
+	position: absolute; top: 0; right: 0; bottom: 0;
+	width: 380px;
+	box-shadow: 0 0 2px 0 rgba(0,0,0,0.6);
+	background-color: #f4f2f1;
+}
+
+#index .search {
+	position: absolute; top: 0; left: 0; right: 0;
+	height: 60px; padding: 10px;
+	/*background-color: #f00;*/
+}
+
+#index .navigate {
+	position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+	margin-top: 60px;
+	/*background-color: #0f0;*/
 }
