@@ -1,0 +1,64 @@
+.locationEntry {
+	position: fixed;
+	bottom: 2em;
+	right: 4em;
+	display: inline-block;
+
+	&.active {
+		input {
+			opacity: 1;
+		}
+
+		button {
+			&.toggle {
+				span {
+					display: block;
+					@include retina-sprite($close-group);
+				}
+			}
+
+			&.submit {
+				opacity:1;
+			}
+		}
+	}
+
+	input {
+		opacity: 0;
+		@include prefixProp("transition", "opacity .5s");
+		padding:1em;
+		border-radius:3px;
+		border: 1px solid $color-gray-lightest;
+		background: $color-gray-darkest;
+		color:$color-gray-lightest;
+		outline:none;
+	}
+
+	button {
+		display: inline-block;
+		background: $color-gray-darkest;
+		padding: .5em;
+		border-radius: 5px;
+		cursor: pointer;
+		outline:none;
+		vertical-align: middle;
+		border: 1px solid $color-gray-lightest;
+
+		&.toggle {
+			span {
+				display: block;
+				@include retina-sprite($loc-select-group);
+			}
+		}
+
+		&.submit{
+			opacity: 0;
+			@include prefixProp("transition", "opacity .5s");
+
+			span{
+				display:block;
+				@include retina-sprite($arrow-go-group);
+			}
+		}
+	}
+}

@@ -1,0 +1,134 @@
+.hud {
+	position:absolute;
+	z-index: 1;
+	height:100%;
+
+	.resultsListWrapper{
+		position:fixed;
+		top:2em;
+		left:2em;
+		max-height:100%;
+		height:100%;
+		opacity: 0;
+		@include prefixProp("transition", "opacity 1.5s");
+		@include prefixProp("transform-style", "preserve-3d");
+		@include prefixProp("perspective-origin", "100% 50%");
+		@include prefixProp("perspective", "2000px");
+
+		h2{
+			background: $color-gray-darkest;
+			border: 1px solid $color-gray-lightest;
+			color: $color-gray-lightest;
+			padding:.5em;
+			border-radius:5px;
+		}
+
+		.resultsList{
+			background: $color-gray-darkest;
+			color: $color-gray-lightest;
+			max-height:75%;
+			max-width:75%;
+			overflow:auto;
+			border:1px solid;
+			padding:0;
+			border-radius:5px;
+			margin:0;
+
+			li{
+				padding:1.5em;
+				cursor:pointer;
+
+				&:hover{
+					background: $color-gray-dark;
+				}
+
+				.icon{
+					display:inline-block;
+					margin-right:.5em;
+				}
+
+				&.restaurant{
+					.icon{
+						@include retina-sprite($restaurant-icon-group);
+					}
+				}
+
+				&.school{
+					.icon{
+						@include retina-sprite($school-icon-group);
+					}
+				}
+
+				&.park{
+					.icon{
+						@include retina-sprite($park-icon-group);
+					}
+				}
+			}
+		}
+
+		.transformContainer{
+			max-height: 90%;
+			height: 100%;
+			@include prefixProp("transform-style", "preserve-3d");
+			@include prefixProp("transition", "transform 750ms");
+			@include prefixProp("transform", "rotateY(25deg) translateX(-150px) translateZ(-300px)");
+		}
+
+		&.active {
+			opacity: 1;
+
+			.transformContainer {
+				@include prefixProp("transform", "rotateY(25deg) translateX(10px) translateZ(0)");
+			}
+		}
+	}
+
+	@media screen and (min-width: $screen-xs-min) {
+		.resultsListWrapper {
+			&.active {
+				.transformContainer {
+					@include prefixProp("transform", "rotateY(25deg) translateX(20px) translateZ(0)");
+				}
+			}
+		}
+	}
+
+	@media screen and (min-width: $screen-sm-min) {
+		.resultsListWrapper {
+			&.active {
+				.transformContainer {
+					@include prefixProp("transform", "rotateY(25deg) translateX(50px) translateZ(0)");
+				}
+			}
+		}
+	}
+
+	@media screen and (min-width: $screen-md-min) {
+		.resultsListWrapper {
+			.resultsList{
+				max-height:90%;
+			}
+
+			&.active {
+				.transformContainer {
+					@include prefixProp("transform", "rotateY(25deg) translateX(100px) translateZ(0)");
+				}
+			}
+		}
+	}
+
+	@media screen and (min-width: $screen-lg-min) {
+		.resultsListWrapper{
+			&.active {
+				.transformContainer {
+					@include prefixProp("transform", "rotateY(25deg) translateX(150px) translateZ(0)");
+				}
+			}
+		}
+	}
+
+	@media screen and (min-width: $screen-xl-min) {
+
+	}
+}

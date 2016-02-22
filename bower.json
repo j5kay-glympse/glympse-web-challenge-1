@@ -27,6 +27,9 @@
   "dependencies": {
     "requirejs": "~2.1.11",
     "almond": "~0.2.9",
-    "jquery": "~2.1.1"
+    "jquery": "~2.1.1",
+    "requirejs-plugins": "~1.0.3",
+    "q": "1.0.1",
+    "greensock": "~1.18.2"
   }
 }

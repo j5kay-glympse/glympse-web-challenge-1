@@ -4,6 +4,6 @@ module.exports = {
     rjsConfig: '<%= config.app %>/src/requireConfig.js'
   },
   options: {
-    exclude: ['famous', 'famous-polyfills', 'requirejs', 'almond']
+    exclude: ['famous', 'famous-polyfills', 'requirejs', 'almond', 'greensock']
   }
 };
