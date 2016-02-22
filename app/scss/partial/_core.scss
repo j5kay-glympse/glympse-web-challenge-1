@@ -1,0 +1,19 @@
+html,
+body{
+	padding:0;
+	margin:0;
+	height:100%;
+	min-height:100%;
+}
+
+body{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	background:url(../content/images/bg.jpg) center;
+	background-size:cover;
+}
+
+button{
+	background:transparent;
+	border: none;
+}

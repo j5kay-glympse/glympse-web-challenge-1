@@ -1,8 +1,357 @@
-html {
-  background: #fff;
+/**
+ * Generated files
+ */
+/*
+SCSS variables are information about icon's compiled state, stored under its original file name
+
+.icon-home {
+  width: $icon-home-width;
 }
 
-.backfaceVisibility {
-  -webkit-backface-visibility: visible;
-  backface-visibility: visible;
+The large array-like variables contain all information about a single icon
+$icon-home: x y offset_x offset_y width height total_width total_height image_path;
+
+At the bottom of this section, we provide information about the spritesheet itself
+$spritesheet: width height image $spritesheet-sprites;
+*/
+/*
+These "retina group" variables are mappings for the naming and pairing of normal and retina sprites.
+
+The list formatted variables are intended for mixins like `retina-sprite` and `retina-sprites`.
+*/
+/*
+The provided mixins are intended to be used with the array-like variables
+
+.icon-home {
+  @include sprite-width($icon-home);
 }
+
+.icon-email {
+  @include sprite($icon-email);
+}
+
+Here are example usages in HTML:
+
+`display: block` sprite:
+<div class="icon-home"></div>
+
+`display: inline-block` sprite:
+<img class="icon-home" />
+*/
+/*
+The `retina-sprite` mixin sets up rules and a media query for a sprite/retina sprite.
+  It should be used with a "retina group" variable.
+
+The media query is from CSS Tricks: https://css-tricks.com/snippets/css/retina-display-media-query/
+
+$icon-home-group: ('icon-home', $icon-home, $icon-home-2x, );
+
+.icon-home {
+  @include retina-sprite($icon-home-group);
+}
+*/
+/*
+The `sprites` mixin generates identical output to the CSS template
+  but can be overridden inside of SCSS
+
+@include sprites($spritesheet-sprites);
+*/
+/*
+The `retina-sprites` mixin generates a CSS rule and media query for retina groups
+  This yields the same output as CSS retina template but can be overridden in SCSS
+
+@include retina-sprites($retina-groups);
+*/
+/**
+ * Globals and imports
+ */
+/**
+ * Colors
+ */
+/**
+ * Breakpoints
+ */
+/**
+ * Partials
+ */
+html,
+body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  min-height: 100%; }
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  background: url(../content/images/bg.jpg) center;
+  background-size: cover; }
+
+button {
+  background: transparent;
+  border: none; }
+
+.hud {
+  position: absolute;
+  z-index: 1;
+  height: 100%; }
+  .hud .resultsListWrapper {
+    position: fixed;
+    top: 2em;
+    left: 2em;
+    max-height: 100%;
+    height: 100%;
+    opacity: 0;
+    -webkit-transition: opacity 1.5s;
+    -moz-transition: opacity 1.5s;
+    -ms-transition: opacity 1.5s;
+    transition: opacity 1.5s;
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-perspective-origin: 100% 50%;
+    -moz-perspective-origin: 100% 50%;
+    -ms-perspective-origin: 100% 50%;
+    perspective-origin: 100% 50%;
+    -webkit-perspective: 2000px;
+    -moz-perspective: 2000px;
+    -ms-perspective: 2000px;
+    perspective: 2000px; }
+    .hud .resultsListWrapper h2 {
+      background: #222222;
+      border: 1px solid #F3F3F3;
+      color: #F3F3F3;
+      padding: .5em;
+      border-radius: 5px; }
+    .hud .resultsListWrapper .resultsList {
+      background: #222222;
+      color: #F3F3F3;
+      max-height: 75%;
+      max-width: 75%;
+      overflow: auto;
+      border: 1px solid;
+      padding: 0;
+      border-radius: 5px;
+      margin: 0; }
+      .hud .resultsListWrapper .resultsList li {
+        padding: 1.5em;
+        cursor: pointer; }
+        .hud .resultsListWrapper .resultsList li:hover {
+          background: #333333; }
+        .hud .resultsListWrapper .resultsList li .icon {
+          display: inline-block;
+          margin-right: .5em; }
+        .hud .resultsListWrapper .resultsList li.restaurant .icon {
+          background-image: url(../content/images/sprite-ui.png);
+          background-position: -40px -40px;
+          width: 26px;
+          height: 20px; }
+          @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .hud .resultsListWrapper .resultsList li.restaurant .icon {
+              background-image: url(../content/images/sprite-ui-retina.png);
+              background-size: 102px 70px; } }
+        .hud .resultsListWrapper .resultsList li.school .icon {
+          background-image: url(../content/images/sprite-ui.png);
+          background-position: -80px -30px;
+          width: 22px;
+          height: 20px; }
+          @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .hud .resultsListWrapper .resultsList li.school .icon {
+              background-image: url(../content/images/sprite-ui-retina.png);
+              background-size: 102px 70px; } }
+        .hud .resultsListWrapper .resultsList li.park .icon {
+          background-image: url(../content/images/sprite-ui.png);
+          background-position: -80px 0px;
+          width: 22px;
+          height: 20px; }
+          @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .hud .resultsListWrapper .resultsList li.park .icon {
+              background-image: url(../content/images/sprite-ui-retina.png);
+              background-size: 102px 70px; } }
+    .hud .resultsListWrapper .transformContainer {
+      max-height: 90%;
+      height: 100%;
+      -webkit-transform-style: preserve-3d;
+      -moz-transform-style: preserve-3d;
+      -ms-transform-style: preserve-3d;
+      transform-style: preserve-3d;
+      -webkit-transition: transform 750ms;
+      -moz-transition: transform 750ms;
+      -ms-transition: transform 750ms;
+      transition: transform 750ms;
+      -webkit-transform: rotateY(25deg) translateX(-150px) translateZ(-300px);
+      -moz-transform: rotateY(25deg) translateX(-150px) translateZ(-300px);
+      -ms-transform: rotateY(25deg) translateX(-150px) translateZ(-300px);
+      transform: rotateY(25deg) translateX(-150px) translateZ(-300px); }
+    .hud .resultsListWrapper.active {
+      opacity: 1; }
+      .hud .resultsListWrapper.active .transformContainer {
+        -webkit-transform: rotateY(25deg) translateX(10px) translateZ(0);
+        -moz-transform: rotateY(25deg) translateX(10px) translateZ(0);
+        -ms-transform: rotateY(25deg) translateX(10px) translateZ(0);
+        transform: rotateY(25deg) translateX(10px) translateZ(0); }
+  @media screen and (min-width: 480px) {
+    .hud .resultsListWrapper.active .transformContainer {
+      -webkit-transform: rotateY(25deg) translateX(20px) translateZ(0);
+      -moz-transform: rotateY(25deg) translateX(20px) translateZ(0);
+      -ms-transform: rotateY(25deg) translateX(20px) translateZ(0);
+      transform: rotateY(25deg) translateX(20px) translateZ(0); } }
+  @media screen and (min-width: 768px) {
+    .hud .resultsListWrapper.active .transformContainer {
+      -webkit-transform: rotateY(25deg) translateX(50px) translateZ(0);
+      -moz-transform: rotateY(25deg) translateX(50px) translateZ(0);
+      -ms-transform: rotateY(25deg) translateX(50px) translateZ(0);
+      transform: rotateY(25deg) translateX(50px) translateZ(0); } }
+  @media screen and (min-width: 992px) {
+    .hud .resultsListWrapper .resultsList {
+      max-height: 90%; }
+    .hud .resultsListWrapper.active .transformContainer {
+      -webkit-transform: rotateY(25deg) translateX(100px) translateZ(0);
+      -moz-transform: rotateY(25deg) translateX(100px) translateZ(0);
+      -ms-transform: rotateY(25deg) translateX(100px) translateZ(0);
+      transform: rotateY(25deg) translateX(100px) translateZ(0); } }
+  @media screen and (min-width: 1200px) {
+    .hud .resultsListWrapper.active .transformContainer {
+      -webkit-transform: rotateY(25deg) translateX(150px) translateZ(0);
+      -moz-transform: rotateY(25deg) translateX(150px) translateZ(0);
+      -ms-transform: rotateY(25deg) translateX(150px) translateZ(0);
+      transform: rotateY(25deg) translateX(150px) translateZ(0); } }
+
+.locationEntry {
+  position: fixed;
+  bottom: 2em;
+  right: 4em;
+  display: inline-block; }
+  .locationEntry.active input {
+    opacity: 1; }
+  .locationEntry.active button.toggle span {
+    display: block;
+    background-image: url(../content/images/sprite-ui.png);
+    background-position: -40px 0px;
+    width: 30px;
+    height: 30px; }
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+      .locationEntry.active button.toggle span {
+        background-image: url(../content/images/sprite-ui-retina.png);
+        background-size: 102px 70px; } }
+  .locationEntry.active button.submit {
+    opacity: 1; }
+  .locationEntry input {
+    opacity: 0;
+    -webkit-transition: opacity .5s;
+    -moz-transition: opacity .5s;
+    -ms-transition: opacity .5s;
+    transition: opacity .5s;
+    padding: 1em;
+    border-radius: 3px;
+    border: 1px solid #F3F3F3;
+    background: #222222;
+    color: #F3F3F3;
+    outline: none; }
+  .locationEntry button {
+    display: inline-block;
+    background: #222222;
+    padding: .5em;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    vertical-align: middle;
+    border: 1px solid #F3F3F3; }
+    .locationEntry button.toggle span {
+      display: block;
+      background-image: url(../content/images/sprite-ui.png);
+      background-position: 0px -40px;
+      width: 30px;
+      height: 30px; }
+      @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+        .locationEntry button.toggle span {
+          background-image: url(../content/images/sprite-ui-retina.png);
+          background-size: 102px 70px; } }
+    .locationEntry button.submit {
+      opacity: 0;
+      -webkit-transition: opacity .5s;
+      -moz-transition: opacity .5s;
+      -ms-transition: opacity .5s;
+      transition: opacity .5s; }
+      .locationEntry button.submit span {
+        display: block;
+        background-image: url(../content/images/sprite-ui.png);
+        background-position: 0px 0px;
+        width: 30px;
+        height: 30px; }
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+          .locationEntry button.submit span {
+            background-image: url(../content/images/sprite-ui-retina.png);
+            background-size: 102px 70px; } }
+
+.mapWrapper {
+  width: 100%;
+  height: 100%;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-perspective-origin: 100% 50%;
+  -moz-perspective-origin: 100% 50%;
+  -ms-perspective-origin: 100% 50%;
+  perspective-origin: 100% 50%;
+  -webkit-perspective: 2000px;
+  -moz-perspective: 2000px;
+  -ms-perspective: 2000px;
+  perspective: 2000px;
+  overflow-x: hidden; }
+  .mapWrapper .mapView {
+    height: 100%;
+    width: 100%;
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform: rotateY(-25deg) translateX(20px) translateZ(-100px) !important;
+    -moz-transform: rotateY(-25deg) translateX(20px) translateZ(-100px) !important;
+    -ms-transform: rotateY(-25deg) translateX(20px) translateZ(-100px) !important;
+    transform: rotateY(-25deg) translateX(20px) translateZ(-100px) !important;
+    -webkit-transform-origin: 75% 50%;
+    -moz-transform-origin: 75% 50%;
+    -ms-transform-origin: 75% 50%;
+    transform-origin: 75% 50%;
+    -webkit-transition: transform 350ms;
+    -moz-transition: transform 350ms;
+    -ms-transition: transform 350ms;
+    transition: transform 350ms; }
+  .mapWrapper.active .mapView {
+    -webkit-transform: translateZ(0) !important;
+    -moz-transform: translateZ(0) !important;
+    -ms-transform: translateZ(0) !important;
+    transform: translateZ(0) !important; }
+  @media screen and (min-width: 992px) {
+    .mapWrapper .mapView {
+      -webkit-transform: rotateY(-25deg) translateX(100px) translateZ(-100px) !important;
+      -moz-transform: rotateY(-25deg) translateX(100px) translateZ(-100px) !important;
+      -ms-transform: rotateY(-25deg) translateX(100px) translateZ(-100px) !important;
+      transform: rotateY(-25deg) translateX(100px) translateZ(-100px) !important; } }
+  @media screen and (min-width: 1200px) {
+    .mapWrapper .mapView {
+      -webkit-transform: rotateY(-25deg) translateX(150px) translateZ(-100px) !important;
+      -moz-transform: rotateY(-25deg) translateX(150px) translateZ(-100px) !important;
+      -ms-transform: rotateY(-25deg) translateX(150px) translateZ(-100px) !important;
+      transform: rotateY(-25deg) translateX(150px) translateZ(-100px) !important; } }
+
+.toast {
+  color: #F3F3F3;
+  position: fixed;
+  z-index: 1;
+  top: 2em;
+  right: 2em;
+  display: inline-block;
+  margin: 0 auto;
+  background: #222222;
+  padding: 1em;
+  border-radius: 5px;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.75);
+  cursor: pointer;
+  border: 1px solid #F3F3F3; }
+  .toast p {
+    margin: 0;
+    display: inline-block; }

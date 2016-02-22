@@ -1,0 +1,47 @@
+.mapWrapper {
+	width:100%;
+	height:100%;
+	@include prefixProp("transform-style", "preserve-3d");
+	@include prefixProp("perspective-origin", "100% 50%");
+	@include prefixProp("perspective", "2000px");
+	overflow-x:hidden;
+
+	.mapView {
+		height: 100%;
+		width:100%;
+		@include prefixProp("transform-style", "preserve-3d");
+		@include prefixProp("transform", "rotateY(-25deg) translateX(20px) translateZ(-100px) !important");
+		@include prefixProp("transform-origin", "75% 50%");
+		@include prefixProp("transition", "transform 350ms");
+	}
+
+	&.active{
+		.mapView {
+			@include prefixProp("transform", "translateZ(0) !important");
+		}
+	}
+
+	@media screen and (min-width: $screen-xs-min){
+
+	}
+
+	@media screen and (min-width: $screen-sm-min){
+
+	}
+
+	@media screen and (min-width: $screen-md-min){
+		.mapView {
+			@include prefixProp("transform", "rotateY(-25deg) translateX(100px) translateZ(-100px) !important");
+		}
+	}
+
+	@media screen and (min-width: $screen-lg-min){
+		.mapView {
+			@include prefixProp("transform", "rotateY(-25deg) translateX(150px) translateZ(-100px) !important");
+		}
+	}
+
+	@media screen and (min-width: $screen-xl-min){
+
+	}
+}
